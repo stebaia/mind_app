@@ -1,0 +1,64 @@
+name: mind_app
+description: A new Flutter project.
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=2.19.3 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  intl: any
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^1.0.2
+  logger: ^1.1.0
+  flutter_secure_storage: ^6.1.0
+  flutter_bloc: ^8.1.1
+  equatable: ^2.0.5
+  font_awesome_flutter: ^10.3.0
+  pine: ^1.0.1
+  provider: ^6.0.5
+  retrofit: ^3.3.1
+  dio: ^4.0.4
+  pretty_dio_logger: ^1.2.0-beta-1
+  auto_route: ^5.0.2
+  favicon: ^1.1.0
+  cached_network_image: ^3.2.3
+  json_annotation: ^4.8.0
+  persistent_bottom_nav_bar: ^5.0.2
+  flutter_html: ^3.0.0-alpha.6
+  dio_cookie_manager: ^2.0.0
+  cookie_jar: ^3.0.0
+  flutter_svg: ^1.1.6
+  fluttertoast: ^8.2.1
+  shimmer: ^2.0.0
+  flutter_rating_bar: ^4.0.1
+  chips_choice: ^3.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  build_runner: ^2.3.0
+  bloc_test: ^9.1.0
+  retrofit_generator: ^4.2.0
+  auto_route_generator: ^5.0.2
+  http_mock_adapter: ^0.3.3
+  data_fixture_dart: ^2.2.0
+  mockito: ^5.3.2
+
+flutter:
+  uses-material-design: true
+  generate: true
+  assets:
+    - assets/ic_person.png
+    - assets/sad.gif
+    - assets/happy.gif
+    - assets/neutral.gif
+    - assets/bored.gif
+    - assets/love.gif
+    - assets/angry.gif
