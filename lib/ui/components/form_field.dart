@@ -8,25 +8,25 @@ class EmailFormField extends StatelessWidget {
   final FormFieldValidator<String>? formFieldValidator;
   final ValueChanged<String>? onFieldSubmitted;
   final TextInputAction? textInputAction;
+  final Color? color;
 
-  const EmailFormField(
-    this.label, {
-    super.key,
-    this.textEditingController,
-    this.focusNode,
-    this.formFieldValidator,
-    this.onFieldSubmitted,
-    this.textInputAction,
-  });
+  const EmailFormField(this.label,
+      {super.key,
+      this.textEditingController,
+      this.focusNode,
+      this.formFieldValidator,
+      this.onFieldSubmitted,
+      this.textInputAction,
+      this.color});
 
   @override
   Widget build(BuildContext context) {
     return Container(
         width: MediaQuery.of(context).size.width / 1.4,
         decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(20)),
+            color: color, borderRadius: BorderRadius.circular(10)),
         child: TextFormField(
-          style: TextStyle(fontSize: 18),
+          style: TextStyle(fontSize: 14),
           cursorColor: Colors.grey,
           controller: textEditingController,
           focusNode: focusNode,
@@ -54,6 +54,7 @@ class PasswordFormField extends StatefulWidget {
   final ValueChanged<String>? onFieldSubmitted;
   final TextInputAction? textInputAction;
   final bool enalbed;
+  final Color? color;
 
   const PasswordFormField(this.label,
       {super.key,
@@ -62,7 +63,8 @@ class PasswordFormField extends StatefulWidget {
       this.formFieldValidator,
       this.onFieldSubmitted,
       this.textInputAction,
-      this.enalbed = true});
+      this.enalbed = true,
+      this.color});
 
   @override
   State<PasswordFormField> createState() => _PasswordFormFieldState();
@@ -76,9 +78,9 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
     return Container(
         width: MediaQuery.of(context).size.width / 1.4,
         decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(20)),
+            color: widget.color, borderRadius: BorderRadius.circular(10)),
         child: TextFormField(
-          style: TextStyle(fontSize: 18),
+          style: TextStyle(fontSize: 14),
           cursorColor: Colors.grey,
           enabled: widget.enalbed,
           controller: widget.textEditingController,

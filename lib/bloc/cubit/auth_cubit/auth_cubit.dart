@@ -22,6 +22,11 @@ class AuthCubit extends Cubit<AuthState> {
 
   void authenticated(User user) => emit(AuthenticatedState(user));
 
+  void manualLogout() async {
+    await userRepository.logout();
+    emit(NotAuthenticatedState());
+  }
+
   /*void singOut(bool force) async {
     final user = await userRepository.logout(force, context);
     if (!force) {

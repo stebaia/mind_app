@@ -16,6 +16,17 @@ class TryLogginInState extends LoginInState {
   const TryLogginInState();
 }
 
+class TryToRegister extends LoginInState {
+  const TryToRegister();
+}
+
+class RegistrationDoneState extends LoginInState {
+  final User user;
+  const RegistrationDoneState(this.user);
+
+  List<Object> get props => [user];
+}
+
 class LoggedInState extends LoginInState {
   final User user;
   const LoggedInState(this.user);

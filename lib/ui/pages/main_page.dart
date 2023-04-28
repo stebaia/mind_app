@@ -13,7 +13,7 @@ class MainPage extends StatelessWidget {
         listener: ((context, state) {
           try {
             if (state is AuthenticatedState) {
-              _replacePage(context, const LoginRoute());
+              _replacePage(context, const CoreRoute());
             } else if (state is NotAuthenticatedState) {
               _replacePage(context, const LoginRoute());
             }

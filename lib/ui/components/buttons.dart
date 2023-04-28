@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
-class LoginButton extends StatelessWidget {
+class FunctionButton extends StatelessWidget {
   final bool loading;
   final GestureTapCallback? onPressed;
+  final String text;
 
-  const LoginButton({super.key, this.loading = false, this.onPressed});
+  const FunctionButton(
+      {super.key, this.loading = false, this.onPressed, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -16,16 +18,16 @@ class LoginButton extends StatelessWidget {
             height: 46,
             decoration: BoxDecoration(
                 border: Border.all(color: Colors.white),
-                color: Colors.transparent,
-                borderRadius: BorderRadius.circular(20)),
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10)),
             width: MediaQuery.of(context).size.width / 1.4,
             child: Center(
                 child: !loading
                     ? Text(
-                        'Login'.toUpperCase(),
+                        text,
                         style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 24,
+                            color: Colors.black,
+                            fontSize: 20,
                             fontWeight: FontWeight.normal),
                       )
                     : const SizedBox(

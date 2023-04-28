@@ -7,10 +7,11 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mind_app/bloc/cubit/auth_cubit/auth_cubit.dart';
 import 'package:mind_app/bloc/login_bloc/login_bloc.dart';
+import 'package:mind_app/routes/app_router.gr.dart';
 import 'package:mind_app/ui/components/buttons.dart';
 import 'package:mind_app/ui/components/form_field.dart';
+import 'package:mind_app/ui/pages/registration_page.dart';
 import 'package:mind_app/utils/theme_helper.dart';
-
 
 class LoginPage extends StatefulWidget with AutoRouteWrapper {
   const LoginPage({super.key});
@@ -46,7 +47,6 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         extendBodyBehindAppBar: true,
-        backgroundColor: ThemeHelper.backgroundColor,
         body: Center(
             child: Form(
                 onChanged: () {
@@ -81,42 +81,12 @@ class _LoginPageState extends State<LoginPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        
-                        const SizedBox(
-                          height: 40,
-                        ),
-                        Text(
-                          AppLocalizations.of(context)!
-                              .textLogoApp
-                              .toUpperCase(),
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                          
-                            color: Colors.white,
-                            letterSpacing: 5,
-                            fontSize: 32,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 36,
-                        ),
-                        Text(
-                          AppLocalizations.of(context)!.textYourDigitalApp,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                          
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 26,
-                            letterSpacing: 3,
-                          ),
-                        ),
                         const SizedBox(
                           height: 40,
                         ),
                         EmailFormField(
                           'Username',
+                          color: Colors.black12,
                           textEditingController: _singUpEmailController,
                           focusNode: _focusNodeEmail,
                           formFieldValidator: (value) {
@@ -133,6 +103,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         PasswordFormField(
                           'Password',
+                          color: Colors.black12,
                           textInputAction: TextInputAction.go,
                           textEditingController: _singUpPasswordController,
                           focusNode: _focusNodePassword,
@@ -145,29 +116,36 @@ class _LoginPageState extends State<LoginPage> {
                           onFieldSubmitted: (value) {
                             if (_formValid) {
                               context.read<LoginBloc>().loginIn(
-                                  email: _singUpEmailController.text,
-                                  password: _singUpPasswordController.text,
+                                    email: _singUpEmailController.text,
+                                    password: _singUpPasswordController.text,
                                   );
                             }
                           },
                         ),
-                        
-                        
                         const SizedBox(
                           height: 20,
                         ),
-                        LoginButton(
+                        FunctionButton(
+                          text: 'Login',
                           loading: state is TryLogginInState,
                           onPressed: () {
                             if (_formValid) {
                               context.read<LoginBloc>().loginIn(
-                                  email: _singUpEmailController.text,
-                                  password: _singUpPasswordController.text,
+                                    email: _singUpEmailController.text,
+                                    password: _singUpPasswordController.text,
                                   );
                             }
                           },
                         ),
-                        
+                        SizedBox(
+                          height: 10,
+                        ),
+                        FunctionButton(
+                          text: 'Registrazione',
+                          onPressed: () {
+                            context.pushRoute(const RegistrationRoute());
+                          },
+                        ),
                       ],
                     ));
                   },
