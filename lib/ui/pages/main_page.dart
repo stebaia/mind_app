@@ -22,7 +22,7 @@ class MainPage extends StatelessWidget {
           }
         }),
         child: const Scaffold(
-          backgroundColor: ThemeHelper.backgroundColor,
+          backgroundColor: ThemeHelper.backgroundColorWhite,
           body: Center(
             child: CircularProgressIndicator(),
           ),

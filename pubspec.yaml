@@ -62,3 +62,11 @@ flutter:
     - assets/bored.gif
     - assets/love.gif
     - assets/angry.gif
+    - assets/blob.svg
+  fonts:
+    - family: LeagueSpartan
+      fonts:
+        - asset: fonts/league_spartanreg.ttf
+    - family: Poppins
+      fonts:
+        - asset: fonts/poppins_regular.ttf    

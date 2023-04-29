@@ -21,27 +21,27 @@ class App extends StatelessWidget {
     ]);
     return DependencyInjector(
         child: DismissKeyboard(
-          child: MaterialApp.router(
-              debugShowCheckedModeBanner: false,
-              theme: ThemeData(
-          backgroundColor: ThemeHelper.backgroundColor,
-          fontFamily: 'Outfit',
+      child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          backgroundColor: ThemeHelper.backgroundColorWhite,
+          fontFamily: 'Poppins',
           useMaterial3: true,
           primaryColor: Color.fromARGB(255, 48, 47, 47),
-              ),
-              localizationsDelegates: [
-            AppLocalizations.delegate, // Add this line
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: [
-            Locale('en'), // English
-            Locale('it'), // Italian
-          ],
-              routeInformationParser: _router.defaultRouteParser(),
-              routerDelegate: _router.delegate(),
-            ),
-        ));
+        ),
+        localizationsDelegates: [
+          AppLocalizations.delegate, // Add this line
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: [
+          Locale('en'), // English
+          Locale('it'), // Italian
+        ],
+        routeInformationParser: _router.defaultRouteParser(),
+        routerDelegate: _router.delegate(),
+      ),
+    ));
   }
 }
