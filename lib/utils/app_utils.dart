@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
-
 class DateConverter {
   static String convert(String? inputDate) {
     if (inputDate != null) {
@@ -23,12 +22,11 @@ class DateConverter {
       return "";
   }
 
-  static String getDateNowWithFormat(){
+  static String getDateNowWithFormat() {
     final DateTime now = DateTime.now();
-    final DateFormat formatter = DateFormat('YYYY-MM-DD HH:ii:SS');
+    final DateFormat formatter = DateFormat('yyyy-MM-dd HH:mm:ss');
     return formatter.format(now);
   }
-
 
   static String convertAgendaDate(String? inputDate) {
     if (inputDate != null) {
