@@ -22,7 +22,6 @@ class EmailFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        width: MediaQuery.of(context).size.width / 1.4,
         decoration: BoxDecoration(
             color: color, borderRadius: BorderRadius.circular(10)),
         child: TextFormField(
@@ -76,7 +75,6 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        width: MediaQuery.of(context).size.width / 1.4,
         decoration: BoxDecoration(
             color: widget.color, borderRadius: BorderRadius.circular(10)),
         child: TextFormField(

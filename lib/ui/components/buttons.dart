@@ -6,9 +6,16 @@ class FunctionButton extends StatelessWidget {
   final bool loading;
   final GestureTapCallback? onPressed;
   final String text;
+  final Color? colorsBackground;
+  final Color? colorText;
 
   const FunctionButton(
-      {super.key, this.loading = false, this.onPressed, required this.text});
+      {super.key,
+      this.loading = false,
+      this.onPressed,
+      required this.text,
+      required this.colorsBackground,
+      required this.colorText});
 
   @override
   Widget build(BuildContext context) {
@@ -17,18 +24,17 @@ class FunctionButton extends StatelessWidget {
         child: Container(
             height: 46,
             decoration: BoxDecoration(
-                border: Border.all(color: Colors.white),
-                color: Colors.white,
+                color: colorsBackground,
                 borderRadius: BorderRadius.circular(10)),
-            width: MediaQuery.of(context).size.width / 1.4,
             child: Center(
                 child: !loading
                     ? Text(
                         text,
-                        style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 20,
-                            fontWeight: FontWeight.normal),
+                        style: TextStyle(
+                            fontFamily: 'PoppinsExtrabold',
+                            color: colorText,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w900),
                       )
                     : const SizedBox(
                         height: 20,

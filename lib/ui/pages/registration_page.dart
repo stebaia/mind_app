@@ -8,6 +8,7 @@ import 'package:mind_app/ui/components/buttons.dart';
 import 'package:mind_app/ui/components/form_field.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:mind_app/utils/theme_helper.dart';
 
 class RegistrationPage extends StatefulWidget with AutoRouteWrapper {
   const RegistrationPage({super.key});
@@ -84,6 +85,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     color: Colors.black12,
                   ),
                   FunctionButton(
+                    colorText: Colors.white,
+                    colorsBackground: ThemeHelper.mainColor,
                     text: 'Registrazione',
                     loading: state is TryLogginInState,
                     onPressed: () {

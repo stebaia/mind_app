@@ -57,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
               top: -50.0,
               child: SvgPicture.asset(
                 'assets/blob.svg',
-                height: 300,
+                height: 250,
               ),
             ),
             Positioned(
@@ -69,20 +69,47 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             Positioned(
-              right: 40.0,
-              bottom: 0.0,
+              right: -80.0,
+              bottom: -40.0,
               child: SvgPicture.asset(
                 'assets/blob.svg',
                 height: 150,
               ),
             ),
+            Positioned(
+              left: 10,
+              bottom: 20.0,
+              child: SvgPicture.asset(
+                'assets/blob_two.svg',
+                height: 230,
+              ),
+            ),
             Container(
-                padding: const EdgeInsets.only(top: 100),
-                alignment: Alignment.topCenter,
-                child: Text(
-                  'Ciao, benvenuto!',
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                )),
+              padding: EdgeInsets.all(40),
+              alignment: Alignment.bottomCenter,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'New to MindApp?',
+                    style: TextStyle(
+                        color: Color.fromARGB(255, 110, 110, 110),
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12),
+                  ),
+                  SizedBox(
+                    width: 4,
+                  ),
+                  Text(
+                    'Register',
+                    style: TextStyle(
+                        color: ThemeHelper.buttonColor,
+                        fontWeight: FontWeight.w900,
+                        fontSize: 12),
+                  ),
+                ],
+              ),
+            ),
             Container(
               width: MediaQuery.of(context).size.width,
               child: Center(
@@ -122,8 +149,17 @@ class _LoginPageState extends State<LoginPage> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
+                                Container(
+                                  alignment: Alignment.topLeft,
+                                  child: Text(
+                                    'Hello, welcome!',
+                                    style: TextStyle(
+                                        fontSize: 26,
+                                        fontFamily: 'PoppinsExtrabold'),
+                                  ),
+                                ),
                                 const SizedBox(
-                                  height: 40,
+                                  height: 10,
                                 ),
                                 EmailFormField(
                                   'Username',
@@ -166,10 +202,25 @@ class _LoginPageState extends State<LoginPage> {
                                   },
                                 ),
                                 const SizedBox(
-                                  height: 20,
+                                  height: 10,
+                                ),
+                                Container(
+                                  alignment: Alignment.centerRight,
+                                  child: Text(
+                                    'Forgot Password?',
+                                    style: TextStyle(
+                                        color: ThemeHelper.buttonColor,
+                                        fontWeight: FontWeight.w900,
+                                        fontSize: 14),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 24,
                                 ),
                                 FunctionButton(
                                   text: 'Login',
+                                  colorText: Colors.white,
+                                  colorsBackground: ThemeHelper.buttonColor,
                                   loading: state is TryLogginInState,
                                   onPressed: () {
                                     if (_formValid) {
@@ -183,13 +234,6 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                                 SizedBox(
                                   height: 10,
-                                ),
-                                FunctionButton(
-                                  text: 'Registrazione',
-                                  onPressed: () {
-                                    context
-                                        .pushRoute(const RegistrationRoute());
-                                  },
                                 ),
                               ],
                             ),
