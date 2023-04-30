@@ -13,6 +13,7 @@ import 'package:mind_app/ui/components/form_field.dart';
 import 'package:mind_app/ui/pages/registration_page.dart';
 import 'package:mind_app/utils/theme_helper.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lottie/lottie.dart';
 
 class LoginPage extends StatefulWidget with AutoRouteWrapper {
   const LoginPage({super.key});
@@ -57,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
               top: -50.0,
               child: SvgPicture.asset(
                 'assets/blob.svg',
-                height: 250,
+                height: 300,
               ),
             ),
             Positioned(
@@ -65,7 +66,7 @@ class _LoginPageState extends State<LoginPage> {
               top: 60.0,
               child: SvgPicture.asset(
                 'assets/blob.svg',
-                height: 100,
+                height: 150,
               ),
             ),
             Positioned(
@@ -91,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'New to MindApp?',
+                    'Don\'t have an account?',
                     style: TextStyle(
                         color: Color.fromARGB(255, 110, 110, 110),
                         fontWeight: FontWeight.w400,
@@ -101,7 +102,7 @@ class _LoginPageState extends State<LoginPage> {
                     width: 4,
                   ),
                   Text(
-                    'Register',
+                    'Sing-up',
                     style: TextStyle(
                         color: ThemeHelper.buttonColor,
                         fontWeight: FontWeight.w900,
@@ -149,6 +150,11 @@ class _LoginPageState extends State<LoginPage> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
+                                Lottie.asset(
+                                  width: 150,
+                                  'assets/hello_animation.json',
+                                  fit: BoxFit.contain,
+                                ),
                                 Container(
                                   alignment: Alignment.topLeft,
                                   child: Text(
@@ -163,7 +169,7 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                                 EmailFormField(
                                   'Username',
-                                  color: Colors.black12,
+                                  color: Color.fromARGB(255, 208, 208, 212),
                                   textEditingController: _singUpEmailController,
                                   focusNode: _focusNodeEmail,
                                   formFieldValidator: (value) {
@@ -180,7 +186,7 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                                 PasswordFormField(
                                   'Password',
-                                  color: Colors.black12,
+                                  color: Color.fromARGB(255, 208, 208, 212),
                                   textInputAction: TextInputAction.go,
                                   textEditingController:
                                       _singUpPasswordController,

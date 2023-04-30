@@ -50,6 +50,7 @@ dev_dependencies:
   http_mock_adapter: ^0.3.3
   data_fixture_dart: ^2.2.0
   mockito: ^5.3.2
+  lottie: ^2.0.0
 
 flutter:
   uses-material-design: true
@@ -64,6 +65,7 @@ flutter:
     - assets/angry.gif
     - assets/blob.svg
     - assets/blob_two.svg
+    - assets/hello_animation.json
   fonts:
     - family: LeagueSpartan
       fonts:
