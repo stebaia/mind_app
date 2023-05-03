@@ -8,7 +8,9 @@ import 'package:mind_app/app.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mind_app/bloc/cubit/auth_cubit/auth_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mind_app/ui/components/carousel_item.dart';
 import 'package:mind_app/ui/components/example_chart.dart';
+import 'package:mind_app/ui/components/line_chart.dart';
 import 'package:mind_app/utils/theme_helper.dart';
 
 class CorePage extends StatelessWidget {
@@ -33,7 +35,7 @@ class CorePage extends StatelessWidget {
             return SingleChildScrollView(
               child: Container(
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
+                height: MediaQuery.of(context).size.height * 1.2,
                 child: Stack(
                   children: [
                     Positioned(
@@ -45,110 +47,199 @@ class CorePage extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      padding: EdgeInsets.all(24),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const SizedBox(
-                            height: 50,
-                          ),
-                          Text(
-                            'Hi ${state.user.name}',
-                            style: TextStyle(
-                                fontSize: 26, fontFamily: 'PoppinsExtrabold'),
-                          ),
-                          RichText(
-                              text: TextSpan(
-                                  text: 'You seem to be ',
-                                  style: TextStyle(color: Colors.black),
-                                  children: [
-                                TextSpan(
-                                    text: 'angry',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black)),
-                                TextSpan(
-                                    text: ' today!',
-                                    style: TextStyle(color: Colors.black)),
-                              ])),
-                          SizedBox(
-                            height: 120,
-                          ),
-                          Text(
-                            'Let off some steam...',
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          
-                          GestureDetector(
-                            child: Container(
-                              padding: EdgeInsets.all(10),
-                              width: MediaQuery.of(context).size.width,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: ThemeHelper.backgroundColorWhite,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Color.fromARGB(255, 220, 199, 216)
-                                        .withOpacity(0.2),
-                                    spreadRadius: 10,
-                                    blurRadius: 10,
-                                    offset: Offset(
-                                        0, 3), // changes position of shadow
-                                  ),
-                                ],
-                              ),
-                              child: Row(
-                                children: [
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Row(children: [
-                                        Container(
-                                            width: 36,
-                                            height: 36,
-                                            decoration: BoxDecoration(
-                                                color: ThemeHelper.secondaryColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(40)),
-                                            child: const Center(
-                                                child:
-                                                    Icon(CupertinoIcons.lock_circle, color: ThemeHelper.buttonColor,))),
-                                        SizedBox(width: 10),
-                                        const Text(
-                                          'Add a secret note!',
+                          Container(
+                            padding: EdgeInsets.all(24),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SizedBox(
+                                  height: 50,
+                                ),
+                                Text(
+                                  'Hi ${state.user.name}',
+                                  style: const TextStyle(
+                                      fontSize: 26,
+                                      fontFamily: 'PoppinsExtrabold'),
+                                ),
+                                RichText(
+                                    text: const TextSpan(
+                                        text: 'You seem to be ',
+                                        style: TextStyle(color: Colors.black),
+                                        children: [
+                                      TextSpan(
+                                          text: 'angry',
                                           style: TextStyle(
-                                              fontWeight: FontWeight.w900,
-                                              fontSize: 16),
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black)),
+                                      TextSpan(
+                                          text: ' today!',
+                                          style:
+                                              TextStyle(color: Colors.black)),
+                                    ])),
+                                const SizedBox(
+                                  height: 120,
+                                ),
+                                const Text(
+                                  'Let off some steam...',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                GestureDetector(
+                                  child: Container(
+                                    padding: EdgeInsets.all(10),
+                                    width: MediaQuery.of(context).size.width,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: ThemeHelper.backgroundColorWhite,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color:
+                                              Color.fromARGB(255, 220, 199, 216)
+                                                  .withOpacity(0.2),
+                                          spreadRadius: 10,
+                                          blurRadius: 10,
+                                          offset: Offset(0,
+                                              3), // changes position of shadow
                                         ),
-                                      ]),
-                                      const Text(
-                                          'Feel like venting?\nWrite an ephemeral note and let the anger go..',
-                                          style: TextStyle(fontSize: 13))
-                                    ],
+                                      ],
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Row(children: [
+                                              Container(
+                                                  width: 36,
+                                                  height: 36,
+                                                  decoration: BoxDecoration(
+                                                      color: ThemeHelper
+                                                          .secondaryColor,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              40)),
+                                                  child: const Center(
+                                                      child: Icon(
+                                                    CupertinoIcons.lock_circle,
+                                                    color:
+                                                        ThemeHelper.buttonColor,
+                                                  ))),
+                                              SizedBox(width: 10),
+                                              const Text(
+                                                'Add a secret note!',
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.w900,
+                                                    fontSize: 16),
+                                              ),
+                                            ]),
+                                            const Text(
+                                                'Feel like venting?\nWrite an ephemeral note and let the anger go..',
+                                                style: TextStyle(fontSize: 13))
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ],
-                              ),
+                                  onTap: () {},
+                                ),
+                                SizedBox(
+                                  height: 30,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    const Text(
+                                      'How was your week?',
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Row(
+                                      children: const [
+                                        Text(
+                                          'Check details...',
+                                          style: TextStyle(
+                                              fontSize: 10,
+                                              fontWeight: FontWeight.w900,
+                                              color: ThemeHelper.buttonColor),
+                                        ),
+                                        Icon(
+                                          CupertinoIcons.chevron_right,
+                                          size: 18,
+                                          color: ThemeHelper.buttonColor,
+                                        )
+                                      ],
+                                    )
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Container(
+                                    child: LineChartSample2(),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: ThemeHelper.backgroundColorWhite,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: const Color.fromARGB(
+                                                    255, 220, 199, 216)
+                                                .withOpacity(0.2),
+                                            spreadRadius: 10,
+                                            blurRadius: 10,
+                                            offset: Offset(0,
+                                                3), // changes position of shadow
+                                          )
+                                        ])),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    const Text(
+                                      'News for your well-being',
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Row(
+                                      children: const [
+                                        Text(
+                                          'See all..',
+                                          style: TextStyle(
+                                              fontSize: 10,
+                                              fontWeight: FontWeight.w900,
+                                              color: ThemeHelper.buttonColor),
+                                        ),
+                                        Icon(
+                                          CupertinoIcons.chevron_right,
+                                          size: 18,
+                                          color: ThemeHelper.buttonColor,
+                                        )
+                                      ],
+                                    )
+                                  ],
+                                ),
+                                
+                              ],
                             ),
-                            onTap: () {},
                           ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Text(
-                            'Let off some steam...',
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Container(child: ExampleChart())
+                          Container(padding: EdgeInsets.only(top: 0), child: CarouselItem())
                         ],
                       ),
                     ),
