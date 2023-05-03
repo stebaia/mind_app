@@ -9,6 +9,7 @@ class EmailFormField extends StatelessWidget {
   final ValueChanged<String>? onFieldSubmitted;
   final TextInputAction? textInputAction;
   final Color? color;
+  final IconData? iconCustom;
 
   const EmailFormField(this.label,
       {super.key,
@@ -17,7 +18,8 @@ class EmailFormField extends StatelessWidget {
       this.formFieldValidator,
       this.onFieldSubmitted,
       this.textInputAction,
-      this.color});
+      this.color,
+      this.iconCustom});
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +35,8 @@ class EmailFormField extends StatelessWidget {
           decoration: InputDecoration(
             hintText: label,
             border: InputBorder.none,
-            prefixIcon: const Icon(
-              CupertinoIcons.person,
+            prefixIcon: Icon(
+              iconCustom ?? CupertinoIcons.person,
               size: 18,
               color: Colors.grey,
             ),

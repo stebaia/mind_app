@@ -101,12 +101,15 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(
                     width: 4,
                   ),
-                  Text(
-                    'Sing-up',
-                    style: TextStyle(
-                        color: ThemeHelper.buttonColor,
-                        fontWeight: FontWeight.w900,
-                        fontSize: 12),
+                  GestureDetector(
+                    onTap: () => context.pushRoute(RegistrationRoute()),
+                    child: Text(
+                      'Sing-up',
+                      style: TextStyle(
+                          color: ThemeHelper.buttonColor,
+                          fontWeight: FontWeight.w900,
+                          fontSize: 12),
+                    ),
                   ),
                 ],
               ),

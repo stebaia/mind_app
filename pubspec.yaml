@@ -38,6 +38,7 @@ dependencies:
   shimmer: ^2.0.0
   flutter_rating_bar: ^4.0.1
   chips_choice: ^3.0.0
+  syncfusion_flutter_charts: ^21.2.3
 
 dev_dependencies:
   flutter_test:
@@ -65,7 +66,9 @@ flutter:
     - assets/angry.gif
     - assets/blob.svg
     - assets/blob_two.svg
+    - assets/blob_three.svg
     - assets/hello_animation.json
+    - assets/agent.png
   fonts:
     - family: LeagueSpartan
       fonts:

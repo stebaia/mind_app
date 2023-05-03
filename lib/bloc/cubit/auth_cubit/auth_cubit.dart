@@ -20,6 +20,8 @@ class AuthCubit extends Cubit<AuthState> {
         : const NotAuthenticatedState());
   }
 
+
+
   void authenticated(User user) => emit(AuthenticatedState(user));
 
   void manualLogout() async {
