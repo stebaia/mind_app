@@ -40,6 +40,7 @@ dependencies:
   chips_choice: ^3.0.0
   syncfusion_flutter_charts: ^21.2.3
   fl_chart: ^0.62.0
+  local_auth: ^2.1.6
 
 dev_dependencies:
   flutter_test:

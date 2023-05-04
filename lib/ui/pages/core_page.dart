@@ -1,16 +1,21 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mind_app/app.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mind_app/bloc/cubit/auth_cubit/auth_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mind_app/routes/app_router.gr.dart';
 import 'package:mind_app/ui/components/carousel_item.dart';
 import 'package:mind_app/ui/components/example_chart.dart';
 import 'package:mind_app/ui/components/line_chart.dart';
+import 'package:mind_app/ui/pages/secret_note_detail_page.dart';
+import 'package:mind_app/utils/auth_service.dart';
 import 'package:mind_app/utils/theme_helper.dart';
 
 class CorePage extends StatelessWidget {
@@ -96,34 +101,74 @@ class CorePage extends StatelessWidget {
                                       ],
                                     ),
                                     GestureDetector(
+                                      onTap: () => context.pushRoute(ProfileRoute()),
                                       child: Container(
-                                        padding: EdgeInsets.all(8),
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(50),
-                                          color: ThemeHelper.drawingColor,
-                                        ),
-                                        child: CircleAvatar(
-                                          backgroundImage: NetworkImage(
-                                              'https://picsum.photos/id/237/200/300'),
-                                        ),
-                                      ),
-                                    )
+                                                    width: 36,
+                                                    height: 36,
+                                                    decoration: BoxDecoration(
+                                                        color: ThemeHelper
+                                                            .drawingColor,
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                                40)),
+                                                    child: const Center(
+                                                        child: Icon(
+                                                      CupertinoIcons.person_circle,
+                                                      color:
+                                                          Colors.black,
+                                                    ))),
+                                    ),
                                   ],
                                 ),
                                 const SizedBox(
                                   height: 120,
                                 ),
-                                const Text(
-                                  'Let off some steam...',
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    const Text(
+                                      'Let offsome steam...',
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    GestureDetector(
+                                      onTap:  () async {
+                                        
+                                        bool _localAuthentication = await AuthService.authenticateUser();
+                                        if(_localAuthentication){
+                                          
+                                          context.pushRoute(SecretNoteListRoute());
+                                          
+                                        }else{
+                                          Fluttertoast.showToast(msg: "Auth failed!");
+                                        }
+                                      },
+                                      child: Row(
+                                        children: const [
+                                          Text(
+                                            'See all...',
+                                            style: TextStyle(
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.w900,
+                                                color: ThemeHelper.buttonColor),
+                                          ),
+                                          Icon(
+                                            CupertinoIcons.chevron_right,
+                                            size: 18,
+                                            color: ThemeHelper.buttonColor,
+                                          )
+                                        ],
+                                      ),
+                                    )
+                                  ],
                                 ),
                                 const SizedBox(
                                   height: 20,
                                 ),
                                 GestureDetector(
+                                 
                                   child: Container(
                                     padding: EdgeInsets.all(10),
                                     width: MediaQuery.of(context).size.width,
@@ -182,7 +227,9 @@ class CorePage extends StatelessWidget {
                                       ],
                                     ),
                                   ),
-                                  onTap: () {},
+                                  onTap: () {
+                                    context.pushRoute(SecretNoteDetailRoute());
+                                  },
                                 ),
                                 SizedBox(
                                   height: 30,
