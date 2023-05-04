@@ -35,7 +35,7 @@ class CorePage extends StatelessWidget {
             return SingleChildScrollView(
               child: Container(
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 1.2,
+                height: MediaQuery.of(context).size.height * 1.3,
                 child: Stack(
                   children: [
                     Positioned(
@@ -55,32 +55,62 @@ class CorePage extends StatelessWidget {
                             padding: EdgeInsets.all(24),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 const SizedBox(
                                   height: 50,
                                 ),
-                                Text(
-                                  'Hi ${state.user.name}',
-                                  style: const TextStyle(
-                                      fontSize: 26,
-                                      fontFamily: 'PoppinsExtrabold'),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'Hi ${state.user.name}',
+                                          style: const TextStyle(
+                                              fontSize: 26,
+                                              fontFamily: 'PoppinsExtrabold'),
+                                        ),
+                                        RichText(
+                                            text: const TextSpan(
+                                                text: 'You seem to be ',
+                                                style: TextStyle(
+                                                    color: Colors.black),
+                                                children: [
+                                              TextSpan(
+                                                  text: 'angry',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Colors.black)),
+                                              TextSpan(
+                                                  text: ' today!',
+                                                  style: TextStyle(
+                                                      color: Colors.black)),
+                                            ])),
+                                      ],
+                                    ),
+                                    GestureDetector(
+                                      child: Container(
+                                        padding: EdgeInsets.all(8),
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(50),
+                                          color: ThemeHelper.drawingColor,
+                                        ),
+                                        child: CircleAvatar(
+                                          backgroundImage: NetworkImage(
+                                              'https://picsum.photos/id/237/200/300'),
+                                        ),
+                                      ),
+                                    )
+                                  ],
                                 ),
-                                RichText(
-                                    text: const TextSpan(
-                                        text: 'You seem to be ',
-                                        style: TextStyle(color: Colors.black),
-                                        children: [
-                                      TextSpan(
-                                          text: 'angry',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.black)),
-                                      TextSpan(
-                                          text: ' today!',
-                                          style:
-                                              TextStyle(color: Colors.black)),
-                                    ])),
                                 const SizedBox(
                                   height: 120,
                                 ),
@@ -235,11 +265,12 @@ class CorePage extends StatelessWidget {
                                     )
                                   ],
                                 ),
-                                
                               ],
                             ),
                           ),
-                          Container(padding: EdgeInsets.only(top: 0), child: CarouselItem())
+                          Container(
+                              padding: EdgeInsets.only(top: 0),
+                              child: CarouselItem())
                         ],
                       ),
                     ),
