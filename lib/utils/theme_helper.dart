@@ -7,4 +7,5 @@ class ThemeHelper {
   static const secondaryColor = Color(0xffCEB6F3);
   static const drawingColor = Color(0xffC4CDFF);
   static const buttonColor = Color.fromARGB(255, 123, 97, 185);
+  static const buttonSecondaryColor = Color.fromARGB(255, 49, 38, 110);
 }

@@ -11,8 +11,8 @@ class LineChartSample2 extends StatefulWidget {
 
 class _LineChartSample2State extends State<LineChartSample2> {
   List<Color> gradientColors = [
-    ThemeHelper.buttonColor,
-    ThemeHelper.mainColor
+    ThemeHelper.buttonSecondaryColor,
+    ThemeHelper.buttonSecondaryColor
   ];
 
   bool showAvg = false;

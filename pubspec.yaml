@@ -71,6 +71,7 @@ flutter:
     - assets/blob_three.svg
     - assets/hello_animation.json
     - assets/agent.png
+    - assets/incognito.png
   fonts:
     - family: LeagueSpartan
       fonts:

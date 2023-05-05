@@ -152,7 +152,7 @@ class CorePage extends StatelessWidget {
                                             style: TextStyle(
                                                 fontSize: 10,
                                                 fontWeight: FontWeight.w900,
-                                                color: ThemeHelper.buttonColor),
+                                                color: ThemeHelper.buttonSecondaryColor),
                                           ),
                                           Icon(
                                             CupertinoIcons.chevron_right,
@@ -251,7 +251,7 @@ class CorePage extends StatelessWidget {
                                           style: TextStyle(
                                               fontSize: 10,
                                               fontWeight: FontWeight.w900,
-                                              color: ThemeHelper.buttonColor),
+                                              color: ThemeHelper.buttonSecondaryColor),
                                         ),
                                         Icon(
                                           CupertinoIcons.chevron_right,
@@ -301,7 +301,7 @@ class CorePage extends StatelessWidget {
                                           style: TextStyle(
                                               fontSize: 10,
                                               fontWeight: FontWeight.w900,
-                                              color: ThemeHelper.buttonColor),
+                                              color: ThemeHelper.buttonSecondaryColor),
                                         ),
                                         Icon(
                                           CupertinoIcons.chevron_right,
