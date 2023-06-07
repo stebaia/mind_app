@@ -2,10 +2,13 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mind_app/bloc/cubit/auth_cubit/auth_cubit.dart';
+import 'package:mind_app/bloc/day_bloc/day_bloc.dart';
+import 'package:mind_app/model/day.dart';
 import 'package:mind_app/routes/app_router.gr.dart';
+import 'package:mind_app/utils/app_utils.dart';
 import 'package:mind_app/utils/theme_helper.dart';
 
-class MainPage extends StatelessWidget {
+class MainPage extends StatelessWidget with AutoRouteWrapper {
   const MainPage({super.key});
 
   @override
@@ -13,7 +16,7 @@ class MainPage extends StatelessWidget {
         listener: ((context, state) {
           try {
             if (state is AuthenticatedState) {
-              _replacePage(context, const CoreRoute());
+              context.read<DayBloc>()..getDay(userId: state.user.id, dayFrom: DateConverter.getDateNowWithFormatSimples(), dayTo: DateConverter.getDateNowWithFormatSimples());
             } else if (state is NotAuthenticatedState) {
               _replacePage(context, const LoginRoute());
             }
@@ -21,17 +24,32 @@ class MainPage extends StatelessWidget {
             _replacePage(context, LoginRoute());
           }
         }),
-        child: const Scaffold(
+        child: Scaffold(
           backgroundColor: ThemeHelper.backgroundColorWhite,
-          body: Center(
-            child: CircularProgressIndicator(),
-          ),
+          body: BlocListener<DayBloc, GetDayState>(
+            listener: (context, state) {
+              if(state is EmptyGetDayState){
+                _replacePage(context, ProfileRoute());
+              }else{
+                _replacePage(context, CoreRoute());
+              }
+            },
+            child: Center(child: CircularProgressIndicator()),
+         ),
         ),
+
       );
+      
 
   Future<void> _replacePage(
       BuildContext context, PageRouteInfo routeInfo) async {
     //context.router.popUntilRoot();
     await context.router.push(routeInfo);
   }
+
+  @override
+  Widget wrappedRoute(BuildContext context) => MultiBlocProvider(providers: [
+        BlocProvider<DayBloc>(
+            create: ((context) => DayBloc(daysRepository: context.read())))
+      ], child: this);
 }

@@ -9,11 +9,15 @@ final List<RepositoryProvider> _repositories = [
           userDTOMapper: context.read(),
           userService: context.read(),
           userMapper: context.read(),
-
           logger: context.read());
-
-      
       return userRepository;
+    })),
+  RepositoryProvider<DaysRepository>(create: ((context) {
+      
+      final dayRepository = DaysRepository(
+          
+          logger: context.read(), daysService: context.read(), dtoMapper: context.read());
+      return dayRepository;
     })),
 ];
 

@@ -7,4 +7,10 @@ final List<SingleChildWidget> _mappers = [
   Provider<DTOMapper<UserDTO, User>>(
     create: (_) => UserMapper(),
   ),
+  Provider<DTOMapper<DaysDTO, DaysList>>(
+    create: (_) => DaysListMapper(),
+  ),
+   Provider<DTOMapper<DayDTO, Day>>(
+    create: (_) => DayMapper(),
+  ),
 ];

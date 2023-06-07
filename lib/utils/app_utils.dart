@@ -16,10 +16,16 @@ class DateConverter {
   static String convertDate(String? inputDate) {
     if (inputDate != null) {
       DateTime date = DateTime.parse(inputDate).toLocal();
-      String formattedDate = DateFormat('dd/MM/yy').format(date);
+      String formattedDate = DateFormat('yyyy-MM-dd').format(date);
       return formattedDate;
     } else
       return "";
+  }
+
+  static String getDateNowWithFormatSimples() {
+    final DateTime now = DateTime.now();
+    final DateFormat formatter = DateFormat('yyyy-MM-dd');
+    return formatter.format(now);
   }
 
   static String getDateNowWithFormat() {
