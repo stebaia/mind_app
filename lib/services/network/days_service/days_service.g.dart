@@ -43,14 +43,14 @@ class _DaysService implements DaysService {
   }
 
   @override
-  Future<DaysDTO> setDay(request) async {
+  Future<DayResultDTO> setDay(request) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(request.toJson());
-    final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<DaysDTO>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<DayResultDTO>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -62,7 +62,7 @@ class _DaysService implements DaysService {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = DaysDTO.fromJson(_result.data!);
+    final value = DayResultDTO.fromJson(_result.data!);
     return value;
   }
 

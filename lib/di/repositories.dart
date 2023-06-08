@@ -16,7 +16,7 @@ final List<RepositoryProvider> _repositories = [
       
       final dayRepository = DaysRepository(
           
-          logger: context.read(), daysService: context.read(), dtoMapper: context.read());
+          logger: context.read(), daysService: context.read(), dtoMapper: context.read(), dtoResultMapper: context.read());
       return dayRepository;
     })),
 ];

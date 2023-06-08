@@ -18,5 +18,5 @@ abstract class DaysService {
   Future<DaysDTO> getDay(@Body() GetDayRequest request);
 
   @POST('setday')
-  Future<DaysDTO> setDay(@Body() SetDayRequest request);
+  Future<DayResultDTO> setDay(@Body() SetDayRequest request);
 }

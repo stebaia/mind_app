@@ -26,11 +26,11 @@ class MainPage extends StatelessWidget with AutoRouteWrapper {
         }),
         child: Scaffold(
           backgroundColor: ThemeHelper.backgroundColorWhite,
-          body: BlocListener<DayBloc, GetDayState>(
+          body: BlocListener<DayBloc, DayState>(
             listener: (context, state) {
               if(state is EmptyGetDayState){
-                _replacePage(context, ProfileRoute());
-              }else{
+                _replacePage(context, SetDayRoute());
+              }else if(state is ResultGetDayState){
                 _replacePage(context, CoreRoute());
               }
             },

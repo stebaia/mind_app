@@ -13,4 +13,7 @@ final List<SingleChildWidget> _mappers = [
    Provider<DTOMapper<DayDTO, Day>>(
     create: (_) => DayMapper(),
   ),
+   Provider<DTOMapper<DayResultDTO, DayResult>>(
+    create: (_) => DayResultMapper(),
+  ),
 ];

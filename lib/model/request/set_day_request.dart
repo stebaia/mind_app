@@ -5,21 +5,21 @@ class SetDayRequest extends DTO with EquatableMixin {
   static const _userId = 'userId';
   static const _day = 'day';
   static const _mood = "mood";
-  static const _comment = 'comment';
+  static const _note = 'note';
   static const _tags = 'tags';
   static const _timestamp = "timestamp";
 
   final String userId;
   final String day;
   final int mood;
-  final String comment;
+  final String note;
   final List<String> tags;
   final String timestamp;
 
-  SetDayRequest({required this.userId, required this.day, required this.mood, required this.comment, required  this.tags, required this.timestamp});
+  SetDayRequest({required this.userId, required this.day, required this.mood, required this.note, required  this.tags, required this.timestamp});
 
-  Map<String, dynamic> toJson() => {_userId: userId, _day: day, _mood: mood, _comment: comment, _tags: tags, _timestamp: timestamp};
+  Map<String, dynamic> toJson() => {_userId: userId, _day: day, _mood: mood, _note: note, _tags: tags, _timestamp: timestamp};
 
   @override
-  List<Object?> get props => [userId, day, mood, comment, tags, timestamp];
+  List<Object?> get props => [userId, day, mood, note, tags, timestamp];
 }

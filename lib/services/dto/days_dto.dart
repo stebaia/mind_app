@@ -59,3 +59,29 @@ class DayDTO extends DTO with EquatableMixin {
   // TODO: implement props
   List<Object?> get props => [mood, day, note, tags];
 }
+
+class DayResultDTO extends DTO with EquatableMixin {
+
+
+  DayDTO? dayDTO;
+
+  DayResultDTO({this.dayDTO});
+
+  DayResultDTO.fromJson(Map<String, dynamic> json) {
+    dayDTO = json['day'] != null ? new DayDTO.fromJson(json['day']) : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.dayDTO != null) {
+      data['day'] = this.dayDTO!.toJson();
+    }
+    return data;
+  }
+  
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [dayDTO];
+
+}

@@ -2,13 +2,15 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:mind_app/model/day_list.dart';
+import 'package:mind_app/model/day_result.dart';
 import 'package:mind_app/repositories/days_repository.dart';
 
 part 'day_event.dart';
 part 'day_state.dart';
 
-class DayBloc extends Bloc<DayEvent, GetDayState> {
+class DayBloc extends Bloc<DayEvent, DayState> {
 
   final DaysRepository daysRepository;
 
@@ -16,6 +18,7 @@ class DayBloc extends Bloc<DayEvent, GetDayState> {
     required this.daysRepository
   }) : super(TryGetDayState()) {
     on<GetDayEvent>(_getDay);
+    on<SetDayEvent>(_setDay);
   }
 
    void getDay({
@@ -30,8 +33,19 @@ class DayBloc extends Bloc<DayEvent, GetDayState> {
       ));
 
 
+  void setDay({
+    required String userId,
+    required String day,
+    required int mood,
+    required String note,
+    required List<String> tags,
+    required String timestamp
+  }){
+    add(SetDayEvent(userId: userId, day: day, mood: mood, note: note, tags: tags, timestamp: timestamp));
+  }
+
   FutureOr<void> _getDay(
-      GetDayEvent event, Emitter<GetDayState> emitter) async {
+      GetDayEvent event, Emitter<DayState> emitter) async {
     emit(const TryGetDayState());
     try {
       final dayList = await daysRepository.getDay(userId: event.userId, dayFrom: event.dayFrom, dayTo: event.dayTo);
@@ -41,6 +55,17 @@ class DayBloc extends Bloc<DayEvent, GetDayState> {
         emit(EmptyGetDayState());
       }
       
+    } catch (e) {
+      emit(const ErrorGetDayState());
+    }
+  }
+
+  FutureOr<void> _setDay(
+      SetDayEvent event, Emitter<DayState> emitter) async {
+    emit(const TrySetDayState());
+    try {
+      final dayResult = await daysRepository.setDay(userId: event.userId, day: event.day, mood: event.mood, note: event.note, tags: event.tags, timestamp: event.timestamp);
+      emit(ResultSetDayState(dayResult));
     } catch (e) {
       emit(const ErrorGetDayState());
     }
