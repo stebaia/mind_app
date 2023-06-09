@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 Widget faceFeedback(int feedbackNumber) {
   switch (feedbackNumber) {
-    case 0:
+    case 1:
       {
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -18,7 +18,7 @@ Widget faceFeedback(int feedbackNumber) {
           ],
         );
       }
-    case 25:
+    case 2:
       {
         return Column(children: [
           Image.asset(
@@ -30,7 +30,7 @@ Widget faceFeedback(int feedbackNumber) {
           textFaceState('Uffa! vorrei spaccare tutto!'),
         ]);
       }
-    case 50:
+    case 3:
       {
         return Column(children: [
           Image.asset(
@@ -42,7 +42,7 @@ Widget faceFeedback(int feedbackNumber) {
           textFaceState('Giornata abbastanza normale'),
         ]);
       }
-    case 75:
+    case 4:
       {
         return Column(children: [
           Image.asset(
@@ -54,7 +54,7 @@ Widget faceFeedback(int feedbackNumber) {
           textFaceState('Oggi è stata una bella giornata!'),
         ]);
       }
-    case 100:
+    case 5:
       {
         
         return Column(children: [

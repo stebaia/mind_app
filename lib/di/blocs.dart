@@ -5,8 +5,6 @@ final List<BlocProvider> _blocs = [
       create: (context) =>
           AuthCubit(userRepository: context.read(), context: context)
             ..checkAuthenticationState()),
-  BlocProvider<RatingCubitCubit>(
-      create: (context) =>
-          RatingCubitCubit())
-      ,
+  BlocProvider<RatingCubitCubit>(create: (context) => RatingCubitCubit()),
+  BlocProvider<TagsCubit>(create: (context) => TagsCubit()),
 ];
