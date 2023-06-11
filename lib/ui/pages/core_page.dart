@@ -20,7 +20,7 @@ import 'package:mind_app/utils/app_utils.dart';
 import 'package:mind_app/utils/auth_service.dart';
 import 'package:mind_app/utils/theme_helper.dart';
 
-class CorePage extends StatelessWidget with AutoRouteWrapper{
+class CorePage extends StatelessWidget with AutoRouteWrapper {
   const CorePage({super.key});
 
   @override
@@ -232,7 +232,7 @@ class CorePage extends StatelessWidget with AutoRouteWrapper{
                                     context.pushRoute(SecretNoteDetailRoute());
                                   },
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 30,
                                 ),
                                 Row(
@@ -245,70 +245,74 @@ class CorePage extends StatelessWidget with AutoRouteWrapper{
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    Row(
-                                      children: const [
-                                        Text(
-                                          'Check details...',
-                                          style: TextStyle(
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.w900,
-                                              color: ThemeHelper
-                                                  .buttonSecondaryColor),
-                                        ),
-                                        Icon(
-                                          CupertinoIcons.chevron_right,
-                                          size: 18,
-                                          color: ThemeHelper.buttonColor,
-                                        )
-                                      ],
+                                    GestureDetector(
+                                      onTap: () => context.pushRoute(DayListRoute()),
+                                      child: const Row(
+                                        children: [
+                                          Text(
+                                            'Check details...',
+                                            style: TextStyle(
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.w900,
+                                                color: ThemeHelper
+                                                    .buttonSecondaryColor),
+                                          ),
+                                          Icon(
+                                            CupertinoIcons.chevron_right,
+                                            size: 18,
+                                            color: ThemeHelper.buttonColor,
+                                          )
+                                        ],
+                                      ),
                                     )
                                   ],
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 20,
                                 ),
                                 BlocBuilder<DayBloc, DayState>(
                                   builder: (context, state) {
-                                    if(state is ResultGetDayState){
-return Container(
-                                        child: LineChartSample2(days: state.daysList.days,),
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            color: ThemeHelper
-                                                .backgroundColorWhite,
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: const Color.fromARGB(
-                                                        255, 220, 199, 216)
-                                                    .withOpacity(0.2),
-                                                spreadRadius: 10,
-                                                blurRadius: 10,
-                                                offset: Offset(0,
-                                                    3), // changes position of shadow
-                                              )
-                                            ]));
-                                    }else {
+                                    if (state is ResultGetDayState) {
+                                      return Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              color: ThemeHelper
+                                                  .backgroundColorWhite,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: const Color.fromARGB(
+                                                          255, 220, 199, 216)
+                                                      .withOpacity(0.2),
+                                                  spreadRadius: 10,
+                                                  blurRadius: 10,
+                                                  offset: const Offset(0,
+                                                      3), // changes position of shadow
+                                                )
+                                              ]),
+                                          child: LineChartSample2(
+                                            days: state.daysList.days,
+                                          ));
+                                    } else {
                                       return Container();
                                     }
-                                    
                                   },
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 20,
                                 ),
-                                Row(
+                                const Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    const Text(
+                                     Text(
                                       'News for your well-being',
                                       style: TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold),
                                     ),
                                     Row(
-                                      children: const [
+                                      children:  [
                                         Text(
                                           'See all..',
                                           style: TextStyle(
@@ -331,7 +335,7 @@ return Container(
                           ),
                           Container(
                               padding: EdgeInsets.only(top: 0),
-                              child: CarouselItem())
+                              child: const CarouselItem())
                         ],
                       ),
                     ),
@@ -349,8 +353,17 @@ return Container(
       )),
     );
   }
-  
+
   @override
-  Widget wrappedRoute(BuildContext context) => MultiBlocProvider(providers: [BlocProvider<DayBloc>(
-            create: ((context) => DayBloc(daysRepository: context.read())..getDay(userId: ((context.read<AuthCubit>() as AuthCubit).state as AuthenticatedState).user.id, dayFrom: DateConverter.getDateSevenDaysAgo(), dayTo: DateConverter.getDateNowWithFormatSimples())))], child: this);
+  Widget wrappedRoute(BuildContext context) => MultiBlocProvider(providers: [
+        BlocProvider<DayBloc>(
+            create: ((context) => DayBloc(daysRepository: context.read())
+              ..getDay(
+                  userId: ((context.read<AuthCubit>() as AuthCubit).state
+                          as AuthenticatedState)
+                      .user
+                      .id,
+                  dayFrom: DateConverter.getDateSevenDaysAgo(),
+                  dayTo: DateConverter.getDateNowWithFormatSimples())))
+      ], child: this);
 }

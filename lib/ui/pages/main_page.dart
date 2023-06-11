@@ -41,7 +41,7 @@ class MainPage extends StatelessWidget with AutoRouteWrapper {
             ragingCubit.changeValue(3);
             if (state is EmptyGetDayState) {
               
-              _replacePage(context, SetDayRoute());
+              _replacePage(context, SetDayRoute(isFirstTime: true));
             } else if (state is ResultGetDayState) {
               _replacePage(context, CoreRoute());
             }

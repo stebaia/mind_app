@@ -27,7 +27,13 @@ class DateConverter {
     DateTime sevenDaysAgo = currentDate.subtract(Duration(days: 7));
     final DateFormat formatter = DateFormat('yyyy-MM-dd');
     return formatter.format(sevenDaysAgo);
+  }
 
+  static String getDateAll() {
+    DateTime currentDate = DateTime.now();
+    DateTime sevenDaysAgo = currentDate.subtract(Duration(days: 365));
+    final DateFormat formatter = DateFormat('yyyy-MM-dd');
+    return formatter.format(sevenDaysAgo);
   }
 
   static String getDateNowWithFormatSimples() {

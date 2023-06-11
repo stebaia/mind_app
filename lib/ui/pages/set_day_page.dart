@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -8,6 +9,7 @@ import 'package:mind_app/bloc/cubit/rating_cubit/rating_cubit_cubit.dart';
 import 'package:mind_app/bloc/cubit/tags_cubit/tags_cubit.dart';
 import 'package:mind_app/bloc/day_bloc/day_bloc.dart';
 import 'package:mind_app/routes/app_router.gr.dart';
+import 'package:mind_app/ui/components/buttons.dart';
 import 'package:mind_app/ui/components/face_feedback.dart';
 import 'package:mind_app/ui/components/tags_widget.dart';
 import 'package:mind_app/utils/app_utils.dart';
@@ -15,7 +17,9 @@ import 'package:mind_app/utils/theme_helper.dart';
 import 'package:chips_choice/chips_choice.dart';
 
 class SetDayPage extends StatelessWidget with AutoRouteWrapper {
-  const SetDayPage({super.key});
+  SetDayPage({super.key, required this.isFirstTime});
+
+  final bool isFirstTime;
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +65,23 @@ class SetDayPage extends StatelessWidget with AutoRouteWrapper {
                           SizedBox(
                             height: 60,
                           ),
+                          isFirstTime
+                              ? Container()
+                              : Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Row(children: [
+                                    IconButton(
+                                        icon: Icon(
+                                          CupertinoIcons.arrow_left,
+                                        ),
+                                        onPressed: () => context.popRoute()),
+                                    const Text(
+                                      'How was your day today?',
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontFamily: 'PoppinsExtrabold'),
+                                    ),
+                                  ])),
                           Center(
                               child: SingleChildScrollView(
                             child: Container(
@@ -75,7 +96,7 @@ class SetDayPage extends StatelessWidget with AutoRouteWrapper {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Container(
+                                    isFirstTime ? Container(
                                       alignment: Alignment.topLeft,
                                       child: Text(
                                         'How was your day today?',
@@ -87,7 +108,7 @@ class SetDayPage extends StatelessWidget with AutoRouteWrapper {
                                             color: ThemeHelper
                                                 .buttonSecondaryColor),
                                       ),
-                                    ),
+                                    ) : Container(),
                                     Text(
                                       'Was your day good or bad? do you want to let off some steam?',
                                       style: TextStyle(
@@ -162,41 +183,38 @@ class SetDayPage extends StatelessWidget with AutoRouteWrapper {
                                 )),
                           )),
                           Container(
-                              padding: EdgeInsets.only(bottom: 100, right: 20),
+                              padding: EdgeInsets.only(
+                                  bottom: 20, right: 20, left: 20),
                               alignment: Alignment.bottomRight,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    color: ThemeHelper.buttonColor,
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(40))),
-                                child: TextButton.icon(
-                                    icon: Icon(
-                                      Icons.face_sharp,
-                                      color: Colors.white,
-                                    ),
-                                    label: Text(
-                                      'Confirm!',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontFamily: 'PoppinsExtraBold',
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    onPressed: (() {
-                                      context.read<DayBloc>().setDay(
-                                          userId:
-                                              (user.state as AuthenticatedState)
-                                                  .user
-                                                  .id,
-                                          day: DateConverter
-                                              .getDateNowWithFormatSimples(),
-                                          mood: (sliderValue.state.value)
-                                              .round(),
-                                          note: controller.text,
-                                          tags: tagsCubit.state.map((string) => string.toLowerCase()).toList(),
-                                          timestamp: DateConverter
-                                              .getDateNowWithFormatSimples());
-                                    })),
-                              ))
+                              child: FunctionButton(
+                                colorText: Colors.white,
+                                colorsBackground:
+                                    ThemeHelper.buttonSecondaryColor,
+                                text: 'Send!',
+                                onPressed: () {
+                                  context.read<DayBloc>().setDay(
+                                      userId: (user.state as AuthenticatedState)
+                                          .user
+                                          .id,
+                                      day: DateConverter
+                                          .getDateNowWithFormatSimples(),
+                                      mood: (sliderValue.state.value).round(),
+                                      note: controller.text,
+                                      tags: tagsCubit.state
+                                          .map((string) => string.toLowerCase())
+                                          .toList(),
+                                      timestamp: DateConverter
+                                          .getDateNowWithFormatSimples());
+                                },
+                              )),
+                          GestureDetector(
+                            child: Text(
+                              'Skip',
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 12),
+                            ),
+                            onTap: () => context.pushRoute(CoreRoute()),
+                          )
                         ]);
                   },
                 ),
