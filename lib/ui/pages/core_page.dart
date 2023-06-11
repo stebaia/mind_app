@@ -10,15 +10,17 @@ import 'package:mind_app/app.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mind_app/bloc/cubit/auth_cubit/auth_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mind_app/bloc/day_bloc/day_bloc.dart';
 import 'package:mind_app/routes/app_router.gr.dart';
 import 'package:mind_app/ui/components/carousel_item.dart';
 import 'package:mind_app/ui/components/example_chart.dart';
 import 'package:mind_app/ui/components/line_chart.dart';
 import 'package:mind_app/ui/pages/secret_note_detail_page.dart';
+import 'package:mind_app/utils/app_utils.dart';
 import 'package:mind_app/utils/auth_service.dart';
 import 'package:mind_app/utils/theme_helper.dart';
 
-class CorePage extends StatelessWidget {
+class CorePage extends StatelessWidget with AutoRouteWrapper{
   const CorePage({super.key});
 
   @override
@@ -101,22 +103,20 @@ class CorePage extends StatelessWidget {
                                       ],
                                     ),
                                     GestureDetector(
-                                      onTap: () => context.pushRoute(ProfileRoute()),
+                                      onTap: () =>
+                                          context.pushRoute(ProfileRoute()),
                                       child: Container(
-                                                    width: 36,
-                                                    height: 36,
-                                                    decoration: BoxDecoration(
-                                                        color: ThemeHelper
-                                                            .drawingColor,
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                                40)),
-                                                    child: const Center(
-                                                        child: Icon(
-                                                      CupertinoIcons.person_circle,
-                                                      color:
-                                                          Colors.black,
-                                                    ))),
+                                          width: 36,
+                                          height: 36,
+                                          decoration: BoxDecoration(
+                                              color: ThemeHelper.drawingColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(40)),
+                                          child: const Center(
+                                              child: Icon(
+                                            CupertinoIcons.person_circle,
+                                            color: Colors.black,
+                                          ))),
                                     ),
                                   ],
                                 ),
@@ -134,15 +134,16 @@ class CorePage extends StatelessWidget {
                                           fontWeight: FontWeight.bold),
                                     ),
                                     GestureDetector(
-                                      onTap:  () async {
-                                        
-                                        bool _localAuthentication = await AuthService.authenticateUser();
-                                        if(_localAuthentication){
-                                          
-                                          context.pushRoute(SecretNoteListRoute());
-                                          
-                                        }else{
-                                          Fluttertoast.showToast(msg: "Auth failed!");
+                                      onTap: () async {
+                                        bool _localAuthentication =
+                                            await AuthService
+                                                .authenticateUser();
+                                        if (_localAuthentication) {
+                                          context
+                                              .pushRoute(SecretNoteListRoute());
+                                        } else {
+                                          Fluttertoast.showToast(
+                                              msg: "Auth failed!");
                                         }
                                       },
                                       child: Row(
@@ -152,7 +153,8 @@ class CorePage extends StatelessWidget {
                                             style: TextStyle(
                                                 fontSize: 10,
                                                 fontWeight: FontWeight.w900,
-                                                color: ThemeHelper.buttonSecondaryColor),
+                                                color: ThemeHelper
+                                                    .buttonSecondaryColor),
                                           ),
                                           Icon(
                                             CupertinoIcons.chevron_right,
@@ -168,7 +170,6 @@ class CorePage extends StatelessWidget {
                                   height: 20,
                                 ),
                                 GestureDetector(
-                                 
                                   child: Container(
                                     padding: EdgeInsets.all(10),
                                     width: MediaQuery.of(context).size.width,
@@ -251,7 +252,8 @@ class CorePage extends StatelessWidget {
                                           style: TextStyle(
                                               fontSize: 10,
                                               fontWeight: FontWeight.w900,
-                                              color: ThemeHelper.buttonSecondaryColor),
+                                              color: ThemeHelper
+                                                  .buttonSecondaryColor),
                                         ),
                                         Icon(
                                           CupertinoIcons.chevron_right,
@@ -265,22 +267,33 @@ class CorePage extends StatelessWidget {
                                 SizedBox(
                                   height: 20,
                                 ),
-                                Container(
-                                    child: LineChartSample2(),
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        color: ThemeHelper.backgroundColorWhite,
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: const Color.fromARGB(
-                                                    255, 220, 199, 216)
-                                                .withOpacity(0.2),
-                                            spreadRadius: 10,
-                                            blurRadius: 10,
-                                            offset: Offset(0,
-                                                3), // changes position of shadow
-                                          )
-                                        ])),
+                                BlocBuilder<DayBloc, DayState>(
+                                  builder: (context, state) {
+                                    if(state is ResultGetDayState){
+return Container(
+                                        child: LineChartSample2(days: state.daysList.days,),
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            color: ThemeHelper
+                                                .backgroundColorWhite,
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: const Color.fromARGB(
+                                                        255, 220, 199, 216)
+                                                    .withOpacity(0.2),
+                                                spreadRadius: 10,
+                                                blurRadius: 10,
+                                                offset: Offset(0,
+                                                    3), // changes position of shadow
+                                              )
+                                            ]));
+                                    }else {
+                                      return Container();
+                                    }
+                                    
+                                  },
+                                ),
                                 SizedBox(
                                   height: 20,
                                 ),
@@ -301,7 +314,8 @@ class CorePage extends StatelessWidget {
                                           style: TextStyle(
                                               fontSize: 10,
                                               fontWeight: FontWeight.w900,
-                                              color: ThemeHelper.buttonSecondaryColor),
+                                              color: ThemeHelper
+                                                  .buttonSecondaryColor),
                                         ),
                                         Icon(
                                           CupertinoIcons.chevron_right,
@@ -335,4 +349,8 @@ class CorePage extends StatelessWidget {
       )),
     );
   }
+  
+  @override
+  Widget wrappedRoute(BuildContext context) => MultiBlocProvider(providers: [BlocProvider<DayBloc>(
+            create: ((context) => DayBloc(daysRepository: context.read())..getDay(userId: ((context.read<AuthCubit>() as AuthCubit).state as AuthenticatedState).user.id, dayFrom: DateConverter.getDateSevenDaysAgo(), dayTo: DateConverter.getDateNowWithFormatSimples())))], child: this);
 }

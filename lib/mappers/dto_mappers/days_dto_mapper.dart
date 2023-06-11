@@ -14,7 +14,7 @@ class DaysListMapper extends DTOMapper<DaysDTO, DaysList> {
       DayMapper dayMapper = DayMapper();
       dto.days!.forEach((element) { days.add(dayMapper.fromDTO(element));});
     }
-    return DaysList(count: dto.count!);
+    return DaysList(count: dto.count!, days: days);
   }
 
   @override
@@ -47,7 +47,7 @@ class DayResultMapper extends DTOMapper<DayResultDTO, DayResult> {
 
 class DayMapper extends DTOMapper<DayDTO, Day> {
   @override
-  Day fromDTO(DayDTO dto) => Day(mood: dto.mood!, day: dto.day!, note: dto.note!, tags: dto.tags!);
+  Day fromDTO(DayDTO dto) => Day(mood: dto.mood!, day: dto.day!, note: dto.note, tags: dto.tags);
 
   @override
   DayDTO toDTO(Day model) { 

@@ -28,7 +28,7 @@ class DaysRepository {
   }) async {
     try{
       final response = await daysService.getDay(
-        GetDayRequest(userId: userId, dayFrom: DateConverter.convertDate(dayFrom), dayTo: DateConverter.convertDate(dayFrom))
+        GetDayRequest(userId: userId, dayFrom: DateConverter.convertDate(dayFrom), dayTo: DateConverter.convertDate(dayTo))
       );
       return dtoMapper.fromDTO(response);
     } catch (error, stackTrace){

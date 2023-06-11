@@ -1,10 +1,11 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:mind_app/model/day.dart';
 import 'package:mind_app/utils/theme_helper.dart';
 
 class LineChartSample2 extends StatefulWidget {
-  const LineChartSample2({super.key});
-
+  LineChartSample2({super.key, this.days});
+  List<Day> ?days;
   @override
   State<LineChartSample2> createState() => _LineChartSample2State();
 }
@@ -30,29 +31,12 @@ class _LineChartSample2State extends State<LineChartSample2> {
               top: 24,
               bottom: 12,
             ),
-            child: LineChart(
-              showAvg ? avgData() : mainData(),
-            ),
+            child: widget.days != null ? LineChart(
+              mainData(),
+            ): Container(),
           ),
         ),
-        SizedBox(
-          width: 60,
-          height: 34,
-          child: TextButton(
-            onPressed: () {
-              setState(() {
-                showAvg = !showAvg;
-              });
-            },
-            child: Text(
-              'avg',
-              style: TextStyle(
-                fontSize: 12,
-                color: showAvg ? Colors.white.withOpacity(0.5) : Colors.white,
-              ),
-            ),
-          ),
-        ),
+        
       ],
     );
   }
@@ -64,15 +48,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
     );
     Widget text;
     switch (value.toInt()) {
-      case 2:
-        text = const Text('MAR', style: style);
-        break;
-      case 5:
-        text = const Text('JUN', style: style);
-        break;
-      case 8:
-        text = const Text('SEP', style: style);
-        break;
+      
       default:
         text = const Text('', style: style);
         break;
@@ -92,13 +68,15 @@ class _LineChartSample2State extends State<LineChartSample2> {
     String text;
     switch (value.toInt()) {
       case 1:
-        text = '10K';
+        text = '😔';
         break;
+  
       case 3:
-        text = '30k';
+        text = '😕';
         break;
+
       case 5:
-        text = '50k';
+        text = '😁';
         break;
       default:
         return Container();
@@ -157,20 +135,18 @@ class _LineChartSample2State extends State<LineChartSample2> {
         border: Border.all(color: const Color(0xff37434d)),
       ),
       minX: 0,
-      maxX: 11,
+      maxX: widget.days != null ? widget.days!.length.toDouble() -1 : 0,
       minY: 0,
       maxY: 6,
       lineBarsData: [
         LineChartBarData(
-          spots: const [
-            FlSpot(0, 3),
-            FlSpot(2.6, 2),
-            FlSpot(4.9, 5),
-            FlSpot(6.8, 3.1),
-            FlSpot(8, 4),
-            FlSpot(9.5, 3),
-            FlSpot(11, 4),
-          ],
+          spots: widget.days!.asMap().entries.map((e) {
+            int index = e.key;
+            Day day = e.value;
+            int mood = day.mood;
+            return FlSpot(index.toDouble(), mood.toDouble());
+          }).toList(),
+          
           isCurved: true,
           gradient: LinearGradient(
             colors: gradientColors,
@@ -193,100 +169,5 @@ class _LineChartSample2State extends State<LineChartSample2> {
     );
   }
 
-  LineChartData avgData() {
-    return LineChartData(
-      lineTouchData: LineTouchData(enabled: false),
-      gridData: FlGridData(
-        show: true,
-        drawHorizontalLine: true,
-        verticalInterval: 1,
-        horizontalInterval: 1,
-        getDrawingVerticalLine: (value) {
-          return FlLine(
-            color: const Color(0xff37434d),
-            strokeWidth: 1,
-          );
-        },
-        getDrawingHorizontalLine: (value) {
-          return FlLine(
-            color: const Color(0xff37434d),
-            strokeWidth: 1,
-          );
-        },
-      ),
-      titlesData: FlTitlesData(
-        show: true,
-        bottomTitles: AxisTitles(
-          sideTitles: SideTitles(
-            showTitles: true,
-            reservedSize: 30,
-            getTitlesWidget: bottomTitleWidgets,
-            interval: 1,
-          ),
-        ),
-        leftTitles: AxisTitles(
-          sideTitles: SideTitles(
-            showTitles: true,
-            getTitlesWidget: leftTitleWidgets,
-            reservedSize: 42,
-            interval: 1,
-          ),
-        ),
-        topTitles: AxisTitles(
-          sideTitles: SideTitles(showTitles: false),
-        ),
-        rightTitles: AxisTitles(
-          sideTitles: SideTitles(showTitles: false),
-        ),
-      ),
-      borderData: FlBorderData(
-        show: true,
-        border: Border.all(color: const Color(0xff37434d)),
-      ),
-      minX: 0,
-      maxX: 11,
-      minY: 0,
-      maxY: 6,
-      lineBarsData: [
-        LineChartBarData(
-          spots: const [
-            FlSpot(0, 3.44),
-            FlSpot(2.6, 3.44),
-            FlSpot(4.9, 3.44),
-            FlSpot(6.8, 3.44),
-            FlSpot(8, 3.44),
-            FlSpot(9.5, 3.44),
-            FlSpot(11, 3.44),
-          ],
-          isCurved: true,
-          gradient: LinearGradient(
-            colors: [
-              ColorTween(begin: gradientColors[0], end: gradientColors[1])
-                  .lerp(0.2)!,
-              ColorTween(begin: gradientColors[0], end: gradientColors[1])
-                  .lerp(0.2)!,
-            ],
-          ),
-          barWidth: 5,
-          isStrokeCapRound: true,
-          dotData: FlDotData(
-            show: false,
-          ),
-          belowBarData: BarAreaData(
-            show: true,
-            gradient: LinearGradient(
-              colors: [
-                ColorTween(begin: gradientColors[0], end: gradientColors[1])
-                    .lerp(0.2)!
-                    .withOpacity(0.1),
-                ColorTween(begin: gradientColors[0], end: gradientColors[1])
-                    .lerp(0.2)!
-                    .withOpacity(0.1),
-              ],
-            ),
-          ),
-        ),
-      ],
-    );
-  }
+  
 }

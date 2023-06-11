@@ -3,10 +3,10 @@ import 'package:equatable/equatable.dart';
 class Day extends Equatable {
   int mood;
   String day;
-  String note;
-  List<String> tags;
+  String? note;
+  List<String>? tags;
 
-  Day({required this.mood, required this.day,required this.note, required this.tags});
+  Day({required this.mood, required this.day, this.note,  this.tags});
 
   
   @override
