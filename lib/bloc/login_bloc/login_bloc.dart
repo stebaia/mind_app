@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -46,18 +47,29 @@ class LoginBloc extends Bloc<AuthEvent, LoginInState> {
   void registration(
           {required String email,
           required String password,
-          required String name}) =>
-      add(RegistrationEvent(email: email, password: password, name: name));
+          required String name,
+          required String username,
+          required String birth,
+          required String surname}) =>
+      add(RegistrationEvent(
+          email: email,
+          password: password,
+          name: name,
+          surname: surname,
+          birth: birth,
+          username: username));
 
   FutureOr<void> _registration(
       RegistrationEvent event, Emitter<LoginInState> emitter) async {
     emit(const TryLogginInState());
     try {
       final user = await userRepository.registration(
-        name: event.name,
-        email: event.email,
-        password: event.password,
-      );
+          name: event.name,
+          email: event.email,
+          password: event.password,
+          username: event.username,
+          birth: event.birth,
+          surname: event.surname);
       emit(LoggedInState(user));
     } catch (e) {
       emit(const ErrorLoginInState());

@@ -7,7 +7,8 @@ class UserDTO extends DTO with EquatableMixin {
   UserDTO({this.user});
 
   UserDTO.fromJson(Map<String, dynamic> json) {
-    user = json['user'] != null ? new UserDetailDTO.fromJson(json['user']) : null;
+    user =
+        json['user'] != null ? new UserDetailDTO.fromJson(json['user']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -17,24 +18,37 @@ class UserDTO extends DTO with EquatableMixin {
     }
     return data;
   }
-  
+
   @override
   // TODO: implement props
   List<Object?> get props => [user];
 }
- 
-class UserDetailDTO extends DTO with EquatableMixin{
+
+class UserDetailDTO extends DTO with EquatableMixin {
   String? id;
   String? name;
-  String? registrationDate;
+  String? surname;
+  String? email;
+  String? birth;
+  String? registration;
   String? lastLogin;
 
-  UserDetailDTO({this.id, this.name, this.registrationDate, this.lastLogin});
+  UserDetailDTO(
+      {this.id,
+      this.name,
+      this.registration,
+      this.lastLogin,
+      this.birth,
+      this.email,
+      this.surname});
 
   UserDetailDTO.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
-    registrationDate = json['registrationDate'];
+    registration = json['registration'];
+    birth = json['birth'];
+    surname = json['surname'];
+    email = json['email'];
     lastLogin = json['lastLogin'];
   }
 
@@ -42,12 +56,16 @@ class UserDetailDTO extends DTO with EquatableMixin{
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['name'] = this.name;
-    data['registrationDate'] = this.registrationDate;
+    data['registration'] = this.registration;
+    data['email'] = this.email;
+    data['surname'] = this.surname;
+    data['birth'] = this.birth;
     data['lastLogin'] = this.lastLogin;
     return data;
   }
-  
+
   @override
   // TODO: implement props
-  List<Object?> get props => [id, name, registrationDate, lastLogin];
+  List<Object?> get props =>
+      [id, name, registration, birth, surname, email, lastLogin];
 }

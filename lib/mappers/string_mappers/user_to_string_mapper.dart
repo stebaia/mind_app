@@ -8,9 +8,11 @@ class UserToStringMapper extends Mapper<User, String> {
   String from(User from) => jsonEncode(<String, dynamic>{
         'id': from.id,
         'name': from.name,
-        'registrationDate': from.registrationDate,
+        'registration': from.registration,
+        'birth': from.birth,
+        'email': from.email,
+        'surname': from.surname,
         'lastLogin': from.lastLogin,
-      
       });
 
   @override
@@ -19,7 +21,10 @@ class UserToStringMapper extends Mapper<User, String> {
     return User(
         name: json['name'],
         lastLogin: json['lastLogin'],
-        registrationDate: json['registrationDate'],
+        registration: json['registration'],
+        email: json['email'],
+        surname: json['surname'],
+        birth: json['birth'],
         id: json['id']);
   }
 }

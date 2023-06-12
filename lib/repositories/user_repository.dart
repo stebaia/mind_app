@@ -30,11 +30,17 @@ class UserRepository {
   Future<User> registration(
       {required String email,
       required String password,
-      required String name}) async {
+      required String name,
+      required String surname,
+      required String username,
+      required String birth}) async {
     try {
       final response = await userService.registration(RegistrationRequest(
           name: name,
-          email: sha256.convert(utf8.encode(email)).toString(),
+          surname: surname,
+          birth: birth,
+          username: sha256.convert(utf8.encode(username)).toString(),
+          email: email,
           password: sha256.convert(utf8.encode(password)).toString(),
           timestamp: DateConverter.getDateNowWithFormat()));
 

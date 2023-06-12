@@ -1,6 +1,56 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+class DateFormField extends StatelessWidget {
+  final String label;
+  final TextEditingController? textEditingController;
+  final FocusNode? focusNode;
+  final FormFieldValidator<String>? formFieldValidator;
+  final ValueChanged<String>? onFieldSubmitted;
+  final TextInputAction? textInputAction;
+  final Color? color;
+  final IconData? iconCustom;
+  final GestureTapCallback? gestureTapCallback;
+
+  const DateFormField(this.label,
+      {super.key,
+      this.textEditingController,
+      this.focusNode,
+      this.formFieldValidator,
+      this.onFieldSubmitted,
+      this.textInputAction,
+      this.color,
+      this.gestureTapCallback,
+      this.iconCustom});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        decoration: BoxDecoration(
+            color: color, borderRadius: BorderRadius.circular(10)),
+        child: TextFormField(
+          readOnly: true,
+          style: TextStyle(fontSize: 14),
+          cursorColor: Colors.grey,
+          controller: textEditingController,
+          focusNode: focusNode,
+          onTap: gestureTapCallback,
+          keyboardType: TextInputType.emailAddress,
+          decoration: InputDecoration(
+            hintText: label,
+            border: InputBorder.none,
+            prefixIcon: Icon(
+              iconCustom ?? CupertinoIcons.person,
+              size: 18,
+              color: Colors.grey,
+            ),
+          ),
+          onFieldSubmitted: onFieldSubmitted,
+          textInputAction: textInputAction,
+        ));
+  }
+}
+
 class EmailFormField extends StatelessWidget {
   final String label;
   final TextEditingController? textEditingController;
