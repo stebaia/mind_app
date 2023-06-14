@@ -45,7 +45,7 @@ class UserDetailDTO extends DTO with EquatableMixin {
   UserDetailDTO.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
-    registration = json['registration'];
+    registration = json['registrationDate'];
     birth = json['birth'];
     surname = json['surname'];
     email = json['email'];
@@ -56,7 +56,7 @@ class UserDetailDTO extends DTO with EquatableMixin {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['name'] = this.name;
-    data['registration'] = this.registration;
+    data['registrationDate'] = this.registration;
     data['email'] = this.email;
     data['surname'] = this.surname;
     data['birth'] = this.birth;

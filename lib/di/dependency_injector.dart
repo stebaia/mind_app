@@ -20,6 +20,7 @@ import 'package:mind_app/repositories/user_repository.dart';
 import 'package:mind_app/services/dto/days_dto.dart';
 import 'package:mind_app/services/dto/user_dto.dart';
 import 'package:mind_app/services/network/days_service/days_service.dart';
+import 'package:mind_app/services/network/interceptors/auth_interceptors.dart';
 import 'package:mind_app/services/network/user_service/user_service.dart';
 import 'package:mind_app/utils/constants.dart';
 import 'package:pine/di/dependency_injector_helper.dart';

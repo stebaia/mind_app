@@ -7,7 +7,7 @@ class UserMapper extends DTOMapper<UserDTO, User> {
   User fromDTO(UserDTO dto) => User(
         id: dto.user!.id!,
         name: dto.user!.name!,
-        registration: dto.user!.registration!,
+        registrationDate: dto.user!.registration!,
         birth: dto.user!.birth!,
         surname: dto.user!.surname!,
         email: dto.user!.email!,
@@ -20,7 +20,7 @@ class UserMapper extends DTOMapper<UserDTO, User> {
           id: model.id,
           name: model.name,
           lastLogin: model.lastLogin,
-          registration: model.registration,
+          registration: model.registrationDate,
           surname: model.surname,
           email: model.email,
           birth: model.birth));
