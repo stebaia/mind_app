@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
+
 
 class DateConverter {
   static String convert(String? inputDate) {
@@ -20,6 +22,45 @@ class DateConverter {
       return formattedDate;
     } else
       return "";
+  }
+
+  static String getMonthByDate(String? inputDate) {
+    if (inputDate != null) {
+      initializeDateFormatting('it_IT', null);
+      DateTime date = DateTime.parse(inputDate).toLocal();
+      String formattedDate = DateFormat('MMMM','it_IT').format(date);
+      return formattedDate;
+    } else
+      return "";
+  }
+
+  static String getDayName(String? inputDate) {
+    if (inputDate != null) {
+      initializeDateFormatting('it_IT', null);
+      DateTime date = DateTime.parse(inputDate).toLocal();
+      String formattedDate = DateFormat('EEEE', 'it_IT').format(date);
+      return formattedDate.toUpperCase().substring(0,3);
+    } else
+      return "";
+  }
+
+  static String getDayNumber(String? inputDate) {
+    if (inputDate != null) {
+      
+      DateTime date = DateTime.parse(inputDate).toLocal();
+      String formattedDate = DateFormat('dd',).format(date);
+      return formattedDate.toUpperCase();
+    } else
+      return "";
+  }
+
+  static String getDateString(String inputDate) {
+    initializeDateFormatting('it_IT', null);
+
+    DateTime date = DateTime.parse(inputDate);
+    String formattedDate = DateFormat('EEEE, d MMMM y', 'it_IT').format(date);
+
+    return formattedDate;
   }
 
   static String getDateSevenDaysAgo() {

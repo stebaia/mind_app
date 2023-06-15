@@ -14,7 +14,6 @@ import 'package:mind_app/ui/components/face_feedback.dart';
 import 'package:mind_app/ui/components/tags_widget.dart';
 import 'package:mind_app/utils/app_utils.dart';
 import 'package:mind_app/utils/theme_helper.dart';
-import 'package:chips_choice/chips_choice.dart';
 
 class SetDayPage extends StatelessWidget with AutoRouteWrapper {
   SetDayPage({super.key, required this.isFirstTime});
@@ -52,7 +51,9 @@ class SetDayPage extends StatelessWidget with AutoRouteWrapper {
                 BlocConsumer<DayBloc, DayState>(
                   listener: (context, state) {
                     if (state is ResultSetDayState) {
-                      context.pushRoute(CoreRoute());
+                      isFirstTime ? 
+                              context.pushRoute(CoreRoute()) : context.popRoute();
+                      
                     } else if (state is ErrorSetDayState) {
                       Fluttertoast.showToast(msg: "error, please retry later!");
                     }
@@ -74,7 +75,10 @@ class SetDayPage extends StatelessWidget with AutoRouteWrapper {
                                         icon: Icon(
                                           CupertinoIcons.arrow_left,
                                         ),
-                                        onPressed: () => context.popRoute()),
+                                        onPressed: () {
+                                          context.read<TagsCubit>().deleteAll();
+                                          context.popRoute();
+                                        }),
                                     const Text(
                                       'How was your day today?',
                                       style: TextStyle(
@@ -96,19 +100,22 @@ class SetDayPage extends StatelessWidget with AutoRouteWrapper {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    isFirstTime ? Container(
-                                      alignment: Alignment.topLeft,
-                                      child: Text(
-                                        'How was your day today?',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            fontFamily: 'PoppinsExtraBold',
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 26,
-                                            color: ThemeHelper
-                                                .buttonSecondaryColor),
-                                      ),
-                                    ) : Container(),
+                                    isFirstTime
+                                        ? Container(
+                                            alignment: Alignment.topLeft,
+                                            child: Text(
+                                              'How was your day today?',
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                  fontFamily:
+                                                      'PoppinsExtraBold',
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 26,
+                                                  color: ThemeHelper
+                                                      .buttonSecondaryColor),
+                                            ),
+                                          )
+                                        : Container(),
                                     Text(
                                       'Was your day good or bad? do you want to let off some steam?',
                                       style: TextStyle(
@@ -205,16 +212,22 @@ class SetDayPage extends StatelessWidget with AutoRouteWrapper {
                                           .toList(),
                                       timestamp: DateConverter
                                           .getDateNowWithFormatSimples());
+                                  context.read<TagsCubit>().deleteAll();
                                 },
                               )),
-                          GestureDetector(
-                            child: Text(
-                              'Skip',
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 12),
-                            ),
-                            onTap: () => context.pushRoute(CoreRoute()),
-                          )
+                          isFirstTime
+                              ? GestureDetector(
+                                  child: Text(
+                                    'Skip',
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 12),
+                                  ),
+                                  onTap: () {
+                                    context.read<TagsCubit>().deleteAll();
+                                    context.pushRoute(CoreRoute());
+                                  },
+                                )
+                              : Container()
                         ]);
                   },
                 ),

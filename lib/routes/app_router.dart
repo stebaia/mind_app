@@ -2,6 +2,7 @@ import 'package:auto_route/annotations.dart';
 import 'package:auto_route/empty_router_widgets.dart';
 import 'package:mind_app/ui/pages/core_page.dart';
 import 'package:mind_app/ui/pages/day_list_page.dart';
+import 'package:mind_app/ui/pages/detail_mood_page.dart';
 import 'package:mind_app/ui/pages/login_page.dart';
 import 'package:mind_app/ui/pages/main_page.dart';
 import 'package:mind_app/ui/pages/profile_page.dart';
@@ -23,7 +24,8 @@ import 'package:mind_app/ui/pages/set_day_page.dart';
     AutoRoute(page: SecretNoteDetailPage, path: 'secret_note_detail'),
     AutoRoute(page: SecretNoteListPage, path: 'secret_note_list'),
     AutoRoute(page: SetDayPage, path: 'set_day_page'),
-    AutoRoute(page: DayListPage, path: 'day_list_page')
+    AutoRoute(page: DayListPage, path: 'day_list_page'),
+    AutoRoute(page: DetailMoodPage, path: 'detail_mood_page')
   ])
 
   /*
