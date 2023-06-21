@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +13,7 @@ import 'package:mind_app/ui/components/emoji_text.dart';
 import 'package:mind_app/ui/components/widget_detail_mood.dart';
 import 'package:mind_app/utils/app_utils.dart';
 import 'package:mind_app/utils/theme_helper.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 class DayListPage extends StatefulWidget with AutoRouteWrapper {
   DayListPage({super.key});
@@ -33,12 +36,91 @@ class DayListPage extends StatefulWidget with AutoRouteWrapper {
 }
 
 class _DayListPageState extends State<DayListPage> {
+  late final ValueNotifier<Day> _selectedEvents;
   String selectedDate = DateConverter.getDateNowWithFormatSimples();
   int selectedIndex = -1;
+  CalendarFormat _calendarFormat = CalendarFormat.month;
+  DateTime _focusedDay = DateTime.now();
+  DateTime? _selectedDay;
+  Day? myNewDay;
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  MaterialColor _getEventColor(int mood) {
+    switch (mood) {
+      case 1:
+        return Colors.red;
+      case 2:
+        return Colors.orange;
+      case 3:
+        return Colors.amber;
+      case 4:
+        return Colors.lightGreen;
+      case 5:
+        return Colors.green;
+      default:
+        return Colors.amber;
+    }
+  }
+
+  Day? getInformationOfDaySelected(DateTime date, List<Day> days) {
+    Day? myDay;
+    for (var day in days) {
+      DateTime dayDate = DateTime.parse(day.day);
+
+      if (isSameDay(dayDate, date)) {
+        myDay = day;
+      }
+    }
+    return myDay;
+  }
+
+  List<dynamic> getEvents(DateTime date, List<Day> days) {
+    List<dynamic> events = [];
+
+    for (var day in days) {
+      DateTime dayDate = DateTime.parse(day.day);
+
+      if (isSameDay(dayDate, date)) {
+        events.add(day);
+      }
+    }
+
+    return events;
+  }
+
+  int getHashCode(DateTime key) {
+    return key.day * 1000000 + key.month * 10000 + key.year;
+  }
+
+  /*List<dynamic> Function(DateTime) _loadEvents(List<Day> days) {
+    // Esegue la conversione da List<Day> a List<dynamic> in base alla data
+    final kEvents = LinkedHashMap<DateTime, List<Day>>(
+  equals: isSameDay,
+  hashCode: getHashCode,
+)..addAll(_kEventSource);
+    /*return (DateTime dateTime) {
+      List<dynamic> events = [];
+      for (var day in days) {
+        print(DateTime.parse(day.day));
+        print(dateTime);
+        if(isSameDay(DateTime.parse(day.day), dateTime)){
+          events.add(DateTime.parse(day.day));
+        }
+        
+      }
+      return events;
+    };*/
+    return kEvents;
+    // Trova gli eventi corrispondenti alla data fornita
+  }*/
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       backgroundColor: ThemeHelper.backgroundColorWhite,
       body: SingleChildScrollView(
           child: Container(
@@ -50,41 +132,43 @@ class _DayListPageState extends State<DayListPage> {
             Container(
                 width: MediaQuery.of(context).size.width,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      Row(
+                        children: [
+                          IconButton(
+                              icon: Icon(
+                                CupertinoIcons.arrow_left,
+                              ),
+                              onPressed: () => context.popRoute()),
+                          const Text(
+                            'Your emotional state',
+                            style: TextStyle(
+                                fontSize: 20, fontFamily: 'PoppinsExtrabold'),
+                          ),
+                        ],
+                      ),
                       IconButton(
-                      icon: Icon(
-                        CupertinoIcons.arrow_left,
-                      ),
-                      onPressed: () => context.popRoute()),
-                  const Text(
-                    'Your emotional state',
-                    style:
-                        TextStyle(fontSize: 20, fontFamily: 'PoppinsExtrabold'),
-                  ),
-                    ],
-                  ),
-                  
-                   IconButton(
-                      icon: Icon(
-                        CupertinoIcons.add_circled,
-                        color: ThemeHelper.buttonColor,
-                      ),
-                      onPressed: () => context.pushRoute(
-                SetDayRoute(isFirstTime: false),
-              )
-              .then(
-                (value) => context.read<DayBloc>().getDay(
-                    userId: ((context.read<AuthCubit>() as AuthCubit).state
-                            as AuthenticatedState)
-                        .user
-                        .id,
-                    dayFrom: DateConverter.getDateAll(),
-                    dayTo: DateConverter.getDateNowWithFormatSimples()),
-              )),
-                ])),
+                          icon: Icon(
+                            CupertinoIcons.add_circled,
+                            color: ThemeHelper.buttonColor,
+                          ),
+                          onPressed: () => context
+                              .pushRoute(
+                                SetDayRoute(isFirstTime: false),
+                              )
+                              .then(
+                                (value) => context.read<DayBloc>().getDay(
+                                    userId: ((context.read<AuthCubit>()
+                                                as AuthCubit)
+                                            .state as AuthenticatedState)
+                                        .user
+                                        .id,
+                                    dayFrom: DateConverter.getDateAll(),
+                                    dayTo: DateConverter
+                                        .getDateNowWithFormatSimples()),
+                              )),
+                    ])),
             Container(
               child: Column(
                 children: [
@@ -101,7 +185,7 @@ class _DayListPageState extends State<DayListPage> {
                       SizedBox(
                         height: 20,
                       ),
-                      Align(
+                      /*Align(
                         alignment: Alignment.center,
                         child: Container(
                           
@@ -143,7 +227,7 @@ class _DayListPageState extends State<DayListPage> {
                             ),
                           ),
                         ),
-                      ),
+                      ),*/
                       SizedBox(
                         height: 20,
                       ),
@@ -157,13 +241,101 @@ class _DayListPageState extends State<DayListPage> {
                         borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(40),
                             topRight: Radius.circular(40))),
-                    
                     child: BlocBuilder<DayBloc, DayState>(
                       builder: (context, state) {
+                        print(DateTime.now());
                         if (state is ResultGetDayState) {
                           List<Day> days = state.daysList.days!;
-  
                           return Column(
+                            children: [
+                              TableCalendar(
+                                eventLoader: (date) => getEvents(date, days),
+                                calendarBuilders: CalendarBuilders(
+                                  markerBuilder: (context, day, events) {
+                                    if (events.isEmpty) return SizedBox();
+
+                                    return ListView.builder(
+                                        shrinkWrap: true,
+                                        scrollDirection: Axis.horizontal,
+                                        itemCount: events.length,
+                                        itemBuilder: (context, index) {
+                                          return Container(
+                                              margin: const EdgeInsets.only(
+                                                  top: 30),
+                                              padding: const EdgeInsets.all(1),
+                                              child: Container(
+                                                // height: 7, // for vertical axis
+                                                width: 10, //for horizontal axis
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  color: _getEventColor(
+                                                      (events[index] as Day)
+                                                          .mood),
+                                                ),
+                                              ));
+                                        });
+                                  },
+                                ),
+                                selectedDayPredicate: (day) {
+                                  // Use `selectedDayPredicate` to determine which day is currently selected.
+                                  // If this returns true, then `day` will be marked as selected.
+
+                                  // Using `isSameDay` is recommended to disregard
+                                  // the time-part of compared DateTime objects.
+                                  return isSameDay(_selectedDay, day);
+                                },
+                                onDaySelected: (selectedDay, focusedDay) {
+                                  if (!isSameDay(_selectedDay, selectedDay)) {
+                                    // Call `setState()` when updating the selected day
+                                    setState(() {
+                                      myNewDay = getInformationOfDaySelected(selectedDay, days);
+                                      _selectedDay = selectedDay;
+                                      _focusedDay = focusedDay;
+                                    });
+                                  }
+                                },
+                                onFormatChanged: (format) {
+                                  if (_calendarFormat != format) {
+                                    // Call `setState()` when updating calendar format
+                                    setState(() {
+                                      _calendarFormat = format;
+                                    });
+                                  }
+                                },
+                                onPageChanged: (focusedDay) {
+                                  // No need to call `setState()` here
+                                  _focusedDay = focusedDay;
+                                },
+                                firstDay: DateTime.utc(2023, 01, 01),
+                                lastDay: DateTime.utc(2100, 01, 01),
+                                focusedDay: _focusedDay,
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                                  myNewDay != null ? 
+                                   Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    height: 60,
+                                    child: Row(children: [
+                                      Container(
+                                        width: 10,
+                                        decoration: BoxDecoration(
+                                            color:
+                                                _getEventColor(myNewDay!.mood)),
+                                      )
+                                    ]),
+                                    decoration: BoxDecoration(
+                                        color: ThemeHelper.colorSemiWhite,
+                                        borderRadius: BorderRadius.circular(8)),
+                                  )
+                                : Container()
+                          
+                              
+                            ],
+                          );
+
+                          /*return Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -209,6 +381,7 @@ class _DayListPageState extends State<DayListPage> {
                               MoodDetailWidget(day: selectedIndex > -1 ?  days[selectedIndex] : days.last)
                             ],
                           );
+                          */
                         } else if (state is TryGetDayState) {
                           return Center(
                             child: CircularProgressIndicator(),
@@ -221,7 +394,6 @@ class _DayListPageState extends State<DayListPage> {
                       },
                     ),
                   ),
-                  
 
                   /*BlocBuilder<DayBloc, DayState>(
                         builder: (context, state) {
