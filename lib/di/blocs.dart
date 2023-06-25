@@ -7,4 +7,5 @@ final List<BlocProvider> _blocs = [
             ..checkAuthenticationState()),
   BlocProvider<RatingCubitCubit>(create: (context) => RatingCubitCubit()),
   BlocProvider<TagsCubit>(create: (context) => TagsCubit()),
+  BlocProvider<DaySelectedCubit>(create: (context) => DaySelectedCubit()),
 ];

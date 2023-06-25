@@ -44,7 +44,7 @@ class DateSelectedElementWidget extends StatelessWidget {
             style: TextStyle(
                 color: Colors.white, fontWeight: FontWeight.bold, fontSize: 24),
           ),
-          EmojyTextWidget(mood: day.mood)
+          EmojyTextWidget(mood: day.mood, size: 40,)
         ]));
   }
 }
@@ -81,7 +81,7 @@ class DateUnSelectedElementWidget extends StatelessWidget {
             style: TextStyle(
                 color: Colors.black, fontWeight: FontWeight.bold, fontSize: 24),
           ),
-          EmojyTextWidget(mood: day.mood)
+          EmojyTextWidget(mood: day.mood, size: 40)
         ]));
   }
 }

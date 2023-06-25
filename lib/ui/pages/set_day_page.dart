@@ -8,6 +8,7 @@ import 'package:mind_app/bloc/cubit/auth_cubit/auth_cubit.dart';
 import 'package:mind_app/bloc/cubit/rating_cubit/rating_cubit_cubit.dart';
 import 'package:mind_app/bloc/cubit/tags_cubit/tags_cubit.dart';
 import 'package:mind_app/bloc/day_bloc/day_bloc.dart';
+import 'package:mind_app/model/day.dart';
 import 'package:mind_app/routes/app_router.gr.dart';
 import 'package:mind_app/ui/components/buttons.dart';
 import 'package:mind_app/ui/components/face_feedback.dart';
@@ -16,16 +17,22 @@ import 'package:mind_app/utils/app_utils.dart';
 import 'package:mind_app/utils/theme_helper.dart';
 
 class SetDayPage extends StatelessWidget with AutoRouteWrapper {
-  SetDayPage({super.key, required this.isFirstTime});
+  SetDayPage({super.key, required this.isFirstTime, this.passedDay});
 
   final bool isFirstTime;
+  final Day? passedDay;
 
   @override
   Widget build(BuildContext context) {
+    if(passedDay != null){
+      context.read<RatingCubitCubit>().changeValue(passedDay!.mood.toDouble());
+    }
+    
     final sliderValue = context.read<RatingCubitCubit>();
     final user = context.read<AuthCubit>();
     final tagsCubit = context.read<TagsCubit>();
-    TextEditingController controller = TextEditingController();
+    
+    TextEditingController controller = TextEditingController(text: passedDay != null ? passedDay!.note : '');
     return BlocBuilder<AuthCubit, AuthState>(
       builder: (context, state) {
         return Scaffold(
@@ -128,8 +135,14 @@ class SetDayPage extends StatelessWidget with AutoRouteWrapper {
                                       alignment: Alignment.center,
                                       child: BlocBuilder<RatingCubitCubit,
                                           RatingCubitInitial>(
-                                        builder: (context, state) =>
-                                            faceFeedback(state.value.toInt()),
+                                        builder: (context, state) {
+                                          if(passedDay != null){
+                                            return faceFeedback(passedDay!.mood);
+                                          }else {
+                                            return faceFeedback(state.value.toInt());
+                                          }
+                                        }
+                                            ,
                                       ),
                                     ),
                                     SizedBox(
@@ -167,9 +180,11 @@ class SetDayPage extends StatelessWidget with AutoRouteWrapper {
                                         controller: controller,
                                         style: TextStyle(fontSize: 14),
                                         textAlign: TextAlign.start,
+                                        
                                         decoration: InputDecoration(
                                             hintStyle: TextStyle(fontSize: 14),
                                             hintText: 'What\'s going on?',
+                                            
                                             filled: true,
                                             fillColor: ThemeHelper
                                                 .backgroundColorWhite,
@@ -203,8 +218,7 @@ class SetDayPage extends StatelessWidget with AutoRouteWrapper {
                                       userId: (user.state as AuthenticatedState)
                                           .user
                                           .id,
-                                      day: DateConverter
-                                          .getDateNowWithFormatSimples(),
+                                      day: !isFirstTime?  DateConverter.getDateNowWithFormatSimpleWithParameter(passedDay!.day) : DateConverter.getDateNowWithFormatSimples(),
                                       mood: (sliderValue.state.value).round(),
                                       note: controller.text,
                                       tags: tagsCubit.state

@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
 
 class EmojyTextWidget extends StatelessWidget {
-  EmojyTextWidget({super.key, required this.mood});
+  EmojyTextWidget({super.key, required this.mood, required this.size});
 
   int mood; 
 
-
+  double size;
 
   @override
   Widget build(BuildContext context) {
     switch (mood) {
       case 1:
-      return Text('😔', style: TextStyle(fontSize: 40),);
+      return Text('😔', style: TextStyle(fontSize: size),);
       case 2:
-      return Text('🙁', style: TextStyle(fontSize: 40),);
+      return Text('🙁', style: TextStyle(fontSize: size),);
       case 3:
-      return Text('😕', style: TextStyle(fontSize: 40),);
+      return Text('😕', style: TextStyle(fontSize: size),);
       case 4:
-      return Text('😌', style: TextStyle(fontSize: 40),);
+      return Text('😌', style: TextStyle(fontSize: size),);
       case 5:
-      return Text('😊', style: TextStyle(fontSize: 40),);
-      default: return Text('😊', style: TextStyle(fontSize: 40),);
+      return Text('😊', style: TextStyle(fontSize: size),);
+      default: return Text('😊', style: TextStyle(fontSize: size),);
     }
   }
 }

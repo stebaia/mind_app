@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:logger/logger.dart';
 import 'package:mind_app/bloc/cubit/auth_cubit/auth_cubit.dart';
+import 'package:mind_app/bloc/cubit/day_selected_cubit/day_selected_cubit.dart';
 import 'package:mind_app/bloc/cubit/rating_cubit/rating_cubit_cubit.dart';
 import 'package:mind_app/bloc/cubit/tags_cubit/tags_cubit.dart';
 import 'package:mind_app/mappers/dto_mappers/days_dto_mapper.dart';

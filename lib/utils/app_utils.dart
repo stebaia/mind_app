@@ -77,6 +77,12 @@ class DateConverter {
     return formatter.format(sevenDaysAgo);
   }
 
+  static String getDateNowWithFormatSimpleWithParameter(String date) {
+    final DateTime dateTime = DateTime.parse(date);
+    final DateFormat formatter = DateFormat('yyyy-MM-dd');
+    return formatter.format(dateTime);
+  }
+
   static String getDateNowWithFormatSimples() {
     final DateTime now = DateTime.now();
     final DateFormat formatter = DateFormat('yyyy-MM-dd');
@@ -216,6 +222,22 @@ class DateConverter {
       }
     } catch (e) {
       return '';
+    }
+  }
+
+  static String calculateMood(int mood){
+    switch(mood) {
+      case 1:
+        return 'Che giornata terribile oggi!';
+      case 2:
+        return 'Sembra che oggi non sia affatto una bella giornata per te';
+      case 3:
+        return 'Uhm una giornata nella media';
+      case 4:
+        return 'Oggi è una bella giornata!';
+      case 5:
+        return 'Che giornata fantastica oggi!';
+      default: return '';
     }
   }
 

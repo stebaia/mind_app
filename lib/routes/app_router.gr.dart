@@ -90,6 +90,7 @@ class AppRouter extends _i12.RootStackRouter {
             child: _i9.SetDayPage(
           key: args.key,
           isFirstTime: args.isFirstTime,
+          passedDay: args.passedDay,
         )),
       );
     },
@@ -277,12 +278,14 @@ class SetDayRoute extends _i12.PageRouteInfo<SetDayRouteArgs> {
   SetDayRoute({
     _i14.Key? key,
     required bool isFirstTime,
+    _i15.Day? passedDay,
   }) : super(
           SetDayRoute.name,
           path: 'set_day_page',
           args: SetDayRouteArgs(
             key: key,
             isFirstTime: isFirstTime,
+            passedDay: passedDay,
           ),
         );
 
@@ -293,15 +296,18 @@ class SetDayRouteArgs {
   const SetDayRouteArgs({
     this.key,
     required this.isFirstTime,
+    this.passedDay,
   });
 
   final _i14.Key? key;
 
   final bool isFirstTime;
 
+  final _i15.Day? passedDay;
+
   @override
   String toString() {
-    return 'SetDayRouteArgs{key: $key, isFirstTime: $isFirstTime}';
+    return 'SetDayRouteArgs{key: $key, isFirstTime: $isFirstTime, passedDay: $passedDay}';
   }
 }
 

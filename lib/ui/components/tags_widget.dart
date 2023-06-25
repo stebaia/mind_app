@@ -13,17 +13,18 @@ class TagsWidget extends StatefulWidget {
 class _TagsWidgetState extends State<TagsWidget> {
   List<String> tags = [];
   List<String> options = [
-    'News',
-    'Entertainment',
-    'Politics',
-    'Automotive',
+    'Work',
+    'Relationships',
+    'Love',
+    'Family',
     'Sports',
-    'Education',
+    'Finances',
     'Fashion',
     'Travel',
     'Food',
-    'Tech',
-    'Science',
+    'Stress',
+    'Lifestyle',
+    'Mental health'
   ];
 
   @override
