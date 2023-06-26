@@ -346,7 +346,7 @@ class _DayListPageState extends State<DayListPage> {
                                             onPressed: () {
                                               context
                                                   .pushRoute(SetDayRoute(
-                                                      isFirstTime: false))
+                                                      isFirstTime: false, passedDay: Day(day: DateConverter.getDateNowWithFormatSimpleWithParameter(_selectedDay.toString()), mood: 3)))
                                                   .then(
                                                     (value) => context.read<DayBloc>().getDay(
                                                         userId: ((context.read<AuthCubit>()

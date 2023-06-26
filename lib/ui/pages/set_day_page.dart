@@ -136,11 +136,9 @@ class SetDayPage extends StatelessWidget with AutoRouteWrapper {
                                       child: BlocBuilder<RatingCubitCubit,
                                           RatingCubitInitial>(
                                         builder: (context, state) {
-                                          if(passedDay != null){
-                                            return faceFeedback(passedDay!.mood);
-                                          }else {
+                                          
                                             return faceFeedback(state.value.toInt());
-                                          }
+                                          
                                         }
                                             ,
                                       ),
