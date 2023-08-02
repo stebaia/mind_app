@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "897468631800",
+    "project_id": "mind--app-ec238",
+    "storage_bucket": "mind--app-ec238.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:897468631800:android:0eb80a5aca81ac7e7dc90d",
+        "android_client_info": {
+          "package_name": "com.mind_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "897468631800-cvhqvod95ol4dvb7k1vf7d0sbc9en3cd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCE5ugHao_S_l7wz-mDQHX1QL-rx7cLBgQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "897468631800-cvhqvod95ol4dvb7k1vf7d0sbc9en3cd.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "897468631800-tl1k4voa1i34fluksgso43lfnn9vnq6i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.mindApp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:897468631800:android:014886b42fa0d5f87dc90d",
+        "android_client_info": {
+          "package_name": "com.mindapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "897468631800-cvhqvod95ol4dvb7k1vf7d0sbc9en3cd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCE5ugHao_S_l7wz-mDQHX1QL-rx7cLBgQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "897468631800-cvhqvod95ol4dvb7k1vf7d0sbc9en3cd.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "897468631800-tl1k4voa1i34fluksgso43lfnn9vnq6i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.mindApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -40,7 +40,7 @@ class LoginBloc extends Bloc<AuthEvent, LoginInState> {
       );
       emit(LoggedInState(user));
     } catch (e) {
-      emit(const ErrorLoginInState());
+      emit(ErrorLoginInState(e.toString()));
     }
   }
 
@@ -72,7 +72,7 @@ class LoginBloc extends Bloc<AuthEvent, LoginInState> {
           surname: event.surname);
       emit(LoggedInState(user));
     } catch (e) {
-      emit(const ErrorLoginInState());
+      emit(ErrorLoginInState(e.toString()));
     }
   }
 }

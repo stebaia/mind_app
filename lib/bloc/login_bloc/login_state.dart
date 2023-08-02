@@ -35,5 +35,8 @@ class LoggedInState extends LoginInState {
 }
 
 class ErrorLoginInState extends LoginInState {
-  const ErrorLoginInState();
+  final String errorString;
+
+  const ErrorLoginInState(this.errorString);
+  List<Object> get props => [errorString];
 }

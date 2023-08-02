@@ -1,7 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.mind_app">
+    package="com.mindapp">
+     <uses-permission android:name="android.permission.INTERNET" />
+
    <application
-        android:label="mind_app"
+        android:label="mindapp"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

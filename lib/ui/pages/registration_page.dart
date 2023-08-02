@@ -129,7 +129,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     } else if (state is ErrorLoginInState) {
                       //showErrorDialog
                       Fluttertoast.showToast(
-                        msg: AppLocalizations.of(context).login_error,
+                        msg: state.errorString,
                       );
                     }
                   },
