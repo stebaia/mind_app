@@ -24,6 +24,15 @@ class DateConverter {
       return "";
   }
 
+  static String convertDateToISO(String? inputDate) {
+    if (inputDate != null) {
+      DateTime date = DateTime.parse(inputDate).toLocal();
+      String formattedDate = DateFormat('yyyy/MM/dd').format(date);
+      return formattedDate;
+    } else
+      return "";
+  }
+
   static String getMonthByDate(String? inputDate) {
     if (inputDate != null) {
       initializeDateFormatting('it_IT', null);

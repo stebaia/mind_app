@@ -59,6 +59,7 @@ class EmailFormField extends StatelessWidget {
   final ValueChanged<String>? onFieldSubmitted;
   final TextInputAction? textInputAction;
   final Color? color;
+  final TextCapitalization? textCapitalization;
   final IconData? iconCustom;
 
   const EmailFormField(this.label,
@@ -69,6 +70,7 @@ class EmailFormField extends StatelessWidget {
       this.onFieldSubmitted,
       this.textInputAction,
       this.color,
+      this.textCapitalization,
       this.iconCustom});
 
   @override
@@ -79,6 +81,7 @@ class EmailFormField extends StatelessWidget {
         child: TextFormField(
           style: TextStyle(fontSize: 14),
           cursorColor: Colors.grey,
+          textCapitalization: textCapitalization != null ? textCapitalization! : TextCapitalization.none,
           controller: textEditingController,
           focusNode: focusNode,
           keyboardType: TextInputType.emailAddress,

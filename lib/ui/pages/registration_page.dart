@@ -48,6 +48,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
   Widget build(BuildContext context) {
     Future<void> _selectDate(BuildContext context) async {
       final DateTime? picked = await showDatePicker(
+          locale: Locale("it", "IT"),
+          fieldHintText: "gg/mm/aaaa",
+          fieldLabelText: "gg/mm/aaaa",
           context: context,
           initialDate: selectedDate,
           firstDate: DateTime(1900),
@@ -56,7 +59,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
         setState(() {
           selectedDate = picked;
           _registrationBirthController.text =
-              DateConverter.convertDate(selectedDate.toString());
+              DateConverter.convertDateToISO(selectedDate.toString());
         });
       }
     }
@@ -143,6 +146,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           EmailFormField(
                             'nome',
                             textEditingController: _registrationNameController,
+                            textCapitalization: TextCapitalization.words,
                             focusNode: _focusNodeName,
                             color: Color.fromARGB(255, 208, 208, 212),
                           ),
@@ -152,6 +156,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           EmailFormField(
                             'surname',
                             iconCustom: CupertinoIcons.person,
+                            textCapitalization: TextCapitalization.words,
                             textEditingController:
                                 _registrationSurnameController,
                             focusNode: _focusNodeSurname,
@@ -226,7 +231,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                     name: _registrationNameController.text,
                                     surname:
                                         _registrationSurnameController.text,
-                                    birth: _registrationBirthController.text,
+                                    birth: _registrationBirthController.text.replaceAll("/", "-"),
                                     username:
                                         _registrationUsernameController.text);
                               } else {
