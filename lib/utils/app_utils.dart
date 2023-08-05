@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
-
 class DateConverter {
   static String convert(String? inputDate) {
     if (inputDate != null) {
@@ -37,7 +36,7 @@ class DateConverter {
     if (inputDate != null) {
       initializeDateFormatting('it_IT', null);
       DateTime date = DateTime.parse(inputDate).toLocal();
-      String formattedDate = DateFormat('MMMM','it_IT').format(date);
+      String formattedDate = DateFormat('MMMM', 'it_IT').format(date);
       return formattedDate;
     } else
       return "";
@@ -48,16 +47,17 @@ class DateConverter {
       initializeDateFormatting('it_IT', null);
       DateTime date = DateTime.parse(inputDate).toLocal();
       String formattedDate = DateFormat('EEEE', 'it_IT').format(date);
-      return formattedDate.toUpperCase().substring(0,3);
+      return formattedDate.toUpperCase().substring(0, 3);
     } else
       return "";
   }
 
   static String getDayNumber(String? inputDate) {
     if (inputDate != null) {
-      
       DateTime date = DateTime.parse(inputDate).toLocal();
-      String formattedDate = DateFormat('dd',).format(date);
+      String formattedDate = DateFormat(
+        'dd',
+      ).format(date);
       return formattedDate.toUpperCase();
     } else
       return "";
@@ -234,8 +234,25 @@ class DateConverter {
     }
   }
 
-  static String calculateMood(int mood){
-    switch(mood) {
+  static MaterialColor getEventColor(int mood) {
+    switch (mood) {
+      case 1:
+        return Colors.red;
+      case 2:
+        return Colors.orange;
+      case 3:
+        return Colors.amber;
+      case 4:
+        return Colors.lightGreen;
+      case 5:
+        return Colors.green;
+      default:
+        return Colors.amber;
+    }
+  }
+
+  static String calculateMood(int mood) {
+    switch (mood) {
       case 1:
         return 'Che giornata terribile oggi!';
       case 2:
@@ -246,7 +263,8 @@ class DateConverter {
         return 'Oggi è una bella giornata!';
       case 5:
         return 'Che giornata fantastica oggi!';
-      default: return '';
+      default:
+        return '';
     }
   }
 

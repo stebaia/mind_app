@@ -51,23 +51,6 @@ class _DayListPageState extends State<DayListPage> {
     super.dispose();
   }
 
-  MaterialColor _getEventColor(int mood) {
-    switch (mood) {
-      case 1:
-        return Colors.red;
-      case 2:
-        return Colors.orange;
-      case 3:
-        return Colors.amber;
-      case 4:
-        return Colors.lightGreen;
-      case 5:
-        return Colors.green;
-      default:
-        return Colors.amber;
-    }
-  }
-
   Day? getInformationOfDaySelected(DateTime date, List<Day> days) {
     Day? myDay;
     for (var day in days) {
@@ -239,16 +222,17 @@ class _DayListPageState extends State<DayListPage> {
                             List<Day> days = state.daysList.days!;
                             if (_selectedDay == null) {
                               myNewDay.changeValue(days.last);
-                            }else{
-                              try{
-                                Day? valueDay = state.daysList.days!.where((element) => isSameDay(DateTime.parse(element.day), _selectedDay)).first;
+                            } else {
+                              try {
+                                Day? valueDay = state.daysList.days!
+                                    .where((element) => isSameDay(
+                                        DateTime.parse(element.day),
+                                        _selectedDay))
+                                    .first;
                                 myNewDay.changeValue(valueDay);
-                              }catch(ex){
+                              } catch (ex) {
                                 myNewDay.changeValue(null);
                               }
-                              
-                              
-                              
                             }
 
                             return Column(
@@ -275,9 +259,11 @@ class _DayListPageState extends State<DayListPage> {
                                                       10, //for horizontal axis
                                                   decoration: BoxDecoration(
                                                     shape: BoxShape.circle,
-                                                    color: _getEventColor(
-                                                        (events[index] as Day)
-                                                            .mood),
+                                                    color: DateConverter
+                                                        .getEventColor(
+                                                            (events[index]
+                                                                    as Day)
+                                                                .mood),
                                                   ),
                                                 ));
                                           });
@@ -346,7 +332,13 @@ class _DayListPageState extends State<DayListPage> {
                                             onPressed: () {
                                               context
                                                   .pushRoute(SetDayRoute(
-                                                      isFirstTime: false, passedDay: Day(day: DateConverter.getDateNowWithFormatSimpleWithParameter(_selectedDay.toString()), mood: 3)))
+                                                      isFirstTime: false,
+                                                      passedDay: Day(
+                                                          day: DateConverter
+                                                              .getDateNowWithFormatSimpleWithParameter(
+                                                                  _selectedDay
+                                                                      .toString()),
+                                                          mood: 3)))
                                                   .then(
                                                     (value) => context.read<DayBloc>().getDay(
                                                         userId: ((context.read<AuthCubit>()
@@ -404,8 +396,9 @@ class _DayListPageState extends State<DayListPage> {
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             8),
-                                                    color: _getEventColor(
-                                                        state.day!.mood),
+                                                    color: DateConverter
+                                                        .getEventColor(
+                                                            state.day!.mood),
                                                   ),
                                                 ),
                                                 Padding(

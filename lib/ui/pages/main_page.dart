@@ -40,10 +40,9 @@ class MainPage extends StatelessWidget with AutoRouteWrapper {
             tagsCubit.deleteAll();
             ragingCubit.changeValue(3);
             if (state is EmptyGetDayState) {
-              
-              _replacePage(context, SetDayRoute(isFirstTime: true));
+              _replacePage(context, SetDayEmojiRoute());
             } else if (state is ResultGetDayState) {
-              _replacePage(context, CoreRoute());
+              _replacePage(context, SetDayEmojiRoute());
             }
           },
           child: Center(child: CircularProgressIndicator()),

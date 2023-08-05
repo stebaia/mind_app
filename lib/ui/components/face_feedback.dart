@@ -10,10 +10,12 @@ Widget faceFeedback(int feedbackNumber) {
           children: [
             Image.asset(
               "assets/sad.gif",
-              height: 100.0,
-              width: 100.0,
+              height: 150.0,
+              width: 150.0,
             ),
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
             textFaceState('Oggi mi sento molto triste :('),
           ],
         );
@@ -23,10 +25,12 @@ Widget faceFeedback(int feedbackNumber) {
         return Column(children: [
           Image.asset(
             "assets/angry.gif",
-            height: 100.0,
-            width: 100.0,
+            height: 150.0,
+            width: 150.0,
           ),
-          SizedBox(height: 20,),
+          SizedBox(
+            height: 20,
+          ),
           textFaceState('Uffa! vorrei spaccare tutto!'),
         ]);
       }
@@ -35,10 +39,12 @@ Widget faceFeedback(int feedbackNumber) {
         return Column(children: [
           Image.asset(
             "assets/neutral.gif",
-            height: 100.0,
-            width: 100.0,
+            height: 150.0,
+            width: 150.0,
           ),
-          SizedBox(height: 20,),
+          SizedBox(
+            height: 20,
+          ),
           textFaceState('Giornata abbastanza normale'),
         ]);
       }
@@ -47,23 +53,26 @@ Widget faceFeedback(int feedbackNumber) {
         return Column(children: [
           Image.asset(
             "assets/happy.gif",
-            height: 100.0,
-            width: 100.0,
+            height: 150.0,
+            width: 150.0,
           ),
-          SizedBox(height: 20,),
+          SizedBox(
+            height: 20,
+          ),
           textFaceState('Oggi è stata una bella giornata!'),
         ]);
       }
     case 5:
       {
-        
         return Column(children: [
           Image.asset(
             "assets/love.gif",
-            height: 100.0,
-            width: 100.0,
+            height: 150.0,
+            width: 150.0,
           ),
-          SizedBox(height: 20,),
+          SizedBox(
+            height: 20,
+          ),
           textFaceState('Oggi sono veramente felice! :)'),
         ]);
       }
@@ -72,16 +81,20 @@ Widget faceFeedback(int feedbackNumber) {
         return Column(children: [
           Image.asset(
             "assets/happy.gif",
-            height: 125.0,
-            width: 125.0,
+            height: 150.0,
+            width: 150.0,
           ),
-          SizedBox(height: 20,),
+          SizedBox(
+            height: 20,
+          ),
           textFaceState('Oggi mi sento molto triste'),
         ]);
       }
   }
 }
 
-Widget textFaceState(String description){
-  return Text(description, textAlign: TextAlign.center,style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold));
+Widget textFaceState(String description) {
+  return Text(description,
+      textAlign: TextAlign.center,
+      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold));
 }

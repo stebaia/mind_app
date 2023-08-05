@@ -9,6 +9,7 @@ import 'package:mind_app/ui/pages/profile_page.dart';
 import 'package:mind_app/ui/pages/registration_page.dart';
 import 'package:mind_app/ui/pages/secret_note_detail_page.dart';
 import 'package:mind_app/ui/pages/secret_note_list.page.dart';
+import 'package:mind_app/ui/pages/set_day_emoji_page.dart';
 import 'package:mind_app/ui/pages/set_day_page.dart';
 
 @MaterialAutoRouter(replaceInRouteName: 'Page,Route', routes: [
@@ -25,7 +26,8 @@ import 'package:mind_app/ui/pages/set_day_page.dart';
     AutoRoute(page: SecretNoteListPage, path: 'secret_note_list'),
     AutoRoute(page: SetDayPage, path: 'set_day_page'),
     AutoRoute(page: DayListPage, path: 'day_list_page'),
-    AutoRoute(page: DetailMoodPage, path: 'detail_mood_page')
+    AutoRoute(page: DetailMoodPage, path: 'detail_mood_page'),
+    AutoRoute(page: SetDayEmojiPage, path: 'set_day_emoji_page')
   ])
 
   /*
