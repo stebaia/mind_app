@@ -9,6 +9,7 @@ import 'package:mind_app/bloc/cubit/auth_cubit/auth_cubit.dart';
 import 'package:mind_app/bloc/cubit/day_selected_cubit/day_selected_cubit.dart';
 import 'package:mind_app/bloc/cubit/rating_cubit/rating_cubit_cubit.dart';
 import 'package:mind_app/bloc/cubit/tags_cubit/tags_cubit.dart';
+import 'package:mind_app/bloc/cubit/visibility_cubit/visibility_cubit.dart';
 import 'package:mind_app/mappers/dto_mappers/days_dto_mapper.dart';
 import 'package:mind_app/mappers/dto_mappers/user_dto_mapper.dart';
 import 'package:mind_app/mappers/string_mappers/user_to_string_mapper.dart';

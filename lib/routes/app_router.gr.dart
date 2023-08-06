@@ -114,9 +114,15 @@ class AppRouter extends _i13.RootStackRouter {
       );
     },
     SetDayEmojiRoute.name: (routeData) {
+      final args = routeData.argsAs<SetDayEmojiRouteArgs>();
       return _i13.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i13.WrappedRoute(child: const _i12.SetDayEmojiPage()),
+        child: _i13.WrappedRoute(
+            child: _i12.SetDayEmojiPage(
+          key: args.key,
+          passedDay: args.passedDay,
+          isFirstTime: args.isFirstTime,
+        )),
       );
     },
   };
@@ -383,12 +389,39 @@ class DetailMoodRouteArgs {
 
 /// generated route for
 /// [_i12.SetDayEmojiPage]
-class SetDayEmojiRoute extends _i13.PageRouteInfo<void> {
-  const SetDayEmojiRoute()
-      : super(
+class SetDayEmojiRoute extends _i13.PageRouteInfo<SetDayEmojiRouteArgs> {
+  SetDayEmojiRoute({
+    _i15.Key? key,
+    _i16.Day? passedDay,
+    required bool isFirstTime,
+  }) : super(
           SetDayEmojiRoute.name,
           path: 'set_day_emoji_page',
+          args: SetDayEmojiRouteArgs(
+            key: key,
+            passedDay: passedDay,
+            isFirstTime: isFirstTime,
+          ),
         );
 
   static const String name = 'SetDayEmojiRoute';
+}
+
+class SetDayEmojiRouteArgs {
+  const SetDayEmojiRouteArgs({
+    this.key,
+    this.passedDay,
+    required this.isFirstTime,
+  });
+
+  final _i15.Key? key;
+
+  final _i16.Day? passedDay;
+
+  final bool isFirstTime;
+
+  @override
+  String toString() {
+    return 'SetDayEmojiRouteArgs{key: $key, passedDay: $passedDay, isFirstTime: $isFirstTime}';
+  }
 }

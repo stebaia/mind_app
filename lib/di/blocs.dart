@@ -8,4 +8,5 @@ final List<BlocProvider> _blocs = [
   BlocProvider<RatingCubitCubit>(create: (context) => RatingCubitCubit()),
   BlocProvider<TagsCubit>(create: (context) => TagsCubit()),
   BlocProvider<DaySelectedCubit>(create: (context) => DaySelectedCubit()),
+  BlocProvider<VisibilityCubit>(create: (context) => VisibilityCubit()),
 ];

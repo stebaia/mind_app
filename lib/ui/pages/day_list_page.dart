@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mind_app/bloc/cubit/auth_cubit/auth_cubit.dart';
 import 'package:mind_app/bloc/cubit/day_selected_cubit/day_selected_cubit.dart';
 import 'package:mind_app/bloc/cubit/rating_cubit/rating_cubit_cubit.dart';
+import 'package:mind_app/bloc/cubit/visibility_cubit/visibility_cubit.dart';
 import 'package:mind_app/bloc/day_bloc/day_bloc.dart';
 import 'package:mind_app/model/day.dart';
 import 'package:mind_app/routes/app_router.gr.dart';
@@ -330,8 +331,9 @@ class _DayListPageState extends State<DayListPage> {
                                                 .buttonSecondaryColor,
                                             text: 'Send!',
                                             onPressed: () {
+                                              context.read<VisibilityCubit>().changeVisibility(false);
                                               context
-                                                  .pushRoute(SetDayRoute(
+                                                  .pushRoute(SetDayEmojiRoute(
                                                       isFirstTime: false,
                                                       passedDay: Day(
                                                           day: DateConverter
@@ -356,8 +358,10 @@ class _DayListPageState extends State<DayListPage> {
                                           ));
                                     } else if (state is DaySelectedInitial) {
                                       return GestureDetector(
-                                        onTap: () => context
-                                            .pushRoute(SetDayRoute(
+                                        onTap: () {
+                                          context.read<VisibilityCubit>().changeVisibility(false);
+                                          context
+                                            .pushRoute(SetDayEmojiRoute(
                                                 isFirstTime: false,
                                                 passedDay: state.day))
                                             .then(
@@ -374,8 +378,9 @@ class _DayListPageState extends State<DayListPage> {
                                                     DateConverter.getDateAll(),
                                                 dayTo: DateConverter
                                                     .getDateNowWithFormatSimples());
-                                          },
-                                        ),
+                                        }
+                                        
+                                        );},
                                         child: Container(
                                           padding: EdgeInsets.all(8),
                                           width:

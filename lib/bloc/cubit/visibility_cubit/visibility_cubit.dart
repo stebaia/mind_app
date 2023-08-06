@@ -6,4 +6,6 @@ part 'visibility_state.dart';
 
 class VisibilityCubit extends Cubit<VisibilityCubitInitial> {
   VisibilityCubit() : super(VisibilityCubitInitial(isVisible: false));
+
+  void changeVisibility(bool visibility) => emit(VisibilityCubitInitial(isVisible: visibility));
 }
