@@ -43,6 +43,7 @@ dependencies:
   local_auth: ^2.1.6
   table_calendar: ^3.0.9
   firebase_core: ^2.15.0
+  textfield_tags: ^2.0.2
 
 dev_dependencies:
   flutter_test:

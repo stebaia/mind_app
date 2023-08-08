@@ -268,6 +268,21 @@ class DateConverter {
     }
   }
 
+  static List<String> tagNameHelper = [
+    'work',
+    'relationships',
+    'love',
+    'family',
+    'sports',
+    'finances',
+    'fashion',
+    'travel',
+    'food',
+    'stress',
+    'lifestyle',
+    'mental health'
+  ];
+
   static String calculateHourDifference(
       String startDateStr, String endDateStr) {
     DateTime dateTime1 = DateTime.parse(startDateStr);
