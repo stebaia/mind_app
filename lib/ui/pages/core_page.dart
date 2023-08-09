@@ -13,7 +13,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mind_app/bloc/day_bloc/day_bloc.dart';
 import 'package:mind_app/routes/app_router.gr.dart';
 import 'package:mind_app/ui/components/carousel_item.dart';
-import 'package:mind_app/ui/components/example_chart.dart';
 import 'package:mind_app/ui/components/line_chart.dart';
 import 'package:mind_app/ui/components/text_feeling_widget.dart';
 import 'package:mind_app/ui/pages/secret_note_detail_page.dart';
@@ -86,27 +85,37 @@ class CorePage extends StatelessWidget with AutoRouteWrapper {
                                         ),
                                         BlocBuilder<DayBloc, DayState>(
                                           builder: (context, state) {
-                                            if(state is ResultGetDayState){
-                                              return TextFeelingWidget(mood: state.daysList.days!.last.mood);
-                                            }else {
+                                            if (state is ResultGetDayState) {
+                                              return TextFeelingWidget(
+                                                  mood: state.daysList.days!
+                                                      .last.mood);
+                                            } else {
                                               return GestureDetector(
-                                                onTap: () => context.pushRoute(SetDayEmojiRoute(isFirstTime: true)).then((value) => context.read<DayBloc>().getDay(
-                                                        userId: ((context.read<AuthCubit>()
-                                                                        as AuthCubit)
-                                                                    .state
-                                                                as AuthenticatedState)
-                                                            .user
-                                                            .id,
-                                                        dayFrom: DateConverter
-                                                            .getDateAll(),
-                                                        dayTo: DateConverter
-                                                            .getDateNowWithFormatSimples()),
-                                                  ),
-                                                child: Text('Tell me how you are today!', style: TextStyle(
-                                                          color: Colors.black)),
+                                                onTap: () =>
+                                                    context
+                                                        .pushRoute(
+                                                            SetDayEmojiRoute(
+                                                                isFirstTime:
+                                                                    true))
+                                                        .then(
+                                                          (value) => context.read<DayBloc>().getDay(
+                                                              userId: ((context.read<AuthCubit>()
+                                                                              as AuthCubit)
+                                                                          .state
+                                                                      as AuthenticatedState)
+                                                                  .user
+                                                                  .id,
+                                                              dayFrom: DateConverter
+                                                                  .getDateAll(),
+                                                              dayTo: DateConverter
+                                                                  .getDateNowWithFormatSimples()),
+                                                        ),
+                                                child: Text(
+                                                    'Tell me how you are today!',
+                                                    style: TextStyle(
+                                                        color: Colors.black)),
                                               );
                                             }
-                                            
                                           },
                                         ),
                                       ],
@@ -255,19 +264,22 @@ class CorePage extends StatelessWidget with AutoRouteWrapper {
                                           fontWeight: FontWeight.bold),
                                     ),
                                     GestureDetector(
-                                      onTap: () =>
-                                          context.pushRoute(DayListRoute()).then((value) => context.read<DayBloc>().getDay(
-                                                        userId: ((context.read<AuthCubit>()
-                                                                        as AuthCubit)
-                                                                    .state
-                                                                as AuthenticatedState)
-                                                            .user
-                                                            .id,
-                                                        dayFrom: DateConverter
-                                                            .getDateAll(),
-                                                        dayTo: DateConverter
-                                                            .getDateNowWithFormatSimples()),
-                                                  ),
+                                      onTap: () => context
+                                          .pushRoute(DayListRoute())
+                                          .then(
+                                            (value) => context.read<DayBloc>().getDay(
+                                                userId: ((context.read<
+                                                                    AuthCubit>()
+                                                                as AuthCubit)
+                                                            .state
+                                                        as AuthenticatedState)
+                                                    .user
+                                                    .id,
+                                                dayFrom:
+                                                    DateConverter.getDateAll(),
+                                                dayTo: DateConverter
+                                                    .getDateNowWithFormatSimples()),
+                                          ),
                                       child: const Row(
                                         children: [
                                           Text(
