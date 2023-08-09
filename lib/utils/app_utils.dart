@@ -234,6 +234,22 @@ class DateConverter {
     }
   }
 
+  static String getStatusByValueSlider(int mood) {
+    switch (mood) {
+      case 1:
+        return 'depressed';
+      case 2: 
+        return 'sad';
+      case 3:
+        return 'balance';
+      case 4:
+        return 'happy';
+      case 5: 
+        return 'euphoric';
+      default: return 'balance';
+    }
+  }
+
   static MaterialColor getEventColor(int mood) {
     switch (mood) {
       case 1:

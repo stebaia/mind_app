@@ -12,8 +12,10 @@ import 'package:mind_app/bloc/day_bloc/day_bloc.dart';
 import 'package:mind_app/model/day.dart';
 import 'package:mind_app/routes/app_router.gr.dart';
 import 'package:mind_app/ui/components/buttons.dart';
+import 'package:mind_app/ui/components/emoji_text.dart';
 import 'package:mind_app/ui/components/face_feedback.dart';
 import 'package:mind_app/ui/components/tags_widget.dart';
+import 'package:mind_app/ui/components/text_feeling_widget.dart';
 import 'package:mind_app/utils/app_utils.dart';
 import 'package:mind_app/utils/theme_helper.dart';
 import 'package:textfield_tags/textfield_tags.dart';
@@ -36,15 +38,16 @@ class _SetDayEmojiPageState extends State<SetDayEmojiPage> {
 
   @override
   void initState() {
+        _tagsController = TextfieldTagsController();
     super.initState();
-    _tagsController = TextfieldTagsController();
+
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
+
     super.dispose();
-    _tagsController.dispose();
   }
 
   @override
@@ -74,7 +77,7 @@ class _SetDayEmojiPageState extends State<SetDayEmojiPage> {
       },
       builder: (context, setDayState) {
         return BlocBuilder<RatingCubitCubit, RatingCubitInitial>(
-          builder: (context, state) {
+          builder: (context, stateRatingCubit) {
             return Scaffold(
               backgroundColor: Colors.white,
               body: SingleChildScrollView(
@@ -121,18 +124,35 @@ class _SetDayEmojiPageState extends State<SetDayEmojiPage> {
                               padding: EdgeInsets.all(20),
                               alignment: Alignment.center,
                               child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   SizedBox(
                                     height: 100,
                                   ),
+                                  Row(
+                                    children: [
+                                      TextFeelingWidget(
+                                          mood:
+                                              sliderValue.state.value.toInt()),
+                                      SizedBox(
+                                        width: 6,
+                                      ),
+                                      EmojyTextWidget(
+                                          mood: sliderValue.state.value.toInt(),
+                                          size: 20)
+                                    ],
+                                  ),
                                   const Text(
                                     'Describe what is happened',
                                     style: TextStyle(
-                                        fontSize: 20,
-                                        fontFamily: 'PoppinsExtrabold'),
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'PoppinsExtraBold',
+                                      fontSize: 20,
+                                    ),
                                   ),
                                   SizedBox(
-                                    height: 30,
+                                    height: 20,
                                   ),
                                   SizedBox(
                                     height: 200,
@@ -200,11 +220,7 @@ class _SetDayEmojiPageState extends State<SetDayEmojiPage> {
                                                           style:
                                                               const TextStyle(
                                                             color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    74,
-                                                                    137,
-                                                                    92),
+                                                                ThemeHelper.buttonSecondaryColor,
                                                           ),
                                                         ),
                                                       ),
@@ -235,11 +251,13 @@ class _SetDayEmojiPageState extends State<SetDayEmojiPage> {
                                     fieldViewBuilder:
                                         (context, ttec, tfn, onFieldSubmitted) {
                                       return TextFieldTags(
-                                        textEditingController: ttec,
                                         focusNode: tfn,
+                                        textEditingController: ttec,
                                         textfieldTagsController:
                                             _tagsController,
-                                        initialTags: const [],
+                                        initialTags: widget.isFirstTime
+                                            ? []
+                                            : widget.passedDay!.tags,
                                         textSeparators: const [' ', ','],
                                         letterCase: LetterCase.normal,
                                         validator: (String tag) {
@@ -249,43 +267,55 @@ class _SetDayEmojiPageState extends State<SetDayEmojiPage> {
                                           }
                                           return null;
                                         },
-                                        inputfieldBuilder: (context, tec, fn,
-                                            error, onChanged, onSubmitted) {
-                                          return ((context, sc, tags,
-                                              onTagDelete) {
+                                        inputfieldBuilder: (context,
+                                            textEditingControllerIFB,
+                                            focusNode,
+                                            errorString,
+                                            onChanged,
+                                            onSubmitted) {
+                                          return ((context, scrollController,
+                                              tags, onTagDelete) {
                                             return Padding(
                                               padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 10.0),
+                                                  const EdgeInsets.all(10.0),
                                               child: TextField(
-                                                controller: tec,
-                                                focusNode: fn,
+                                                controller:
+                                                    textEditingControllerIFB,
+                                                focusNode: focusNode,
                                                 decoration: InputDecoration(
+                                                  isDense: true,
                                                   border:
-                                                      const UnderlineInputBorder(
+                                                      const OutlineInputBorder(
                                                     borderSide: BorderSide(
-                                                        color: ThemeHelper
-                                                            .buttonSecondaryColor,
-                                                        width: 3.0),
+                                                      color: ThemeHelper
+                                                          .buttonSecondaryColor,
+                                                      width: 3.0,
+                                                    ),
                                                   ),
                                                   focusedBorder:
-                                                      const UnderlineInputBorder(
+                                                      const OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                10)),
                                                     borderSide: BorderSide(
-                                                        color: ThemeHelper
-                                                            .buttonSecondaryColor,
-                                                        width: 3.0),
+                                                      color: ThemeHelper
+                                                          .buttonSecondaryColor,
+                                                      width: 3.0,
+                                                    ),
                                                   ),
                                                   helperText:
-                                                      'Enter language...',
+                                                      'How do you feel?',
                                                   helperStyle: const TextStyle(
                                                     color: ThemeHelper
                                                         .buttonSecondaryColor,
                                                   ),
                                                   hintText:
-                                                      _tagsController.hasTags
+                                                      _tagsController
+                                                              .hasTags
                                                           ? ''
                                                           : "Enter tag...",
-                                                  errorText: error,
+                                                  errorText: errorString,
                                                   prefixIconConstraints:
                                                       BoxConstraints(
                                                           maxWidth: MediaQuery.of(
@@ -295,78 +325,88 @@ class _SetDayEmojiPageState extends State<SetDayEmojiPage> {
                                                               0.74),
                                                   prefixIcon: tags.isNotEmpty
                                                       ? SingleChildScrollView(
-                                                          controller: sc,
+                                                          controller:
+                                                              scrollController,
                                                           scrollDirection:
-                                                              Axis.horizontal,
-                                                          child: Row(
+                                                              Axis.vertical,
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .symmetric(
+                                                                  vertical:
+                                                                      8.0),
+                                                          child: Wrap(
+                                                              runSpacing: 7.0,
                                                               children: tags
                                                                   .map((String
                                                                       tag) {
-                                                            return Container(
-                                                              decoration:
-                                                                  const BoxDecoration(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .all(
-                                                                  Radius
-                                                                      .circular(
+                                                                return Container(
+                                                                  decoration:
+                                                                      const BoxDecoration(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .all(
+                                                                      Radius.circular(
                                                                           20.0),
-                                                                ),
-                                                                color: ThemeHelper
-                                                                    .buttonSecondaryColor,
-                                                              ),
-                                                              margin:
-                                                                  const EdgeInsets
-                                                                          .only(
-                                                                      right:
-                                                                          10.0),
-                                                              padding: const EdgeInsets
-                                                                      .symmetric(
-                                                                  horizontal:
-                                                                      10.0,
-                                                                  vertical:
-                                                                      4.0),
-                                                              child: Row(
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .spaceBetween,
-                                                                children: [
-                                                                  InkWell(
-                                                                    child: Text(
-                                                                      '#$tag',
-                                                                      style: const TextStyle(
-                                                                          color:
-                                                                              Colors.white),
                                                                     ),
-                                                                    onTap: () {
-                                                                      //print("$tag selected");
-                                                                    },
+                                                                    color: ThemeHelper
+                                                                        .buttonSecondaryColor,
                                                                   ),
-                                                                  const SizedBox(
-                                                                      width:
-                                                                          4.0),
-                                                                  InkWell(
-                                                                    child:
-                                                                        const Icon(
-                                                                      Icons
-                                                                          .cancel,
-                                                                      size:
-                                                                          14.0,
-                                                                      color: Color.fromARGB(
-                                                                          255,
-                                                                          233,
-                                                                          233,
-                                                                          233),
-                                                                    ),
-                                                                    onTap: () {
-                                                                      onTagDelete(
-                                                                          tag);
-                                                                    },
-                                                                  )
-                                                                ],
-                                                              ),
-                                                            );
-                                                          }).toList()),
+                                                                  margin: const EdgeInsets
+                                                                          .symmetric(
+                                                                      horizontal:
+                                                                          5.0),
+                                                                  padding: const EdgeInsets
+                                                                          .symmetric(
+                                                                      horizontal:
+                                                                          10.0,
+                                                                      vertical:
+                                                                          5.0),
+                                                                  child: Row(
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .start,
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .min,
+                                                                    children: [
+                                                                      InkWell(
+                                                                        child:
+                                                                            Text(
+                                                                          '#$tag',
+                                                                          style:
+                                                                              const TextStyle(color: Colors.white),
+                                                                        ),
+                                                                        onTap:
+                                                                            () {
+                                                                          //print("$tag selected");
+                                                                        },
+                                                                      ),
+                                                                      const SizedBox(
+                                                                          width:
+                                                                              4.0),
+                                                                      InkWell(
+                                                                        child:
+                                                                            const Icon(
+                                                                          Icons
+                                                                              .cancel,
+                                                                          size:
+                                                                              14.0,
+                                                                          color: Color.fromARGB(
+                                                                              255,
+                                                                              233,
+                                                                              233,
+                                                                              233),
+                                                                        ),
+                                                                        onTap:
+                                                                            () {
+                                                                          onTagDelete(
+                                                                              tag);
+                                                                        },
+                                                                      )
+                                                                    ],
+                                                                  ),
+                                                                );
+                                                              }).toList()),
                                                         )
                                                       : null,
                                                 ),
@@ -427,9 +467,9 @@ class _SetDayEmojiPageState extends State<SetDayEmojiPage> {
                                                       (sliderValue.state.value)
                                                           .round(),
                                                   note: controller.text,
-                                                  tags: tagsCubit.state
-                                                      .map((string) =>
-                                                          string.toLowerCase())
+                                                  tags: _tagsController.getTags!
+                                                      .map((e) =>
+                                                          e.toLowerCase())
                                                       .toList(),
                                                   timestamp: DateConverter
                                                       .getDateNowWithFormatSimples());
@@ -449,8 +489,11 @@ class _SetDayEmojiPageState extends State<SetDayEmojiPage> {
                                                   ? Center(
                                                       child: Container(
                                                           height: 24,
+                                                          width: 24,
                                                           child:
-                                                              CircularProgressIndicator()),
+                                                              CircularProgressIndicator(
+                                                            color: Colors.white,
+                                                          )),
                                                     )
                                                   : Text(
                                                       'Send',
@@ -462,7 +505,7 @@ class _SetDayEmojiPageState extends State<SetDayEmojiPage> {
                                         ],
                                       ),
                                     ),
-                                  )
+                                  ),
                                 ],
                               ),
                             ),
@@ -504,7 +547,7 @@ class _SetDayEmojiPageState extends State<SetDayEmojiPage> {
                                         MediaQuery.of(context).size.width / 1.4,
                                     child: Slider(
                                       activeColor: ThemeHelper.buttonColor,
-                                      value: state.value,
+                                      value: stateRatingCubit.value,
                                       max: 5,
                                       min: 1,
                                       divisions: 4,

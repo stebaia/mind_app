@@ -15,6 +15,7 @@ import 'package:mind_app/routes/app_router.gr.dart';
 import 'package:mind_app/ui/components/carousel_item.dart';
 import 'package:mind_app/ui/components/example_chart.dart';
 import 'package:mind_app/ui/components/line_chart.dart';
+import 'package:mind_app/ui/components/text_feeling_widget.dart';
 import 'package:mind_app/ui/pages/secret_note_detail_page.dart';
 import 'package:mind_app/utils/app_utils.dart';
 import 'package:mind_app/utils/auth_service.dart';
@@ -42,7 +43,7 @@ class CorePage extends StatelessWidget with AutoRouteWrapper {
             return SingleChildScrollView(
               child: Container(
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 1.3,
+                height: MediaQuery.of(context).size.height * 1.2,
                 child: Stack(
                   children: [
                     Positioned(
@@ -83,23 +84,31 @@ class CorePage extends StatelessWidget with AutoRouteWrapper {
                                               fontSize: 26,
                                               fontFamily: 'PoppinsExtrabold'),
                                         ),
-                                        RichText(
-                                            text: const TextSpan(
-                                                text: 'You seem to be ',
-                                                style: TextStyle(
-                                                    color: Colors.black),
-                                                children: [
-                                              TextSpan(
-                                                  text: 'angry',
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: Colors.black)),
-                                              TextSpan(
-                                                  text: ' today!',
-                                                  style: TextStyle(
-                                                      color: Colors.black)),
-                                            ])),
+                                        BlocBuilder<DayBloc, DayState>(
+                                          builder: (context, state) {
+                                            if(state is ResultGetDayState){
+                                              return TextFeelingWidget(mood: state.daysList.days!.last.mood);
+                                            }else {
+                                              return GestureDetector(
+                                                onTap: () => context.pushRoute(SetDayEmojiRoute(isFirstTime: true)).then((value) => context.read<DayBloc>().getDay(
+                                                        userId: ((context.read<AuthCubit>()
+                                                                        as AuthCubit)
+                                                                    .state
+                                                                as AuthenticatedState)
+                                                            .user
+                                                            .id,
+                                                        dayFrom: DateConverter
+                                                            .getDateAll(),
+                                                        dayTo: DateConverter
+                                                            .getDateNowWithFormatSimples()),
+                                                  ),
+                                                child: Text('Tell me how you are today!', style: TextStyle(
+                                                          color: Colors.black)),
+                                              );
+                                            }
+                                            
+                                          },
+                                        ),
                                       ],
                                     ),
                                     GestureDetector(
@@ -246,7 +255,19 @@ class CorePage extends StatelessWidget with AutoRouteWrapper {
                                           fontWeight: FontWeight.bold),
                                     ),
                                     GestureDetector(
-                                      onTap: () => context.pushRoute(DayListRoute()),
+                                      onTap: () =>
+                                          context.pushRoute(DayListRoute()).then((value) => context.read<DayBloc>().getDay(
+                                                        userId: ((context.read<AuthCubit>()
+                                                                        as AuthCubit)
+                                                                    .state
+                                                                as AuthenticatedState)
+                                                            .user
+                                                            .id,
+                                                        dayFrom: DateConverter
+                                                            .getDateAll(),
+                                                        dayTo: DateConverter
+                                                            .getDateNowWithFormatSimples()),
+                                                  ),
                                       child: const Row(
                                         children: [
                                           Text(
@@ -305,14 +326,14 @@ class CorePage extends StatelessWidget with AutoRouteWrapper {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                     Text(
+                                    Text(
                                       'News for your well-being',
                                       style: TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold),
                                     ),
                                     Row(
-                                      children:  [
+                                      children: [
                                         Text(
                                           'See all..',
                                           style: TextStyle(
