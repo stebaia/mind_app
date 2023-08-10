@@ -32,7 +32,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
               bottom: 12,
             ),
             child: widget.days != null ? LineChart(
-              mainData(),
+              mainData(widget.days?.last.day),
             ): Container(),
           ),
         ),
@@ -41,7 +41,23 @@ class _LineChartSample2State extends State<LineChartSample2> {
     );
   }
 
-  Widget bottomTitleWidgets(double value, TitleMeta meta) {
+  Widget bottomTitleWidgets2(double value, TitleMeta meta) {
+    int index = value.toInt();
+    if (index >= 0 && index < widget.days!.length) {
+      DateTime day = DateTime.parse(widget.days![index].day);
+      int dayOfWeek = day.weekday; // 1 = Monday, 2 = Tuesday, ...
+      String dayName = _getDayName(dayOfWeek);
+      return Text(dayName, style: TextStyle(fontSize: 12));
+    }
+    return Container();
+  }
+
+  String _getDayName(int dayOfWeek) {
+    List<String> dayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    return dayNames[dayOfWeek - 1];
+  }
+
+  Widget bottomTitleWidgets(double value, TitleMeta meta, ) {
     const style = TextStyle(
       fontWeight: FontWeight.bold,
       fontSize: 16,
@@ -85,7 +101,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
     return Text(text, style: style, textAlign: TextAlign.left);
   }
 
-  LineChartData mainData() {
+  LineChartData mainData(String? date) {
     return LineChartData(
       gridData: FlGridData(
         show: true,
@@ -114,13 +130,13 @@ class _LineChartSample2State extends State<LineChartSample2> {
           sideTitles: SideTitles(showTitles: false),
         ),
         bottomTitles: AxisTitles(
-          sideTitles: SideTitles(
-            showTitles: true,
-            reservedSize: 30,
-            interval: 1,
-            getTitlesWidget: bottomTitleWidgets,
-          ),
+        sideTitles: SideTitles(
+          showTitles: true,
+          reservedSize: 30,
+          interval: 1,
+          getTitlesWidget:bottomTitleWidgets2 
         ),
+      ),
         leftTitles: AxisTitles(
           sideTitles: SideTitles(
             showTitles: true,

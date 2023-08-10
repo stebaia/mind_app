@@ -234,6 +234,41 @@ class DateConverter {
     }
   }
 
+  static List<String> getInitialDayFromDate(DateTime date){
+   
+    List<String> daysOfWeek = [];
+
+    // Create a list of day names
+    List<String> dayNames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+    int dayIndex = date.weekday - 1; // Weekdays in Dart start from 1 (Monday) to 7 (Sunday)
+    
+    for (int i = 0; i < 7; i++) {
+      daysOfWeek.add(dayNames[dayIndex % 7]);
+      dayIndex++;
+    }
+
+    return daysOfWeek;
+  }
+
+  static List<String> generatePastDays(DateTime date) {
+    List<String> pastDays = [];
+    
+    List<String> dayNames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+    int dayIndex = (date.weekday - 1) % 7;
+
+    for (int i = 0; i < 7; i++) {
+      pastDays.add(dayNames[dayIndex]);
+      dayIndex = (dayIndex - 1) % 7;
+      if (dayIndex < 0) {
+        dayIndex = 6;
+      }
+    }
+
+    return pastDays;
+  }
+
   static String getStatusByValueSlider(int mood) {
     switch (mood) {
       case 1:

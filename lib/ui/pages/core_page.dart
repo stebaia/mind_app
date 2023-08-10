@@ -283,7 +283,7 @@ class CorePage extends StatelessWidget with AutoRouteWrapper {
                                       child: const Row(
                                         children: [
                                           Text(
-                                            'Check details...',
+                                            'Show calendar...',
                                             style: TextStyle(
                                                 fontSize: 10,
                                                 fontWeight: FontWeight.w900,

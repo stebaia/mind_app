@@ -40,7 +40,7 @@ class LoginBloc extends Bloc<AuthEvent, LoginInState> {
       );
       emit(LoggedInState(user));
     } catch (e) {
-      emit(ErrorLoginInState(e.toString()));
+      emit(ErrorLoginInState('Credenziali errate, riprova!'));
     }
   }
 
@@ -72,7 +72,7 @@ class LoginBloc extends Bloc<AuthEvent, LoginInState> {
           surname: event.surname);
       emit(LoggedInState(user));
     } catch (e) {
-      emit(ErrorLoginInState(e.toString()));
+      emit(ErrorLoginInState('Errore nell\'inserimento delle credenziali!'));
     }
   }
 }

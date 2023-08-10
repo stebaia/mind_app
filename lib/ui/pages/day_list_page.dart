@@ -385,7 +385,7 @@ class _DayListPageState extends State<DayListPage> {
                                           padding: EdgeInsets.all(8),
                                           width:
                                               MediaQuery.of(context).size.width,
-                                          height: 80,
+                                          
                                           decoration: BoxDecoration(
                                               color: ThemeHelper.colorSemiWhite,
                                               borderRadius:
@@ -396,6 +396,7 @@ class _DayListPageState extends State<DayListPage> {
                                             children: [
                                               Row(children: [
                                                 Container(
+                                                  height: 40,
                                                   width: 10,
                                                   decoration: BoxDecoration(
                                                     borderRadius:
@@ -406,7 +407,8 @@ class _DayListPageState extends State<DayListPage> {
                                                             state.day!.mood),
                                                   ),
                                                 ),
-                                                Padding(
+                                                Container(
+                                                  width: MediaQuery.of(context).size.width * 0.7,
                                                   padding: const EdgeInsets
                                                           .symmetric(
                                                       horizontal: 12),
@@ -441,14 +443,8 @@ class _DayListPageState extends State<DayListPage> {
                                                           ],
                                                         ),
                                                         state.day!.mood != null
-                                                            ? state.day!.note!
-                                                                        .length >
-                                                                    30
-                                                                ? Text(state
-                                                                    .day!.note!
-                                                                    .substring(
-                                                                        0, 50))
-                                                                : Text(state
+                                                            ? 
+                                                                 Text(state
                                                                     .day!.note!)
                                                             : Container()
                                                       ]),
