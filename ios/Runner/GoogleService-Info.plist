@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>897468631800-tl1k4voa1i34fluksgso43lfnn9vnq6i.apps.googleusercontent.com</string>
+	<string>897468631800-8bjp18lu11l78g1jjblhhntv6thvsv02.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.897468631800-tl1k4voa1i34fluksgso43lfnn9vnq6i</string>
+	<string>com.googleusercontent.apps.897468631800-8bjp18lu11l78g1jjblhhntv6thvsv02</string>
 	<key>API_KEY</key>
 	<string>AIzaSyDxqXNx0pPuhzt2MmrMgRqVkt_Vxkj2cHs</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.mindApp</string>
+	<string>com.mindfull.mindapp</string>
 	<key>PROJECT_ID</key>
 	<string>mind--app-ec238</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:897468631800:ios:b1ac982ade679c207dc90d</string>
+	<string>1:897468631800:ios:fa4806030712960c7dc90d</string>
 </dict>
 </plist>
