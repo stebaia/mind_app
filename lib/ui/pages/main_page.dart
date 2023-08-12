@@ -57,9 +57,9 @@ class _MainPageState extends State<MainPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    if (Platform.isAndroid) {
+
       initPushNotifications();
-    }
+
   }
 
   @override
