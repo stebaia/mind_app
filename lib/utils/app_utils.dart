@@ -234,15 +234,31 @@ class DateConverter {
     }
   }
 
-  static List<String> getInitialDayFromDate(DateTime date){
-   
+  static Map<String, DateTime> getCurrentWeekDates() {
+    final now = DateTime.now();
+    DateTime midnight = DateTime(now.year, now.month, now.day);
+    final startOfWeek = midnight.subtract(Duration(days: midnight.weekday + 1));
+    final endOfWeek = startOfWeek.add(Duration(days: 9));
+    return {'start': startOfWeek, 'end': endOfWeek};
+  }
+
+  static List<String> getInitialDayFromDate(DateTime date) {
     List<String> daysOfWeek = [];
 
     // Create a list of day names
-    List<String> dayNames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    List<String> dayNames = [
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+      'Sunday'
+    ];
 
-    int dayIndex = date.weekday - 1; // Weekdays in Dart start from 1 (Monday) to 7 (Sunday)
-    
+    int dayIndex = date.weekday -
+        1; // Weekdays in Dart start from 1 (Monday) to 7 (Sunday)
+
     for (int i = 0; i < 7; i++) {
       daysOfWeek.add(dayNames[dayIndex % 7]);
       dayIndex++;
@@ -253,8 +269,16 @@ class DateConverter {
 
   static List<String> generatePastDays(DateTime date) {
     List<String> pastDays = [];
-    
-    List<String> dayNames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+    List<String> dayNames = [
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+      'Sunday'
+    ];
 
     int dayIndex = (date.weekday - 1) % 7;
 
@@ -273,15 +297,16 @@ class DateConverter {
     switch (mood) {
       case 1:
         return 'depressed';
-      case 2: 
+      case 2:
         return 'sad';
       case 3:
         return 'balance';
       case 4:
         return 'happy';
-      case 5: 
+      case 5:
         return 'euphoric';
-      default: return 'balance';
+      default:
+        return 'balance';
     }
   }
 
