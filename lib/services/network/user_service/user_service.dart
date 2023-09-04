@@ -12,7 +12,7 @@ abstract class UserService {
   factory UserService(Dio dio, {String baseUrl}) = _UserService;
 
   @POST('login')
-  Future<UserDTO> login(@Body() LoginRequest request);
+  Future<HttpResponse<UserDTO>> login(@Body() LoginRequest request);
 
   @POST('register')
   Future<UserDTO> registration(@Body() RegistrationRequest request);

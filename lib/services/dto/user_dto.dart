@@ -32,6 +32,7 @@ class UserDetailDTO extends DTO with EquatableMixin {
   String? birth;
   String? registration;
   String? lastLogin;
+  String? token;
 
   UserDetailDTO(
       {this.id,
@@ -40,7 +41,8 @@ class UserDetailDTO extends DTO with EquatableMixin {
       this.lastLogin,
       this.birth,
       this.email,
-      this.surname});
+      this.surname,
+      this.token});
 
   UserDetailDTO.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -61,11 +63,12 @@ class UserDetailDTO extends DTO with EquatableMixin {
     data['surname'] = this.surname;
     data['birth'] = this.birth;
     data['lastLogin'] = this.lastLogin;
+    data['token'] = this.token;
     return data;
   }
 
   @override
   // TODO: implement props
   List<Object?> get props =>
-      [id, name, registration, birth, surname, email, lastLogin];
+      [id, name, registration, birth, surname, email, lastLogin, token];
 }

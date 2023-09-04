@@ -5,14 +5,14 @@ import 'package:pine/pine.dart';
 class UserMapper extends DTOMapper<UserDTO, User> {
   @override
   User fromDTO(UserDTO dto) => User(
-        id: dto.user!.id!,
-        name: dto.user!.name!,
-        registrationDate: dto.user!.registration!,
-        birth: dto.user!.birth!,
-        surname: dto.user!.surname!,
-        email: dto.user!.email!,
-        lastLogin: dto.user!.lastLogin!,
-      );
+      id: dto.user!.id!,
+      name: dto.user!.name!,
+      registrationDate: dto.user!.registration!,
+      birth: dto.user!.birth!,
+      surname: dto.user!.surname!,
+      email: dto.user!.email!,
+      lastLogin: dto.user!.lastLogin!,
+      token: dto.user!.token);
 
   @override
   UserDTO toDTO(User model) => UserDTO(
@@ -23,5 +23,6 @@ class UserMapper extends DTOMapper<UserDTO, User> {
           registration: model.registrationDate,
           surname: model.surname,
           email: model.email,
+          token: model.token,
           birth: model.birth));
 }

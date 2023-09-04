@@ -63,7 +63,8 @@ class UserRepository {
           password: sha256.convert(utf8.encode(password)).toString(),
           timestamp: DateConverter.getDateNowWithFormat()));
 
-      User user = userDTOMapper.fromDTO(response);
+      User user = userDTOMapper.fromDTO(response.data);
+      user.token = response.response.headers['jwt']![0];
       await flutterSecureStorage.write(
           key: Constants.userKey, value: userMapper.from(user));
       return user;

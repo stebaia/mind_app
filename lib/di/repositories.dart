@@ -11,18 +11,28 @@ final List<RepositoryProvider> _repositories = [
         userMapper: context.read(),
         logger: context.read());
 
-    context.read<Dio>().interceptors.insert(0, AuthInterceptor());
+    context.read<Dio>().interceptors.insert(
+        0,
+        AuthInterceptor(
+            userRepository: userRepository,
+            flutterSecureStorage: secureStorage));
 
     return userRepository;
   })),
   RepositoryProvider<DaysRepository>(create: ((context) {
+    final userRepository = context.read<UserRepository>();
+    final secureStorage = context.read<FlutterSecureStorage>();
     final dayRepository = DaysRepository(
         logger: context.read(),
         daysService: context.read(),
         dtoMapper: context.read(),
         dtoResultMapper: context.read());
 
-    context.read<Dio>().interceptors.insert(0, AuthInterceptor());
+    context.read<Dio>().interceptors.insert(
+        0,
+        AuthInterceptor(
+            userRepository: userRepository,
+            flutterSecureStorage: secureStorage));
     return dayRepository;
   })),
 ];

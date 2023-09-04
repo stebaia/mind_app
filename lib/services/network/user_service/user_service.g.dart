@@ -19,14 +19,14 @@ class _UserService implements UserService {
   String? baseUrl;
 
   @override
-  Future<UserDTO> login(request) async {
+  Future<HttpResponse<UserDTO>> login(request) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(request.toJson());
-    final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<UserDTO>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<HttpResponse<UserDTO>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -39,7 +39,8 @@ class _UserService implements UserService {
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = UserDTO.fromJson(_result.data!);
-    return value;
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
   }
 
   @override

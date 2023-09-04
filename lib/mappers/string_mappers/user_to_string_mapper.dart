@@ -13,6 +13,7 @@ class UserToStringMapper extends Mapper<User, String> {
         'email': from.email,
         'surname': from.surname,
         'lastLogin': from.lastLogin,
+        'token': from.token
       });
 
   @override
@@ -25,6 +26,7 @@ class UserToStringMapper extends Mapper<User, String> {
         email: json['email'],
         surname: json['surname'],
         birth: json['birth'],
-        id: json['id']);
+        id: json['id'],
+        token: json['token']);
   }
 }

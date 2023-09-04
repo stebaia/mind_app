@@ -38,9 +38,8 @@ class _SetDayEmojiPageState extends State<SetDayEmojiPage> {
 
   @override
   void initState() {
-        _tagsController = TextfieldTagsController();
+    _tagsController = TextfieldTagsController();
     super.initState();
-
   }
 
   @override
@@ -112,7 +111,7 @@ class _SetDayEmojiPageState extends State<SetDayEmojiPage> {
                           }
                         },
                         child: Padding(
-                            padding: EdgeInsets.all(10),
+                            padding: EdgeInsets.only(top: 30),
                             child: Icon(Icons.close)),
                       ),
                     ),
@@ -219,8 +218,8 @@ class _SetDayEmojiPageState extends State<SetDayEmojiPage> {
                                                               TextAlign.left,
                                                           style:
                                                               const TextStyle(
-                                                            color:
-                                                                ThemeHelper.buttonSecondaryColor,
+                                                            color: ThemeHelper
+                                                                .buttonSecondaryColor,
                                                           ),
                                                         ),
                                                       ),
@@ -311,8 +310,7 @@ class _SetDayEmojiPageState extends State<SetDayEmojiPage> {
                                                         .buttonSecondaryColor,
                                                   ),
                                                   hintText:
-                                                      _tagsController
-                                                              .hasTags
+                                                      _tagsController.hasTags
                                                           ? ''
                                                           : "Enter tag...",
                                                   errorText: errorString,
