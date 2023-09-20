@@ -70,8 +70,9 @@ class _MainPageState extends State<MainPage> {
       listener: ((context, state) {
         try {
           if (state is AuthenticatedState) {
+
             context.read<DayBloc>()
-              ..getDay(
+              .getDay(
                   userId: state.user.id,
                   dayFrom: DateConverter.getDateNowWithFormatSimples(),
                   dayTo: DateConverter.getDateNowWithFormatSimples());
@@ -92,6 +93,8 @@ class _MainPageState extends State<MainPage> {
               _replacePage(context, SetDayEmojiRoute(isFirstTime: true));
             } else if (state is ResultGetDayState) {
               _replacePage(context, CoreRoute());
+            }else if(state is ErrorUnauthGetDayState){
+              _replacePage(context, LoginRoute());
             }
           },
           child: Center(child: CircularProgressIndicator()),

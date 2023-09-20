@@ -26,9 +26,17 @@ class ErrorGetDayState extends DayState {
   const ErrorGetDayState();
 }
 
+class ErrorUnauthGetDayState extends DayState {
+  const ErrorUnauthGetDayState();
+}
+
 class ErrorSetDayState extends DayState {
   const ErrorSetDayState();
 } 
+
+class ErrorUnauthSetDayState extends DayState {
+  const ErrorUnauthSetDayState();
+}
 
 class TrySetDayState extends DayState {
   const TrySetDayState();

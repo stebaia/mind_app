@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:mind_app/model/day_list.dart';
@@ -56,7 +57,17 @@ class DayBloc extends Bloc<DayEvent, DayState> {
       }
       
     } catch (e) {
-      emit(const ErrorGetDayState());
+      if(e is DioError){
+        if(e.response?.statusCode == 401){
+          emit(const ErrorUnauthGetDayState());
+        }else {
+          emit(const ErrorGetDayState());
+        }
+        
+      }else{
+        emit(const ErrorGetDayState());
+      }
+      
     }
   }
 
@@ -66,8 +77,18 @@ class DayBloc extends Bloc<DayEvent, DayState> {
     try {
       final dayResult = await daysRepository.setDay(userId: event.userId, day: event.day, mood: event.mood, note: event.note, tags: event.tags, timestamp: event.timestamp);
       emit(ResultSetDayState(dayResult));
-    } catch (e) {
-      emit(const ErrorGetDayState());
+     } catch (e) {
+      if(e is DioError){
+        if(e.response?.statusCode == '401'){
+          emit(const ErrorUnauthSetDayState());
+        }else {
+          emit(const ErrorSetDayState());
+        }
+        
+      }else{
+        emit(const ErrorSetDayState());
+      }
+      
     }
   }
 }
