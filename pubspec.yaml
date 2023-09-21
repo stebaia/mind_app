@@ -44,13 +44,18 @@ dependencies:
   firebase_core: ^2.15.0
   textfield_tags: ^2.0.2
   firebase_messaging: ^14.6.5
+  drift: ^2.11.1
+  sqlite3_flutter_libs: ^0.5.0
+  path_provider: ^2.0.0
+  path: ^1.8.3
   
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
-  build_runner: ^2.3.0
+  drift_dev: ^2.11.1
+  build_runner: ^2.4.6
   bloc_test: ^9.1.0
   retrofit_generator: ^4.2.0
   auto_route_generator: ^5.0.2

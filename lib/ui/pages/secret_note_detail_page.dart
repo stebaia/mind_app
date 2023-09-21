@@ -3,15 +3,32 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
+import 'package:mind_app/bloc/secret_note_bloc/secret_note_bloc.dart';
 import 'package:mind_app/ui/components/buttons.dart';
 import 'package:mind_app/utils/theme_helper.dart';
 
-class SecretNoteDetailPage extends StatelessWidget {
+class SecretNoteDetailPage extends StatefulWidget with AutoRouteWrapper{
   const SecretNoteDetailPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  State<SecretNoteDetailPage> createState() => _SecretNoteDetailPageState();
+   @override
+  Widget wrappedRoute(BuildContext context) => MultiBlocProvider(providers: [
+    BlocProvider<SecretNoteBloc>(create:(context) => SecretNoteBloc(secretNoteRepository: context.read()),)
+  ], child: this);
+}
+
+class _SecretNoteDetailPageState extends State<SecretNoteDetailPage> {
+
+  TextEditingController textTitleEditingController = TextEditingController();
+  @override
+  Widget build(BuildContext context) {  
+    
+    final textContentEditingController = TextEditingController();
+
     return Scaffold(
       backgroundColor: ThemeHelper.backgroundColorWhite,
       body: SingleChildScrollView(
@@ -35,15 +52,14 @@ class SecretNoteDetailPage extends StatelessWidget {
                         TextStyle(fontSize: 26, fontFamily: 'PoppinsExtrabold'),
                   ),
                   Expanded(
-                      
                       child: Container(
-                        padding: EdgeInsets.only(left: 34),
-                        child: Image.asset(
-                                          'assets/incognito.png',
-                                          height: 24,
-                                          width: 24,
-                                        ),
-                      ))
+                    padding: EdgeInsets.only(left: 34),
+                    child: Image.asset(
+                      'assets/incognito.png',
+                      height: 24,
+                      width: 24,
+                    ),
+                  ))
                 ],
               ),
             ),
@@ -76,6 +92,7 @@ class SecretNoteDetailPage extends StatelessWidget {
                 SizedBox(
                   height: 300,
                   child: TextField(
+                    controller: textTitleEditingController,
                     style: TextStyle(fontSize: 14),
                     textAlign: TextAlign.start,
                     decoration: InputDecoration(
@@ -94,11 +111,25 @@ class SecretNoteDetailPage extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
-                FunctionButton(
-                  colorText: Colors.white,
-                  colorsBackground: ThemeHelper.buttonSecondaryColor,
-                  text: 'Invia!',
-                  onPressed: () {},
+                BlocConsumer<SecretNoteBloc, SecretNoteState>(
+                  listener: (context, state) {
+                    if(state is InsertSecretNoteState){
+                      Fluttertoast.showToast(msg: 'Nota segreta inserita!');
+                      context.popRoute();
+                      
+                    }
+                  },
+                  builder: (context, state) {
+                    return FunctionButton(
+                      loading:state is! LoadingSecretNoteState,
+                      colorText: Colors.white,
+                      colorsBackground: ThemeHelper.buttonSecondaryColor,
+                      text: 'Invia!',
+                      onPressed: () {
+                        context.read<SecretNoteBloc>().insertSecretNote(title: textTitleEditingController.text, content: textTitleEditingController.text, datetime: DateFormat('EEEE, d MMM yyyy').format(DateTime.now()));
+                      },
+                    );
+                  },
                 ),
               ]),
             )
@@ -107,4 +138,6 @@ class SecretNoteDetailPage extends StatelessWidget {
       ),
     );
   }
+
+  
 }

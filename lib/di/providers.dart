@@ -20,4 +20,5 @@ final List<SingleChildWidget> _providers = [
     create: (context) =>
         DaysService(context.read<Dio>(), baseUrl: Constants.baseUrl),
   ),
+  Provider<MyDatabase>(create: (_) => MyDatabase())
 ];

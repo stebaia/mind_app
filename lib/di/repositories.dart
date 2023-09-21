@@ -35,4 +35,8 @@ final List<RepositoryProvider> _repositories = [
             flutterSecureStorage: secureStorage));
     return dayRepository;
   })),
+   RepositoryProvider<SecretNoteRepository>(create: ((context) {
+    final secretNoteRepo = SecretNoteRepository(database: context.read(), logger: context.read());
+    return secretNoteRepo;
+  })),
 ];
