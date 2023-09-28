@@ -10,6 +10,7 @@ import 'package:mind_app/bloc/cubit/tags_cubit/tags_cubit.dart';
 import 'package:mind_app/bloc/cubit/visibility_cubit/visibility_cubit.dart';
 import 'package:mind_app/bloc/day_bloc/day_bloc.dart';
 import 'package:mind_app/model/day.dart';
+import 'package:mind_app/providers/dark_theme_provider.dart';
 import 'package:mind_app/routes/app_router.gr.dart';
 import 'package:mind_app/ui/components/buttons.dart';
 import 'package:mind_app/ui/components/emoji_text.dart';
@@ -18,6 +19,7 @@ import 'package:mind_app/ui/components/tags_widget.dart';
 import 'package:mind_app/ui/components/text_feeling_widget.dart';
 import 'package:mind_app/utils/app_utils.dart';
 import 'package:mind_app/utils/theme_helper.dart';
+import 'package:provider/provider.dart';
 import 'package:textfield_tags/textfield_tags.dart';
 
 class SetDayEmojiPage extends StatefulWidget with AutoRouteWrapper {
@@ -51,6 +53,7 @@ class _SetDayEmojiPageState extends State<SetDayEmojiPage> {
 
   @override
   Widget build(BuildContext context) {
+     final darkMode = Provider.of<DarkThemeProvider>(context);
     if (widget.passedDay != null) {
       context
           .read<RatingCubitCubit>()
@@ -138,6 +141,7 @@ class _SetDayEmojiPageState extends State<SetDayEmojiPage> {
                                         width: 6,
                                       ),
                                       EmojyTextWidget(
+                                          color: darkMode.darkTheme ? Colors.white : Colors.black,
                                           mood: sliderValue.state.value.toInt(),
                                           size: 20)
                                     ],

@@ -58,46 +58,50 @@ class _MainPageState extends State<MainPage> {
     // TODO: implement initState
     super.initState();
 
-      initPushNotifications();
-
+    initPushNotifications();
   }
 
   @override
   Widget build(BuildContext context) {
     final tagsCubit = context.read<TagsCubit>();
     final ragingCubit = context.read<RatingCubitCubit>();
-    return BlocListener<AuthCubit, AuthState>(
-      listener: ((context, state) {
-        try {
-          if (state is AuthenticatedState) {
-
-            context.read<DayBloc>()
-              .getDay(
+    return BlocListener<DayBloc, DayState>(
+      listener: (context, dayState) {
+        if(dayState is ErrorUnauthGetDayState){
+          _replacePage(context, LoginRoute());
+        }
+      },
+      child: BlocListener<AuthCubit, AuthState>(
+        listener: ((context, state) {
+          try {
+            if (state is AuthenticatedState) {
+              context.read<DayBloc>().getDay(
                   userId: state.user.id,
                   dayFrom: DateConverter.getDateNowWithFormatSimples(),
                   dayTo: DateConverter.getDateNowWithFormatSimples());
-          } else if (state is NotAuthenticatedState) {
-            _replacePage(context, const LoginRoute());
-          }
-        } catch (e) {
-          _replacePage(context, LoginRoute());
-        }
-      }),
-      child: Scaffold(
-        backgroundColor: ThemeHelper.backgroundColorWhite,
-        body: BlocListener<DayBloc, DayState>(
-          listener: (context, state) {
-            tagsCubit.deleteAll();
-            ragingCubit.changeValue(3);
-            if (state is EmptyGetDayState || isFromNotification) {
-              _replacePage(context, SetDayEmojiRoute(isFirstTime: true));
-            } else if (state is ResultGetDayState) {
-              _replacePage(context, CoreRoute());
-            }else if(state is ErrorUnauthGetDayState){
-              _replacePage(context, LoginRoute());
+            } else if (state is NotAuthenticatedState) {
+              _replacePage(context, const LoginRoute());
             }
-          },
-          child: Center(child: CircularProgressIndicator()),
+          } catch (e) {
+            _replacePage(context, LoginRoute());
+          }
+        }),
+        child: Scaffold(
+          backgroundColor: ThemeHelper.backgroundColorWhite,
+          body: BlocListener<DayBloc, DayState>(
+            listener: (context, state) {
+              tagsCubit.deleteAll();
+              ragingCubit.changeValue(3);
+              if (state is EmptyGetDayState || isFromNotification) {
+                _replacePage(context, SetDayEmojiRoute(isFirstTime: true));
+              } else if (state is ResultGetDayState) {
+                _replacePage(context, CoreRoute());
+              } else if (state is ErrorUnauthGetDayState || state is ErrorGetDayState) {
+                _replacePage(context, LoginRoute());
+              }
+            },
+            child: Center(child: CircularProgressIndicator()),
+          ),
         ),
       ),
     );

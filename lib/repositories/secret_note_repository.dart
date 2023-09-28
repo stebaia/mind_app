@@ -14,42 +14,58 @@ class SecretNoteRepository {
 
   // Metodo per ottenere tutte le SecretNote
   Future<List<SecretModel>> getAllSecretNotes() async {
-  final secretNoteDataList = await database.select(database.secretNote).get();
-  final secretModelList = secretNoteDataList.map((secretNoteData) {
-    return SecretModel(
-      // Mappa i campi della SecretNoteData al modello SecretModel
-      id: secretNoteData.id,
-      title: secretNoteData.title,
-      content: secretNoteData.content,
-      datetime: secretNoteData.date,
-    );
-  }).toList();
-  return secretModelList;
-}
+    final secretNoteDataList = await database.select(database.secretNote).get();
+    final secretModelList = secretNoteDataList.map((secretNoteData) {
+      return SecretModel(
+        // Mappa i campi della SecretNoteData al modello SecretModel
+        id: secretNoteData.id,
+        title: secretNoteData.title,
+        content: secretNoteData.content,
+        datetime: secretNoteData.date,
+      );
+    }).toList();
+    return secretModelList;
+  }
 
   // Metodo per ottenere una SecretNote specifica per ID
   Future<SecretModel?> getById(int id) async {
-  final secretNoteData = await (database.select(database.secretNote)
-        ..where((tbl) => tbl.id.equals(id)))
-      .getSingleOrNull();
-  
-  if (secretNoteData != null) {
-    return SecretModel(
-      id: secretNoteData.id,
-      title: secretNoteData.title,
-      content: secretNoteData.content,
-      datetime: secretNoteData.date,
-    );
-  } else {
-    return null;
+    final secretNoteData = await (database.select(database.secretNote)
+          ..where((tbl) => tbl.id.equals(id)))
+        .getSingleOrNull();
+
+    if (secretNoteData != null) {
+      return SecretModel(
+        id: secretNoteData.id,
+        title: secretNoteData.title,
+        content: secretNoteData.content,
+        datetime: secretNoteData.date,
+      );
+    } else {
+      return null;
+    }
   }
-}
 
   // Metodo per aggiungere una nuova SecretNote
   Future<void> addSecretNote(SecretModel secretNoteModel) {
     return database.into(database.secretNote).insert(SecretNoteCompanion.insert(
-        title: secretNoteModel.title,
+        title:  DateTime.now().toString(),
         content: secretNoteModel.content,
         date: secretNoteModel.datetime));
+  }
+
+  Future<void> editSecretNote(SecretModel secretNoteModel) async {
+    final existingRecordNote = await ((database.select(database.secretNote))
+          ..where((tbl) => tbl.title.equals(secretNoteModel.title)))
+        .getSingleOrNull();
+
+    if (existingRecordNote != null) {
+      final updatedRecord = existingRecordNote.copyWith(
+        title: secretNoteModel.title,
+        content: secretNoteModel.content,
+        date: secretNoteModel.datetime,
+      );
+
+      await database.update(database.secretNote).replace(updatedRecord);
+    }
   }
 }

@@ -9,4 +9,6 @@ final List<BlocProvider> _blocs = [
   BlocProvider<TagsCubit>(create: (context) => TagsCubit()),
   BlocProvider<DaySelectedCubit>(create: (context) => DaySelectedCubit()),
   BlocProvider<VisibilityCubit>(create: (context) => VisibilityCubit()),
+  BlocProvider<TextFieldCubit>(create: (context) => TextFieldCubit('')),
+  BlocProvider<DarkThemeCubit>(create: (context) => DarkThemeCubit()..loadTheme()),
 ];

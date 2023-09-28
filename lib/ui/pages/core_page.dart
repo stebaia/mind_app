@@ -11,6 +11,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mind_app/bloc/cubit/auth_cubit/auth_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mind_app/bloc/day_bloc/day_bloc.dart';
+import 'package:mind_app/providers/dark_theme_provider.dart';
 import 'package:mind_app/routes/app_router.gr.dart';
 import 'package:mind_app/ui/components/carousel_item.dart';
 import 'package:mind_app/ui/components/line_chart.dart';
@@ -19,14 +20,16 @@ import 'package:mind_app/ui/pages/secret_note_detail_page.dart';
 import 'package:mind_app/utils/app_utils.dart';
 import 'package:mind_app/utils/auth_service.dart';
 import 'package:mind_app/utils/theme_helper.dart';
+import 'package:provider/provider.dart';
 
 class CorePage extends StatelessWidget with AutoRouteWrapper {
   const CorePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final darkMode = Provider.of<DarkThemeProvider>(context);
     return Scaffold(
-      backgroundColor: ThemeHelper.backgroundColorWhite,
+      backgroundColor: darkMode.darkTheme ? ThemeHelper.backgroundColorDark : ThemeHelper.backgroundColorWhite,
       /*appBar: AppBar(
         title: Text(AppLocalizations.of(context).app_name),
         leading: IconButton(
@@ -127,7 +130,7 @@ class CorePage extends StatelessWidget with AutoRouteWrapper {
                                           width: 36,
                                           height: 36,
                                           decoration: BoxDecoration(
-                                              color: ThemeHelper.drawingColor,
+                                              color:  ThemeHelper.drawingColor,
                                               borderRadius:
                                                   BorderRadius.circular(40)),
                                           child: const Center(
@@ -145,9 +148,10 @@ class CorePage extends StatelessWidget with AutoRouteWrapper {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    const Text(
+                                    Text(
                                       'Let offsome steam...',
                                       style: TextStyle(
+                                          color: darkMode.darkTheme ? CupertinoColors.white : Colors.black,
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold),
                                     ),
@@ -165,14 +169,14 @@ class CorePage extends StatelessWidget with AutoRouteWrapper {
                                         }
                                       },
                                       child: Row(
-                                        children: const [
+                                        children: [
                                           Text(
                                             'See all...',
                                             style: TextStyle(
                                                 fontSize: 10,
                                                 fontWeight: FontWeight.w900,
-                                                color: ThemeHelper
-                                                    .buttonSecondaryColor),
+                                                color: darkMode.darkTheme ? ThemeHelper.secondaryColor : ThemeHelper
+                                                  .buttonSecondaryColor,),
                                           ),
                                           Icon(
                                             CupertinoIcons.chevron_right,
@@ -193,14 +197,14 @@ class CorePage extends StatelessWidget with AutoRouteWrapper {
                                     width: MediaQuery.of(context).size.width,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
-                                      color: ThemeHelper.backgroundColorWhite,
+                                      color: darkMode.darkTheme ? CupertinoColors.black : ThemeHelper.backgroundColorWhite,
                                       boxShadow: [
                                         BoxShadow(
                                           color:
-                                              Color.fromARGB(255, 220, 199, 216)
+                                              Color.fromARGB(255, 41, 39, 41)
                                                   .withOpacity(0.2),
-                                          spreadRadius: 10,
-                                          blurRadius: 10,
+                                          spreadRadius: 6,
+                                                  blurRadius: 10,
                                           offset: Offset(0,
                                               3), // changes position of shadow
                                         ),
@@ -231,16 +235,17 @@ class CorePage extends StatelessWidget with AutoRouteWrapper {
                                                         ThemeHelper.buttonColor,
                                                   ))),
                                               SizedBox(width: 10),
-                                              const Text(
+                                              Text(
                                                 'Add a secret note!',
                                                 style: TextStyle(
+                                                    color: darkMode.darkTheme ? CupertinoColors.white : Colors.black,
                                                     fontWeight: FontWeight.w900,
                                                     fontSize: 16),
                                               ),
                                             ]),
-                                            const Text(
+                                            Text(
                                                 'Feel like venting?\nWrite an ephemeral note and let the anger go..',
-                                                style: TextStyle(fontSize: 13))
+                                                style: TextStyle(fontSize: 13, color: darkMode.darkTheme ? CupertinoColors.white : Colors.black,))
                                           ],
                                         ),
                                       ],
@@ -257,9 +262,10 @@ class CorePage extends StatelessWidget with AutoRouteWrapper {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    const Text(
+                                    Text(
                                       'How was your week?',
                                       style: TextStyle(
+                                          color: darkMode.darkTheme ? CupertinoColors.white : Colors.black,
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold),
                                     ),
@@ -280,17 +286,17 @@ class CorePage extends StatelessWidget with AutoRouteWrapper {
                                                 dayTo: DateConverter
                                                     .getDateNowWithFormatSimples()),
                                           ),
-                                      child: const Row(
+                                      child: Row(
                                         children: [
                                           Text(
                                             'Show calendar...',
                                             style: TextStyle(
                                                 fontSize: 10,
                                                 fontWeight: FontWeight.w900,
-                                                color: ThemeHelper
-                                                    .buttonSecondaryColor),
+                                                color: darkMode.darkTheme ? ThemeHelper.secondaryColor : ThemeHelper
+                                                  .buttonSecondaryColor,),
                                           ),
-                                          Icon(
+                                          const Icon(
                                             CupertinoIcons.chevron_right,
                                             size: 18,
                                             color: ThemeHelper.buttonColor,
@@ -310,14 +316,12 @@ class CorePage extends StatelessWidget with AutoRouteWrapper {
                                           decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(10),
-                                              color: ThemeHelper
-                                                  .backgroundColorWhite,
+                                              color:  darkMode.darkTheme ? CupertinoColors.black : ThemeHelper.backgroundColorWhite,
                                               boxShadow: [
                                                 BoxShadow(
-                                                  color: const Color.fromARGB(
-                                                          255, 220, 199, 216)
+                                                  color: Color.fromARGB(255, 47, 43, 46)
                                                       .withOpacity(0.2),
-                                                  spreadRadius: 10,
+                                                  spreadRadius: 6,
                                                   blurRadius: 10,
                                                   offset: const Offset(0,
                                                       3), // changes position of shadow
@@ -334,13 +338,14 @@ class CorePage extends StatelessWidget with AutoRouteWrapper {
                                 const SizedBox(
                                   height: 20,
                                 ),
-                                const Row(
+                                Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       'News for your well-being',
                                       style: TextStyle(
+                                          color: darkMode.darkTheme ? CupertinoColors.white : Colors.black,
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold),
                                     ),
@@ -349,10 +354,11 @@ class CorePage extends StatelessWidget with AutoRouteWrapper {
                                         Text(
                                           'See all..',
                                           style: TextStyle(
+                                            color: darkMode.darkTheme ? ThemeHelper.secondaryColor : ThemeHelper
+                                                  .buttonSecondaryColor,
                                               fontSize: 10,
                                               fontWeight: FontWeight.w900,
-                                              color: ThemeHelper
-                                                  .buttonSecondaryColor),
+                                              ),
                                         ),
                                         Icon(
                                           CupertinoIcons.chevron_right,

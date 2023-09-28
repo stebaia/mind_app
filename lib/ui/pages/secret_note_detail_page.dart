@@ -6,29 +6,43 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
+import 'package:mind_app/bloc/cubit/text_field_secret_note_cubit/text_field_secret_note_cubit.dart';
 import 'package:mind_app/bloc/secret_note_bloc/secret_note_bloc.dart';
+import 'package:mind_app/model/secret_note_model.dart';
 import 'package:mind_app/ui/components/buttons.dart';
 import 'package:mind_app/utils/theme_helper.dart';
 
-class SecretNoteDetailPage extends StatefulWidget with AutoRouteWrapper{
-  const SecretNoteDetailPage({super.key});
+class SecretNoteDetailPage extends StatefulWidget with AutoRouteWrapper {
+  const SecretNoteDetailPage({super.key, this.secretModel});
+
+  final SecretModel? secretModel;
 
   @override
   State<SecretNoteDetailPage> createState() => _SecretNoteDetailPageState();
-   @override
+  @override
   Widget wrappedRoute(BuildContext context) => MultiBlocProvider(providers: [
-    BlocProvider<SecretNoteBloc>(create:(context) => SecretNoteBloc(secretNoteRepository: context.read()),)
-  ], child: this);
+        BlocProvider<SecretNoteBloc>(
+          create: (context) =>
+              SecretNoteBloc(secretNoteRepository: context.read()),
+        )
+      ], child: this);
 }
 
 class _SecretNoteDetailPageState extends State<SecretNoteDetailPage> {
-
   TextEditingController textTitleEditingController = TextEditingController();
-  @override
-  Widget build(BuildContext context) {  
-    
-    final textContentEditingController = TextEditingController();
 
+  String? _modifiedText;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.secretModel != null) {
+      textTitleEditingController.text = widget.secretModel!.content;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ThemeHelper.backgroundColorWhite,
       body: SingleChildScrollView(
@@ -46,8 +60,10 @@ class _SecretNoteDetailPageState extends State<SecretNoteDetailPage> {
                         CupertinoIcons.arrow_left,
                       ),
                       onPressed: () => context.popRoute()),
-                  const Text(
-                    'Add a secret note',
+                  Text(
+                    widget.secretModel != null
+                        ? 'Edit a secret note'
+                        : 'Add the secret note',
                     style:
                         TextStyle(fontSize: 26, fontFamily: 'PoppinsExtrabold'),
                   ),
@@ -84,49 +100,59 @@ class _SecretNoteDetailPageState extends State<SecretNoteDetailPage> {
                   SizedBox(
                     width: 6,
                   ),
-                  Text(DateFormat('EEEE, d MMM yyyy').format(DateTime.now())),
+                  Text(widget.secretModel != null
+                      ? widget.secretModel!.datetime
+                      : DateFormat('EEEE, d MMM yyyy').format(DateTime.now())),
                 ]),
                 SizedBox(
                   height: 20,
                 ),
-                SizedBox(
-                  height: 300,
-                  child: TextField(
-                    controller: textTitleEditingController,
-                    style: TextStyle(fontSize: 14),
-                    textAlign: TextAlign.start,
-                    decoration: InputDecoration(
-                        hintStyle: TextStyle(fontSize: 14),
-                        hintText: 'What\'s going on?',
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide.none,
-                        )),
-                    maxLines: 300 ~/ 20,
-                    keyboardType: TextInputType.multiline,
-                  ),
+                
+                     SizedBox(
+                      height: 300,
+                      child: TextFormField(
+                        
+                        controller: textTitleEditingController,
+                        style: TextStyle(fontSize: 14),
+                        textAlign: TextAlign.start,
+                        decoration: InputDecoration(
+                            hintStyle: TextStyle(fontSize: 14),
+                            hintText: 'What\'s going on?',
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide.none,
+                            )),
+                        maxLines: 300 ~/ 20,
+                        keyboardType: TextInputType.multiline,
+                      ),
+                   
                 ),
                 SizedBox(
                   height: 20,
                 ),
                 BlocConsumer<SecretNoteBloc, SecretNoteState>(
                   listener: (context, state) {
-                    if(state is InsertSecretNoteState){
+                    if (state is InsertSecretNoteState) {
                       Fluttertoast.showToast(msg: 'Nota segreta inserita!');
                       context.popRoute();
-                      
                     }
                   },
                   builder: (context, state) {
                     return FunctionButton(
-                      loading:state is! LoadingSecretNoteState,
+                      loading: state is! LoadingSecretNoteState,
                       colorText: Colors.white,
-                      colorsBackground: ThemeHelper.buttonSecondaryColor,
+                      colorsBackground: widget.secretModel != null ? ThemeHelper.disabledColor : ThemeHelper.buttonSecondaryColor ,
                       text: 'Invia!',
                       onPressed: () {
-                        context.read<SecretNoteBloc>().insertSecretNote(title: textTitleEditingController.text, content: textTitleEditingController.text, datetime: DateFormat('EEEE, d MMM yyyy').format(DateTime.now()));
+                        widget.secretModel != null
+                            ? null
+                            : context.read<SecretNoteBloc>().insertSecretNote(
+                                title: textTitleEditingController.text,
+                                content: textTitleEditingController.text,
+                                datetime: DateFormat('EEEE, d MMM yyyy')
+                                    .format(DateTime.now()));
                       },
                     );
                   },
@@ -138,6 +164,4 @@ class _SecretNoteDetailPageState extends State<SecretNoteDetailPage> {
       ),
     );
   }
-
-  
 }

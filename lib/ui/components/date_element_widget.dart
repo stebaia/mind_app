@@ -6,7 +6,8 @@ import 'package:mind_app/utils/app_utils.dart';
 import 'package:mind_app/utils/theme_helper.dart';
 
 class DateSelectedElementWidget extends StatelessWidget {
-  DateSelectedElementWidget({super.key, required this.day});
+  DateSelectedElementWidget({super.key, required this.day, required this.color});
+  final Color color;
   final Day day;
   @override
   Widget build(BuildContext context) {
@@ -44,13 +45,14 @@ class DateSelectedElementWidget extends StatelessWidget {
             style: TextStyle(
                 color: Colors.white, fontWeight: FontWeight.bold, fontSize: 24),
           ),
-          EmojyTextWidget(mood: day.mood, size: 40,)
+          EmojyTextWidget(mood: day.mood, size: 40, color: color,)
         ]));
   }
 }
 
 class DateUnSelectedElementWidget extends StatelessWidget {
-  DateUnSelectedElementWidget({super.key, required this.day});
+  DateUnSelectedElementWidget({super.key, required this.day, required this.color});
+  final Color color;
   final Day day;
   @override
   Widget build(BuildContext context) {
@@ -81,7 +83,7 @@ class DateUnSelectedElementWidget extends StatelessWidget {
             style: TextStyle(
                 color: Colors.black, fontWeight: FontWeight.bold, fontSize: 24),
           ),
-          EmojyTextWidget(mood: day.mood, size: 40)
+          EmojyTextWidget(mood: day.mood, size: 40, color: color, )
         ]));
   }
 }

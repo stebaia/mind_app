@@ -16,7 +16,8 @@ import 'package:auto_route/empty_router_widgets.dart' as _i1;
 import 'package:flutter/cupertino.dart' as _i15;
 import 'package:flutter/material.dart' as _i14;
 
-import '../model/day.dart' as _i16;
+import '../model/day.dart' as _i17;
+import '../model/secret_note_model.dart' as _i16;
 import '../ui/pages/core_page.dart' as _i6;
 import '../ui/pages/day_list_page.dart' as _i10;
 import '../ui/pages/detail_mood_page.dart' as _i11;
@@ -72,15 +73,21 @@ class AppRouter extends _i13.RootStackRouter {
       );
     },
     SecretNoteDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<SecretNoteDetailRouteArgs>(
+          orElse: () => const SecretNoteDetailRouteArgs());
       return _i13.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i7.SecretNoteDetailPage(),
+        child: _i13.WrappedRoute(
+            child: _i7.SecretNoteDetailPage(
+          key: args.key,
+          secretModel: args.secretModel,
+        )),
       );
     },
     SecretNoteListRoute.name: (routeData) {
       return _i13.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i8.SecretNoteListPage(),
+        child: _i13.WrappedRoute(child: const _i8.SecretNoteListPage()),
       );
     },
     SetDayRoute.name: (routeData) {
@@ -268,14 +275,37 @@ class CoreRoute extends _i13.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i7.SecretNoteDetailPage]
-class SecretNoteDetailRoute extends _i13.PageRouteInfo<void> {
-  const SecretNoteDetailRoute()
-      : super(
+class SecretNoteDetailRoute
+    extends _i13.PageRouteInfo<SecretNoteDetailRouteArgs> {
+  SecretNoteDetailRoute({
+    _i15.Key? key,
+    _i16.SecretModel? secretModel,
+  }) : super(
           SecretNoteDetailRoute.name,
           path: 'secret_note_detail',
+          args: SecretNoteDetailRouteArgs(
+            key: key,
+            secretModel: secretModel,
+          ),
         );
 
   static const String name = 'SecretNoteDetailRoute';
+}
+
+class SecretNoteDetailRouteArgs {
+  const SecretNoteDetailRouteArgs({
+    this.key,
+    this.secretModel,
+  });
+
+  final _i15.Key? key;
+
+  final _i16.SecretModel? secretModel;
+
+  @override
+  String toString() {
+    return 'SecretNoteDetailRouteArgs{key: $key, secretModel: $secretModel}';
+  }
 }
 
 /// generated route for
@@ -296,7 +326,7 @@ class SetDayRoute extends _i13.PageRouteInfo<SetDayRouteArgs> {
   SetDayRoute({
     _i15.Key? key,
     required bool isFirstTime,
-    _i16.Day? passedDay,
+    _i17.Day? passedDay,
   }) : super(
           SetDayRoute.name,
           path: 'set_day_page',
@@ -321,7 +351,7 @@ class SetDayRouteArgs {
 
   final bool isFirstTime;
 
-  final _i16.Day? passedDay;
+  final _i17.Day? passedDay;
 
   @override
   String toString() {
@@ -358,7 +388,7 @@ class DayListRouteArgs {
 class DetailMoodRoute extends _i13.PageRouteInfo<DetailMoodRouteArgs> {
   DetailMoodRoute({
     _i15.Key? key,
-    required _i16.Day day,
+    required _i17.Day day,
   }) : super(
           DetailMoodRoute.name,
           path: 'detail_mood_page',
@@ -379,7 +409,7 @@ class DetailMoodRouteArgs {
 
   final _i15.Key? key;
 
-  final _i16.Day day;
+  final _i17.Day day;
 
   @override
   String toString() {
@@ -392,7 +422,7 @@ class DetailMoodRouteArgs {
 class SetDayEmojiRoute extends _i13.PageRouteInfo<SetDayEmojiRouteArgs> {
   SetDayEmojiRoute({
     _i15.Key? key,
-    _i16.Day? passedDay,
+    _i17.Day? passedDay,
     required bool isFirstTime,
   }) : super(
           SetDayEmojiRoute.name,
@@ -416,7 +446,7 @@ class SetDayEmojiRouteArgs {
 
   final _i15.Key? key;
 
-  final _i16.Day? passedDay;
+  final _i17.Day? passedDay;
 
   final bool isFirstTime;
 

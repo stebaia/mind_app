@@ -10,6 +10,7 @@ import 'package:mind_app/bloc/cubit/rating_cubit/rating_cubit_cubit.dart';
 import 'package:mind_app/bloc/cubit/visibility_cubit/visibility_cubit.dart';
 import 'package:mind_app/bloc/day_bloc/day_bloc.dart';
 import 'package:mind_app/model/day.dart';
+import 'package:mind_app/providers/dark_theme_provider.dart';
 import 'package:mind_app/routes/app_router.gr.dart';
 import 'package:mind_app/ui/components/buttons.dart';
 import 'package:mind_app/ui/components/date_element_widget.dart';
@@ -17,6 +18,7 @@ import 'package:mind_app/ui/components/emoji_text.dart';
 import 'package:mind_app/ui/components/widget_detail_mood.dart';
 import 'package:mind_app/utils/app_utils.dart';
 import 'package:mind_app/utils/theme_helper.dart';
+import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class DayListPage extends StatefulWidget with AutoRouteWrapper {
@@ -106,6 +108,7 @@ class _DayListPageState extends State<DayListPage> {
 
   @override
   Widget build(BuildContext context) {
+    final darkMode = Provider.of<DarkThemeProvider>(context);
     final myNewDay = context.read<DaySelectedCubit>();
     final sliderValue = context.read<RatingCubitCubit>();
     return WillPopScope(
@@ -114,7 +117,7 @@ class _DayListPageState extends State<DayListPage> {
         return true;
       },
       child: Scaffold(
-        backgroundColor: ThemeHelper.backgroundColorWhite,
+        backgroundColor: darkMode.darkTheme ? ThemeHelper.backgroundColorDark : ThemeHelper.backgroundColorWhite,
         body: SingleChildScrollView(
             child: Container(
           child: Column(
@@ -132,11 +135,13 @@ class _DayListPageState extends State<DayListPage> {
                           IconButton(
                               icon: Icon(
                                 CupertinoIcons.arrow_left,
+                                color: darkMode.darkTheme ? CupertinoColors.white : Colors.black,
                               ),
                               onPressed: () => context.popRoute()),
-                          const Text(
+                          Text(
                             'Your emotional state',
                             style: TextStyle(
+                              color: darkMode.darkTheme ? CupertinoColors.white : Colors.black,
                                 fontSize: 20, fontFamily: 'PoppinsExtrabold'),
                           ),
                         ],
@@ -153,7 +158,7 @@ class _DayListPageState extends State<DayListPage> {
                           'This is the history of how you have been lately, check if everything is OK!',
                           style: TextStyle(
                             fontWeight: FontWeight.w700,
-                            color: ThemeHelper.buttonSecondaryColor,
+                            color: darkMode.darkTheme ? CupertinoColors.white : Colors.black,
                           ),
                         ),
                         SizedBox(
@@ -211,7 +216,7 @@ class _DayListPageState extends State<DayListPage> {
                       height: MediaQuery.of(context).size.height,
                       padding: EdgeInsets.all(20),
                       decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: darkMode.darkTheme ? Colors.black : Colors.white,
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(40),
                               topRight: Radius.circular(40))),
@@ -387,7 +392,7 @@ class _DayListPageState extends State<DayListPage> {
                                               MediaQuery.of(context).size.width,
                                           
                                           decoration: BoxDecoration(
-                                              color: ThemeHelper.colorSemiWhite,
+                                              color:  darkMode.darkTheme? ThemeHelper.buttonSecondaryColor : ThemeHelper.colorSemiWhite,
                                               borderRadius:
                                                   BorderRadius.circular(8)),
                                           child: Row(
@@ -427,7 +432,8 @@ class _DayListPageState extends State<DayListPage> {
                                                                       state.day!
                                                                           .day)
                                                                   .capitalize(),
-                                                              style: const TextStyle(
+                                                              style: TextStyle(
+                                                                color: darkMode.darkTheme? Colors.white : Colors.black,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .bold),
@@ -436,6 +442,7 @@ class _DayListPageState extends State<DayListPage> {
                                                               width: 10,
                                                             ),
                                                             EmojyTextWidget(
+                                                              color: darkMode.darkTheme? Colors.white : Colors.black,
                                                               mood: state
                                                                   .day!.mood,
                                                               size: 20,
@@ -445,7 +452,7 @@ class _DayListPageState extends State<DayListPage> {
                                                         state.day!.mood != null
                                                             ? 
                                                                  Text(state
-                                                                    .day!.note!)
+                                                                    .day!.note!, style: TextStyle(color: darkMode.darkTheme ? Colors.white : Colors.black),)
                                                             : Container()
                                                       ]),
                                                 )

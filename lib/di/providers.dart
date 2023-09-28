@@ -20,5 +20,6 @@ final List<SingleChildWidget> _providers = [
     create: (context) =>
         DaysService(context.read<Dio>(), baseUrl: Constants.baseUrl),
   ),
-  Provider<MyDatabase>(create: (_) => MyDatabase())
+  Provider<MyDatabase>(create: (_) => MyDatabase()),
+  ChangeNotifierProvider<DarkThemeProvider>(create: (_) => DarkThemeProvider())
 ];
