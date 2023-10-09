@@ -29,7 +29,9 @@ class CorePage extends StatelessWidget with AutoRouteWrapper {
   Widget build(BuildContext context) {
     final darkMode = Provider.of<DarkThemeProvider>(context);
     return Scaffold(
-      backgroundColor: darkMode.darkTheme ? ThemeHelper.backgroundColorDark : ThemeHelper.backgroundColorWhite,
+      backgroundColor: darkMode.darkTheme
+          ? ThemeHelper.backgroundColorDark
+          : ThemeHelper.backgroundColorWhite,
       /*appBar: AppBar(
         title: Text(AppLocalizations.of(context).app_name),
         leading: IconButton(
@@ -90,8 +92,12 @@ class CorePage extends StatelessWidget with AutoRouteWrapper {
                                           builder: (context, state) {
                                             if (state is ResultGetDayState) {
                                               return TextFeelingWidget(
-                                                  mood: state.daysList.days!
-                                                      .last.mood);
+                                                mood: state
+                                                    .daysList.days!.last.mood,
+                                                color: darkMode.darkTheme
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                              );
                                             } else {
                                               return GestureDetector(
                                                 onTap: () =>
@@ -130,7 +136,7 @@ class CorePage extends StatelessWidget with AutoRouteWrapper {
                                           width: 36,
                                           height: 36,
                                           decoration: BoxDecoration(
-                                              color:  ThemeHelper.drawingColor,
+                                              color: ThemeHelper.drawingColor,
                                               borderRadius:
                                                   BorderRadius.circular(40)),
                                           child: const Center(
@@ -151,7 +157,9 @@ class CorePage extends StatelessWidget with AutoRouteWrapper {
                                     Text(
                                       'Let offsome steam...',
                                       style: TextStyle(
-                                          color: darkMode.darkTheme ? CupertinoColors.white : Colors.black,
+                                          color: darkMode.darkTheme
+                                              ? CupertinoColors.white
+                                              : Colors.black,
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold),
                                     ),
@@ -173,10 +181,13 @@ class CorePage extends StatelessWidget with AutoRouteWrapper {
                                           Text(
                                             'See all...',
                                             style: TextStyle(
-                                                fontSize: 10,
-                                                fontWeight: FontWeight.w900,
-                                                color: darkMode.darkTheme ? ThemeHelper.secondaryColor : ThemeHelper
-                                                  .buttonSecondaryColor,),
+                                              fontSize: 10,
+                                              fontWeight: FontWeight.w900,
+                                              color: darkMode.darkTheme
+                                                  ? ThemeHelper.secondaryColor
+                                                  : ThemeHelper
+                                                      .buttonSecondaryColor,
+                                            ),
                                           ),
                                           Icon(
                                             CupertinoIcons.chevron_right,
@@ -197,14 +208,15 @@ class CorePage extends StatelessWidget with AutoRouteWrapper {
                                     width: MediaQuery.of(context).size.width,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
-                                      color: darkMode.darkTheme ? CupertinoColors.black : ThemeHelper.backgroundColorWhite,
+                                      color: darkMode.darkTheme
+                                          ? CupertinoColors.black
+                                          : ThemeHelper.backgroundColorWhite,
                                       boxShadow: [
                                         BoxShadow(
-                                          color:
-                                              Color.fromARGB(255, 41, 39, 41)
-                                                  .withOpacity(0.2),
+                                          color: Color.fromARGB(255, 41, 39, 41)
+                                              .withOpacity(0.2),
                                           spreadRadius: 6,
-                                                  blurRadius: 10,
+                                          blurRadius: 10,
                                           offset: Offset(0,
                                               3), // changes position of shadow
                                         ),
@@ -238,14 +250,21 @@ class CorePage extends StatelessWidget with AutoRouteWrapper {
                                               Text(
                                                 'Add a secret note!',
                                                 style: TextStyle(
-                                                    color: darkMode.darkTheme ? CupertinoColors.white : Colors.black,
+                                                    color: darkMode.darkTheme
+                                                        ? CupertinoColors.white
+                                                        : Colors.black,
                                                     fontWeight: FontWeight.w900,
                                                     fontSize: 16),
                                               ),
                                             ]),
                                             Text(
                                                 'Feel like venting?\nWrite an ephemeral note and let the anger go..',
-                                                style: TextStyle(fontSize: 13, color: darkMode.darkTheme ? CupertinoColors.white : Colors.black,))
+                                                style: TextStyle(
+                                                  fontSize: 13,
+                                                  color: darkMode.darkTheme
+                                                      ? CupertinoColors.white
+                                                      : Colors.black,
+                                                ))
                                           ],
                                         ),
                                       ],
@@ -265,7 +284,9 @@ class CorePage extends StatelessWidget with AutoRouteWrapper {
                                     Text(
                                       'How was your week?',
                                       style: TextStyle(
-                                          color: darkMode.darkTheme ? CupertinoColors.white : Colors.black,
+                                          color: darkMode.darkTheme
+                                              ? CupertinoColors.white
+                                              : Colors.black,
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold),
                                     ),
@@ -291,10 +312,13 @@ class CorePage extends StatelessWidget with AutoRouteWrapper {
                                           Text(
                                             'Show calendar...',
                                             style: TextStyle(
-                                                fontSize: 10,
-                                                fontWeight: FontWeight.w900,
-                                                color: darkMode.darkTheme ? ThemeHelper.secondaryColor : ThemeHelper
-                                                  .buttonSecondaryColor,),
+                                              fontSize: 10,
+                                              fontWeight: FontWeight.w900,
+                                              color: darkMode.darkTheme
+                                                  ? ThemeHelper.secondaryColor
+                                                  : ThemeHelper
+                                                      .buttonSecondaryColor,
+                                            ),
                                           ),
                                           const Icon(
                                             CupertinoIcons.chevron_right,
@@ -316,10 +340,14 @@ class CorePage extends StatelessWidget with AutoRouteWrapper {
                                           decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(10),
-                                              color:  darkMode.darkTheme ? CupertinoColors.black : ThemeHelper.backgroundColorWhite,
+                                              color: darkMode.darkTheme
+                                                  ? CupertinoColors.black
+                                                  : ThemeHelper
+                                                      .backgroundColorWhite,
                                               boxShadow: [
                                                 BoxShadow(
-                                                  color: Color.fromARGB(255, 47, 43, 46)
+                                                  color: Color.fromARGB(
+                                                          255, 47, 43, 46)
                                                       .withOpacity(0.2),
                                                   spreadRadius: 6,
                                                   blurRadius: 10,
@@ -345,7 +373,9 @@ class CorePage extends StatelessWidget with AutoRouteWrapper {
                                     Text(
                                       'News for your well-being',
                                       style: TextStyle(
-                                          color: darkMode.darkTheme ? CupertinoColors.white : Colors.black,
+                                          color: darkMode.darkTheme
+                                              ? CupertinoColors.white
+                                              : Colors.black,
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold),
                                     ),
@@ -354,11 +384,13 @@ class CorePage extends StatelessWidget with AutoRouteWrapper {
                                         Text(
                                           'See all..',
                                           style: TextStyle(
-                                            color: darkMode.darkTheme ? ThemeHelper.secondaryColor : ThemeHelper
-                                                  .buttonSecondaryColor,
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.w900,
-                                              ),
+                                            color: darkMode.darkTheme
+                                                ? ThemeHelper.secondaryColor
+                                                : ThemeHelper
+                                                    .buttonSecondaryColor,
+                                            fontSize: 10,
+                                            fontWeight: FontWeight.w900,
+                                          ),
                                         ),
                                         Icon(
                                           CupertinoIcons.chevron_right,

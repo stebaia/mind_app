@@ -16,23 +16,37 @@ import 'package:mind_app/ui/components/tags_widget.dart';
 import 'package:mind_app/utils/app_utils.dart';
 import 'package:mind_app/utils/theme_helper.dart';
 
-class SetDayPage extends StatelessWidget with AutoRouteWrapper {
+class SetDayPage extends StatefulWidget with AutoRouteWrapper {
   SetDayPage({super.key, required this.isFirstTime, this.passedDay});
 
   final bool isFirstTime;
   final Day? passedDay;
 
   @override
+  State<SetDayPage> createState() => _SetDayPageState();
+
+  @override
+  Widget wrappedRoute(BuildContext context) => MultiBlocProvider(providers: [
+        BlocProvider<DayBloc>(
+            create: ((context) => DayBloc(daysRepository: context.read())))
+      ], child: this);
+}
+
+class _SetDayPageState extends State<SetDayPage> {
+  @override
   Widget build(BuildContext context) {
-    if(passedDay != null){
-      context.read<RatingCubitCubit>().changeValue(passedDay!.mood.toDouble());
+    if (widget.passedDay != null) {
+      context
+          .read<RatingCubitCubit>()
+          .changeValue(widget.passedDay!.mood.toDouble());
     }
-    
+
     final sliderValue = context.read<RatingCubitCubit>();
     final user = context.read<AuthCubit>();
     final tagsCubit = context.read<TagsCubit>();
-    
-    TextEditingController controller = TextEditingController(text: passedDay != null ? passedDay!.note : '');
+
+    TextEditingController controller = TextEditingController(
+        text: widget.passedDay != null ? widget.passedDay!.note : '');
     return BlocBuilder<AuthCubit, AuthState>(
       builder: (context, state) {
         return Scaffold(
@@ -58,9 +72,9 @@ class SetDayPage extends StatelessWidget with AutoRouteWrapper {
                 BlocConsumer<DayBloc, DayState>(
                   listener: (context, state) {
                     if (state is ResultSetDayState) {
-                      isFirstTime ? 
-                              context.pushRoute(CoreRoute()) : context.popRoute();
-                      
+                      widget.isFirstTime
+                          ? context.pushRoute(CoreRoute())
+                          : context.popRoute();
                     } else if (state is ErrorSetDayState) {
                       Fluttertoast.showToast(msg: "error, please retry later!");
                     }
@@ -73,7 +87,7 @@ class SetDayPage extends StatelessWidget with AutoRouteWrapper {
                           SizedBox(
                             height: 60,
                           ),
-                          isFirstTime
+                          widget.isFirstTime
                               ? Container()
                               : Container(
                                   width: MediaQuery.of(context).size.width,
@@ -107,7 +121,7 @@ class SetDayPage extends StatelessWidget with AutoRouteWrapper {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    isFirstTime
+                                    widget.isFirstTime
                                         ? Container(
                                             alignment: Alignment.topLeft,
                                             child: Text(
@@ -136,11 +150,10 @@ class SetDayPage extends StatelessWidget with AutoRouteWrapper {
                                       child: BlocBuilder<RatingCubitCubit,
                                           RatingCubitInitial>(
                                         builder: (context, state) {
-                                          
-                                            return faceFeedback(state.value.toInt());
-                                          
-                                        }
-                                            ,
+                                          return faceFeedback(
+                                              state.value.toInt(),
+                                              Colors.black);
+                                        },
                                       ),
                                     ),
                                     SizedBox(
@@ -178,11 +191,9 @@ class SetDayPage extends StatelessWidget with AutoRouteWrapper {
                                         controller: controller,
                                         style: TextStyle(fontSize: 14),
                                         textAlign: TextAlign.start,
-                                        
                                         decoration: InputDecoration(
                                             hintStyle: TextStyle(fontSize: 14),
                                             hintText: 'What\'s going on?',
-                                            
                                             filled: true,
                                             fillColor: ThemeHelper
                                                 .backgroundColorWhite,
@@ -216,7 +227,12 @@ class SetDayPage extends StatelessWidget with AutoRouteWrapper {
                                       userId: (user.state as AuthenticatedState)
                                           .user
                                           .id,
-                                      day: !isFirstTime?  DateConverter.getDateNowWithFormatSimpleWithParameter(passedDay!.day) : DateConverter.getDateNowWithFormatSimples(),
+                                      day: !widget.isFirstTime
+                                          ? DateConverter
+                                              .getDateNowWithFormatSimpleWithParameter(
+                                                  widget.passedDay!.day)
+                                          : DateConverter
+                                              .getDateNowWithFormatSimples(),
                                       mood: (sliderValue.state.value).round(),
                                       note: controller.text,
                                       tags: tagsCubit.state
@@ -227,7 +243,7 @@ class SetDayPage extends StatelessWidget with AutoRouteWrapper {
                                   context.read<TagsCubit>().deleteAll();
                                 },
                               )),
-                          isFirstTime
+                          widget.isFirstTime
                               ? GestureDetector(
                                   child: Text(
                                     'Skip',
@@ -248,10 +264,4 @@ class SetDayPage extends StatelessWidget with AutoRouteWrapper {
       },
     );
   }
-
-  @override
-  Widget wrappedRoute(BuildContext context) => MultiBlocProvider(providers: [
-        BlocProvider<DayBloc>(
-            create: ((context) => DayBloc(daysRepository: context.read())))
-      ], child: this);
 }

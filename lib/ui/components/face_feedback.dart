@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget faceFeedback(int feedbackNumber) {
+Widget faceFeedback(int feedbackNumber, Color color) {
   switch (feedbackNumber) {
     case 1:
       {
@@ -16,7 +16,7 @@ Widget faceFeedback(int feedbackNumber) {
             SizedBox(
               height: 20,
             ),
-            textFaceState('Oggi mi sento molto triste :('),
+            textFaceState('Oggi mi sento molto triste :(', color),
           ],
         );
       }
@@ -31,7 +31,7 @@ Widget faceFeedback(int feedbackNumber) {
           SizedBox(
             height: 20,
           ),
-          textFaceState('Uffa! vorrei spaccare tutto!'),
+          textFaceState('Uffa! vorrei spaccare tutto!', color),
         ]);
       }
     case 3:
@@ -45,7 +45,7 @@ Widget faceFeedback(int feedbackNumber) {
           SizedBox(
             height: 20,
           ),
-          textFaceState('Giornata abbastanza normale'),
+          textFaceState('Giornata abbastanza normale', color),
         ]);
       }
     case 4:
@@ -59,7 +59,7 @@ Widget faceFeedback(int feedbackNumber) {
           SizedBox(
             height: 20,
           ),
-          textFaceState('Oggi è stata una bella giornata!'),
+          textFaceState('Oggi è stata una bella giornata!', color),
         ]);
       }
     case 5:
@@ -73,7 +73,7 @@ Widget faceFeedback(int feedbackNumber) {
           SizedBox(
             height: 20,
           ),
-          textFaceState('Oggi sono veramente felice! :)'),
+          textFaceState('Oggi sono veramente felice! :)', color),
         ]);
       }
     default:
@@ -87,14 +87,15 @@ Widget faceFeedback(int feedbackNumber) {
           SizedBox(
             height: 20,
           ),
-          textFaceState('Oggi mi sento molto triste'),
+          textFaceState('Oggi mi sento molto triste', color),
         ]);
       }
   }
 }
 
-Widget textFaceState(String description) {
+Widget textFaceState(String description, Color color) {
   return Text(description,
       textAlign: TextAlign.center,
-      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold));
+      style:
+          TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: color));
 }

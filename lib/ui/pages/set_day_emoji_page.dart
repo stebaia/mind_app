@@ -53,7 +53,7 @@ class _SetDayEmojiPageState extends State<SetDayEmojiPage> {
 
   @override
   Widget build(BuildContext context) {
-     final darkMode = Provider.of<DarkThemeProvider>(context);
+    final darkMode = Provider.of<DarkThemeProvider>(context);
     if (widget.passedDay != null) {
       context
           .read<RatingCubitCubit>()
@@ -81,7 +81,9 @@ class _SetDayEmojiPageState extends State<SetDayEmojiPage> {
         return BlocBuilder<RatingCubitCubit, RatingCubitInitial>(
           builder: (context, stateRatingCubit) {
             return Scaffold(
-              backgroundColor: Colors.white,
+              backgroundColor: darkMode.darkTheme
+                  ? ThemeHelper.backgroundColorDark
+                  : CupertinoColors.white,
               body: SingleChildScrollView(
                 child: Stack(
                   children: [
@@ -135,23 +137,31 @@ class _SetDayEmojiPageState extends State<SetDayEmojiPage> {
                                   Row(
                                     children: [
                                       TextFeelingWidget(
-                                          mood:
-                                              sliderValue.state.value.toInt()),
+                                        mood: sliderValue.state.value.toInt(),
+                                        color: darkMode.darkTheme
+                                            ? Colors.white
+                                            : Colors.black,
+                                      ),
                                       SizedBox(
                                         width: 6,
                                       ),
                                       EmojyTextWidget(
-                                          color: darkMode.darkTheme ? Colors.white : Colors.black,
+                                          color: darkMode.darkTheme
+                                              ? Colors.white
+                                              : Colors.black,
                                           mood: sliderValue.state.value.toInt(),
                                           size: 20)
                                     ],
                                   ),
-                                  const Text(
+                                  Text(
                                     'Describe what is happened',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontFamily: 'PoppinsExtraBold',
                                       fontSize: 20,
+                                      color: darkMode.darkTheme
+                                          ? Colors.white
+                                          : Colors.black,
                                     ),
                                   ),
                                   SizedBox(
@@ -163,7 +173,9 @@ class _SetDayEmojiPageState extends State<SetDayEmojiPage> {
                                       textCapitalization:
                                           TextCapitalization.sentences,
                                       controller: controller,
-                                      style: TextStyle(fontSize: 14),
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                      ),
                                       textAlign: TextAlign.start,
                                       decoration: InputDecoration(
                                           hintStyle: TextStyle(fontSize: 14),
@@ -282,6 +294,11 @@ class _SetDayEmojiPageState extends State<SetDayEmojiPage> {
                                               padding:
                                                   const EdgeInsets.all(10.0),
                                               child: TextField(
+                                                style: TextStyle(
+                                                  color: darkMode.darkTheme
+                                                      ? Colors.white
+                                                      : Colors.black,
+                                                ),
                                                 controller:
                                                     textEditingControllerIFB,
                                                 focusNode: focusNode,
@@ -524,6 +541,9 @@ class _SetDayEmojiPageState extends State<SetDayEmojiPage> {
                                   Text(
                                     'Hey! how was your day today?',
                                     style: TextStyle(
+                                        color: darkMode.darkTheme
+                                            ? Colors.white
+                                            : Colors.black,
                                         fontSize: 20,
                                         fontFamily: 'PoppinsExtrabold'),
                                   ),
@@ -536,7 +556,11 @@ class _SetDayEmojiPageState extends State<SetDayEmojiPage> {
                                         RatingCubitInitial>(
                                       builder: (context, state) {
                                         return faceFeedback(
-                                            state.value.toInt());
+                                          state.value.toInt(),
+                                          darkMode.darkTheme
+                                              ? Colors.white
+                                              : Colors.black,
+                                        );
                                       },
                                     ),
                                   ),
