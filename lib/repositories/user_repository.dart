@@ -9,8 +9,9 @@ import 'package:mind_app/services/dto/user_dto.dart';
 import 'package:mind_app/services/network/user_service/user_service.dart';
 import 'package:mind_app/utils/app_utils.dart';
 import 'package:mind_app/utils/constants.dart';
-import 'package:pine/utils/mapper.dart';
+
 import 'package:crypto/crypto.dart';
+import 'package:pine/pine.dart';
 
 class UserRepository {
   final UserService userService;
@@ -58,10 +59,8 @@ class UserRepository {
     required String password,
   }) async {
     try {
-      final response = await userService.login(LoginRequest(
-          email: sha256.convert(utf8.encode(email)).toString(),
-          password: sha256.convert(utf8.encode(password)).toString(),
-          timestamp: DateConverter.getDateNowWithFormat()));
+      final response = await userService
+          .login(LoginRequest(email: email, password: password));
 
       User user = userDTOMapper.fromDTO(response.data);
       user.token = response.response.headers['jwt']![0];

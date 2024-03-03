@@ -126,7 +126,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   listener: (context, state) {
                     if (state is LoggedInState) {
                       Fluttertoast.showToast(
-                        msg: AppLocalizations.of(context).registration_confirm,
+                        msg: 'Registrazione',
                       );
                       context.popRoute();
                     } else if (state is ErrorLoginInState) {
@@ -231,7 +231,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                     name: _registrationNameController.text,
                                     surname:
                                         _registrationSurnameController.text,
-                                    birth: _registrationBirthController.text.replaceAll("/", "-"),
+                                    birth: _registrationBirthController.text
+                                        .replaceAll("/", "-"),
                                     username:
                                         _registrationUsernameController.text);
                               } else {

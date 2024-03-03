@@ -19,7 +19,7 @@ class AuthInterceptor extends QueuedInterceptor {
     options.headers['x-api-key'] = 'bBIwkPCHhK3KoeYOrVrKn1gvoXATOZQXa2Sg9ZDg';
     final user = await userRepository.currentUser;
     if (user != null) {
-      options.headers[HttpHeaders.authorizationHeader] = user.token;
+      options.headers['authorizationToken'] = user.token;
     }
     super.onRequest(options, handler);
   }

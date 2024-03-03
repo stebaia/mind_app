@@ -40,9 +40,10 @@ class $SecretNoteTable extends SecretNote
   @override
   List<GeneratedColumn> get $columns => [id, title, content, date];
   @override
-  String get aliasedName => _alias ?? 'secret_note';
+  String get aliasedName => _alias ?? actualTableName;
   @override
-  String get actualTableName => 'secret_note';
+  String get actualTableName => $name;
+  static const String $name = 'secret_note';
   @override
   VerificationContext validateIntegrity(Insertable<SecretNoteData> instance,
       {bool isInserting = false}) {
