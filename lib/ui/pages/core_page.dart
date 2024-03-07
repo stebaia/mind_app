@@ -29,9 +29,8 @@ class CorePage extends StatelessWidget with AutoRouteWrapper {
   Widget build(BuildContext context) {
     final darkMode = Provider.of<DarkThemeProvider>(context);
     return Scaffold(
-      backgroundColor: darkMode.darkTheme
-          ? ThemeHelper.backgroundColorDark
-          : ThemeHelper.backgroundColorWhite,
+      backgroundColor:
+          darkMode.darkTheme ? ThemeHelper.backgroundColorDark : Colors.white,
       /*appBar: AppBar(
         title: Text(AppLocalizations.of(context).app_name),
         leading: IconButton(
@@ -50,14 +49,6 @@ class CorePage extends StatelessWidget with AutoRouteWrapper {
                 height: MediaQuery.of(context).size.height * 1.2,
                 child: Stack(
                   children: [
-                    Positioned(
-                      left: -140.0,
-                      top: -200.0,
-                      child: SvgPicture.asset(
-                        'assets/blob.svg',
-                        width: 500,
-                      ),
-                    ),
                     Container(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -85,8 +76,8 @@ class CorePage extends StatelessWidget with AutoRouteWrapper {
                                         Text(
                                           'Hi ${state.user.name}',
                                           style: const TextStyle(
-                                              fontSize: 26,
-                                              fontFamily: 'PoppinsExtrabold'),
+                                              fontSize: 36,
+                                              fontWeight: FontWeight.bold),
                                         ),
                                         BlocBuilder<DayBloc, DayState>(
                                           builder: (context, state) {
@@ -129,153 +120,145 @@ class CorePage extends StatelessWidget with AutoRouteWrapper {
                                         ),
                                       ],
                                     ),
-                                    GestureDetector(
-                                      onTap: () =>
-                                          context.pushRoute(ProfileRoute()),
-                                      child: Container(
-                                          width: 36,
-                                          height: 36,
-                                          decoration: BoxDecoration(
-                                              color: ThemeHelper.drawingColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(40)),
-                                          child: const Center(
-                                              child: Icon(
-                                            CupertinoIcons.person_circle,
-                                            color: Colors.black,
-                                          ))),
-                                    ),
                                   ],
-                                ),
-                                const SizedBox(
-                                  height: 120,
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      'Let offsome steam...',
-                                      style: TextStyle(
-                                          color: darkMode.darkTheme
-                                              ? CupertinoColors.white
-                                              : Colors.black,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    GestureDetector(
-                                      onTap: () async {
-                                        bool _localAuthentication =
-                                            await AuthService
-                                                .authenticateUser();
-                                        if (_localAuthentication) {
-                                          context
-                                              .pushRoute(SecretNoteListRoute());
-                                        } else {
-                                          Fluttertoast.showToast(
-                                              msg: "Auth failed!");
-                                        }
-                                      },
-                                      child: Row(
-                                        children: [
-                                          Text(
-                                            'See all...',
-                                            style: TextStyle(
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.w900,
-                                              color: darkMode.darkTheme
-                                                  ? ThemeHelper.secondaryColor
-                                                  : ThemeHelper
-                                                      .buttonSecondaryColor,
-                                            ),
-                                          ),
-                                          Icon(
-                                            CupertinoIcons.chevron_right,
-                                            size: 18,
-                                            color: ThemeHelper.buttonColor,
-                                          )
-                                        ],
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                                GestureDetector(
-                                  child: Container(
-                                    padding: EdgeInsets.all(10),
-                                    width: MediaQuery.of(context).size.width,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: darkMode.darkTheme
-                                          ? CupertinoColors.black
-                                          : ThemeHelper.backgroundColorWhite,
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Color.fromARGB(255, 41, 39, 41)
-                                              .withOpacity(0.2),
-                                          spreadRadius: 6,
-                                          blurRadius: 10,
-                                          offset: Offset(0,
-                                              3), // changes position of shadow
-                                        ),
-                                      ],
-                                    ),
-                                    child: Row(
-                                      children: [
-                                        Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Row(children: [
-                                              Container(
-                                                  width: 36,
-                                                  height: 36,
-                                                  decoration: BoxDecoration(
-                                                      color: ThemeHelper
-                                                          .secondaryColor,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              40)),
-                                                  child: const Center(
-                                                      child: Icon(
-                                                    CupertinoIcons.lock_circle,
-                                                    color:
-                                                        ThemeHelper.buttonColor,
-                                                  ))),
-                                              SizedBox(width: 10),
-                                              Text(
-                                                'Add a secret note!',
-                                                style: TextStyle(
-                                                    color: darkMode.darkTheme
-                                                        ? CupertinoColors.white
-                                                        : Colors.black,
-                                                    fontWeight: FontWeight.w900,
-                                                    fontSize: 16),
-                                              ),
-                                            ]),
-                                            Text(
-                                                'Feel like venting?\nWrite an ephemeral note and let the anger go..',
-                                                style: TextStyle(
-                                                  fontSize: 13,
-                                                  color: darkMode.darkTheme
-                                                      ? CupertinoColors.white
-                                                      : Colors.black,
-                                                ))
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  onTap: () {
-                                    context.pushRoute(SecretNoteDetailRoute());
-                                  },
                                 ),
                                 const SizedBox(
                                   height: 30,
+                                ),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                        child: GestureDetector(
+                                      onTap: () {
+                                        context
+                                            .pushRoute(SecretNoteDetailRoute());
+                                      },
+                                      child: Container(
+                                        padding: const EdgeInsets.all(10),
+                                        margin: const EdgeInsets.all(10),
+                                        height: 150,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          color: darkMode.darkTheme
+                                              ? CupertinoColors.black
+                                              : Colors.white,
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Color.fromARGB(
+                                                      255, 129, 121, 129)
+                                                  .withOpacity(0.2),
+                                              spreadRadius: 2,
+                                              blurRadius: 10,
+                                              offset: Offset(0,
+                                                  3), // changes position of shadow
+                                            ),
+                                          ],
+                                        ),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Container(
+                                                width: 36,
+                                                height: 36,
+                                                decoration: BoxDecoration(
+                                                    color: ThemeHelper
+                                                        .secondaryColor,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            40)),
+                                                child: const Center(
+                                                    child: Icon(
+                                                  CupertinoIcons.lock_circle,
+                                                  color:
+                                                      ThemeHelper.buttonColor,
+                                                ))),
+                                            const SizedBox(height: 10),
+                                            Text(
+                                              'Secret note',
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                  color: darkMode.darkTheme
+                                                      ? CupertinoColors.white
+                                                      : Colors.black,
+                                                  fontWeight: FontWeight.w900,
+                                                  fontSize: 14),
+                                            ),
+                                            const Text(
+                                              'let the anger go..',
+                                              style: TextStyle(fontSize: 12),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    )),
+                                    Expanded(
+                                        child: Container(
+                                      padding: const EdgeInsets.all(10),
+                                      margin: const EdgeInsets.all(10),
+                                      height: 150,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        color: darkMode.darkTheme
+                                            ? CupertinoColors.black
+                                            : Colors.white,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Color.fromARGB(
+                                                    255, 129, 121, 129)
+                                                .withOpacity(0.2),
+                                            spreadRadius: 2,
+                                            blurRadius: 10,
+                                            offset: Offset(0,
+                                                3), // changes position of shadow
+                                          ),
+                                        ],
+                                      ),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Container(
+                                              width: 36,
+                                              height: 36,
+                                              decoration: BoxDecoration(
+                                                  color: Colors.amber,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          40)),
+                                              child: const Center(
+                                                  child: Icon(
+                                                CupertinoIcons.lock_circle,
+                                                color: ThemeHelper.buttonColor,
+                                              ))),
+                                          const SizedBox(height: 10),
+                                          Text(
+                                            'Community',
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                color: darkMode.darkTheme
+                                                    ? CupertinoColors.white
+                                                    : Colors.black,
+                                                fontWeight: FontWeight.w900,
+                                                fontSize: 14),
+                                          ),
+                                          const Text(
+                                            'community center',
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(fontSize: 12),
+                                          )
+                                        ],
+                                      ),
+                                    )),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 40,
                                 ),
                                 Row(
                                   mainAxisAlignment:
@@ -331,30 +314,30 @@ class CorePage extends StatelessWidget with AutoRouteWrapper {
                                   ],
                                 ),
                                 const SizedBox(
-                                  height: 20,
+                                  height: 10,
                                 ),
                                 BlocBuilder<DayBloc, DayState>(
                                   builder: (context, state) {
                                     if (state is ResultGetDayState) {
                                       return Container(
                                           decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              color: darkMode.darkTheme
-                                                  ? CupertinoColors.black
-                                                  : ThemeHelper
-                                                      .backgroundColorWhite,
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Color.fromARGB(
-                                                          255, 47, 43, 46)
-                                                      .withOpacity(0.2),
-                                                  spreadRadius: 6,
-                                                  blurRadius: 10,
-                                                  offset: const Offset(0,
-                                                      3), // changes position of shadow
-                                                )
-                                              ]),
+                                            borderRadius:
+                                                BorderRadius.circular(30),
+                                            color: darkMode.darkTheme
+                                                ? CupertinoColors.black
+                                                : Colors.white,
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Color.fromARGB(
+                                                        255, 129, 121, 129)
+                                                    .withOpacity(0.2),
+                                                spreadRadius: 2,
+                                                blurRadius: 10,
+                                                offset: Offset(0,
+                                                    3), // changes position of shadow
+                                              ),
+                                            ],
+                                          ),
                                           child: LineChartSample2(
                                             days: state.daysList.days,
                                           ));
@@ -364,7 +347,7 @@ class CorePage extends StatelessWidget with AutoRouteWrapper {
                                   },
                                 ),
                                 const SizedBox(
-                                  height: 20,
+                                  height: 50,
                                 ),
                                 Row(
                                   mainAxisAlignment:

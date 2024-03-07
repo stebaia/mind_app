@@ -15,8 +15,6 @@ class LineChartSample2 extends StatefulWidget {
 }
 
 class _LineChartSample2State extends State<LineChartSample2> {
-  
-
   bool showAvg = false;
   final currentDays = DateConverter.getCurrentWeekDates();
   List<Day> lastWeekDays = [];
@@ -38,17 +36,13 @@ class _LineChartSample2State extends State<LineChartSample2> {
   @override
   Widget build(BuildContext context) {
     final darkMode = Provider.of<DarkThemeProvider>(context);
-    List<Color> gradientColors = darkMode.darkTheme ? [
-    ThemeHelper.backgroundColorWhite,
-    ThemeHelper.backgroundColorWhite
-  ]: [
-    ThemeHelper.buttonSecondaryColor,
-    ThemeHelper.buttonSecondaryColor
-  ];
+    List<Color> gradientColors = darkMode.darkTheme
+        ? [ThemeHelper.backgroundColorWhite, ThemeHelper.backgroundColorWhite]
+        : [ThemeHelper.buttonSecondaryColor, ThemeHelper.buttonSecondaryColor];
     return Stack(
       children: <Widget>[
         AspectRatio(
-          aspectRatio: 1.70,
+          aspectRatio: 1.40,
           child: Padding(
               padding: const EdgeInsets.only(
                 right: 18,
@@ -59,7 +53,12 @@ class _LineChartSample2State extends State<LineChartSample2> {
               child: lastWeekDays != null
                   ? lastWeekDays.isNotEmpty
                       ? LineChart(
-                          mainData(lastWeekDays.last.day,  darkMode.darkTheme ? CupertinoColors.white : CupertinoColors.black, gradientColors),
+                          mainData(
+                              lastWeekDays.last.day,
+                              darkMode.darkTheme
+                                  ? CupertinoColors.white
+                                  : CupertinoColors.black,
+                              gradientColors),
                         )
                       : Container(
                           child: Center(child: Text('No data')),
@@ -135,9 +134,8 @@ class _LineChartSample2State extends State<LineChartSample2> {
     return Text(text, style: style, textAlign: TextAlign.left);
   }
 
-  LineChartData mainData(String? date, Color color, List<Color> gradient ) {
+  LineChartData mainData(String? date, Color color, List<Color> gradient) {
     return LineChartData(
-      
       gridData: FlGridData(
         show: true,
         drawVerticalLine: true,
@@ -166,21 +164,21 @@ class _LineChartSample2State extends State<LineChartSample2> {
         ),
         bottomTitles: AxisTitles(
           sideTitles: SideTitles(
-              showTitles: true,
-              reservedSize: 30,
-              interval: 1,
-              getTitlesWidget:(value, meta) {
-                return bottomTitleWidgets2(value, meta, color);
-              },),
+            showTitles: true,
+            reservedSize: 30,
+            interval: 1,
+            getTitlesWidget: (value, meta) {
+              return bottomTitleWidgets2(value, meta, color);
+            },
+          ),
         ),
         leftTitles: AxisTitles(
           sideTitles: SideTitles(
-            
             showTitles: true,
             interval: 1,
             getTitlesWidget: (value, meta) {
-      return leftTitleWidgets(value, meta, color);  // Colore rosso
-    },
+              return leftTitleWidgets(value, meta, color); // Colore rosso
+            },
             reservedSize: 42,
           ),
         ),
@@ -213,9 +211,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
           belowBarData: BarAreaData(
             show: true,
             gradient: LinearGradient(
-              colors: gradient
-                  .map((color) => color.withOpacity(0.3))
-                  .toList(),
+              colors: gradient.map((color) => color.withOpacity(0.3)).toList(),
             ),
           ),
         ),

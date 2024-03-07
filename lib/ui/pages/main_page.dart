@@ -67,7 +67,7 @@ class _MainPageState extends State<MainPage> {
     final ragingCubit = context.read<RatingCubitCubit>();
     return BlocListener<DayBloc, DayState>(
       listener: (context, dayState) {
-        if(dayState is ErrorUnauthGetDayState){
+        if (dayState is ErrorUnauthGetDayState) {
           _replacePage(context, LoginRoute());
         }
       },
@@ -95,8 +95,9 @@ class _MainPageState extends State<MainPage> {
               if (state is EmptyGetDayState || isFromNotification) {
                 _replacePage(context, SetDayEmojiRoute(isFirstTime: true));
               } else if (state is ResultGetDayState) {
-                _replacePage(context, CoreRoute());
-              } else if (state is ErrorUnauthGetDayState || state is ErrorGetDayState) {
+                _replacePage(context, ContainerRoute());
+              } else if (state is ErrorUnauthGetDayState ||
+                  state is ErrorGetDayState) {
                 _replacePage(context, LoginRoute());
               }
             },

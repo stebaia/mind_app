@@ -19,8 +19,8 @@ class _DaysService implements DaysService {
   String? baseUrl;
 
   @override
-  Future<DaysDTO> getDay(request) async {
-    const _extra = <String, dynamic>{};
+  Future<DaysDTO> getDay(GetDayRequest request) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -37,17 +37,21 @@ class _DaysService implements DaysService {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = DaysDTO.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<DayDTO> getDays() async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result =
         await _dio.fetch<Map<String, dynamic>>(_setStreamType<DayDTO>(Options(
       method: 'GET',
@@ -60,17 +64,21 @@ class _DaysService implements DaysService {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = DayDTO.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<DaysDTO> getSingleDays(day) async {
-    const _extra = <String, dynamic>{};
+  Future<DaysDTO> getSingleDays(String day) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result =
         await _dio.fetch<Map<String, dynamic>>(_setStreamType<DaysDTO>(Options(
       method: 'GET',
@@ -83,17 +91,21 @@ class _DaysService implements DaysService {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = DaysDTO.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<DaysDTO> getDaysFrom(dayFrom) async {
-    const _extra = <String, dynamic>{};
+  Future<DaysDTO> getDaysFrom(String dayFrom) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result =
         await _dio.fetch<Map<String, dynamic>>(_setStreamType<DaysDTO>(Options(
       method: 'GET',
@@ -106,17 +118,21 @@ class _DaysService implements DaysService {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = DaysDTO.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<DaysDTO> getDaysTo(dayTo) async {
-    const _extra = <String, dynamic>{};
+  Future<DaysDTO> getDaysTo(String dayTo) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result =
         await _dio.fetch<Map<String, dynamic>>(_setStreamType<DaysDTO>(Options(
       method: 'GET',
@@ -129,20 +145,24 @@ class _DaysService implements DaysService {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = DaysDTO.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<DaysDTO> getDaysBetween(
-    dayTo,
-    dayFrom,
+    String dayTo,
+    String dayFrom,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
     final _result =
         await _dio.fetch<Map<String, dynamic>>(_setStreamType<DaysDTO>(Options(
       method: 'GET',
@@ -155,17 +175,21 @@ class _DaysService implements DaysService {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = DaysDTO.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<DayResultDTO> setDay(
-    day,
-    request,
+    String day,
+    SetDayRequest request,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -182,7 +206,11 @@ class _DaysService implements DaysService {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = DayResultDTO.fromJson(_result.data!);
     return value;
   }
@@ -198,5 +226,22 @@ class _DaysService implements DaysService {
       }
     }
     return requestOptions;
+  }
+
+  String _combineBaseUrls(
+    String dioBaseUrl,
+    String? baseUrl,
+  ) {
+    if (baseUrl == null || baseUrl.trim().isEmpty) {
+      return dioBaseUrl;
+    }
+
+    final url = Uri.parse(baseUrl);
+
+    if (url.isAbsolute) {
+      return url.toString();
+    }
+
+    return Uri.parse(dioBaseUrl).resolveUri(url).toString();
   }
 }
