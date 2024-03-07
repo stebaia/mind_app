@@ -21,6 +21,7 @@ class AuthInterceptor extends QueuedInterceptor {
     if (user != null) {
       options.headers['authorizationToken'] = user.token;
     }
+    options.preserveHeaderCase = true;
     super.onRequest(options, handler);
   }
 }

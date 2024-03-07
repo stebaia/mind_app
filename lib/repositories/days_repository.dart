@@ -35,7 +35,7 @@ class DaysRepository {
           */
       return dtoMapper.fromDTO(response);
     } catch (error, stackTrace) {
-      logger.e('Error sing in with email $userId', error, stackTrace);
+      logger.e('Error sing in with email $userId');
       rethrow;
     }
   }
@@ -59,7 +59,7 @@ class DaysRepository {
               timestamp: DateConverter.getDateNowWithFormat()));
       return dtoResultMapper.fromDTO(response);
     } catch (error, stackTrace) {
-      logger.e('Error sing in with email $userId', error, stackTrace);
+      logger.e('Error sing in with email $userId');
       rethrow;
     }
   }

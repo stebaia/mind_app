@@ -49,7 +49,7 @@ class UserRepository {
 
       return user;
     } catch (error, stackTrace) {
-      logger.e('Error sing in with email $email', error, stackTrace);
+      logger.e('Error sing in with email $email');
       rethrow;
     }
   }
@@ -68,7 +68,7 @@ class UserRepository {
           key: Constants.userKey, value: userMapper.from(user));
       return user;
     } catch (error, stackTrace) {
-      logger.e('Error sing in with email $email', error, stackTrace);
+      logger.e('Error sing in with email $email');
       rethrow;
     }
   }

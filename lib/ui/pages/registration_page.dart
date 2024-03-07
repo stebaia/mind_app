@@ -72,38 +72,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
           height: MediaQuery.of(context).size.height,
           child: Stack(
             children: [
-              Positioned(
-                right: -120.0,
-                top: -50.0,
-                child: SvgPicture.asset(
-                  'assets/blob.svg',
-                  height: 300,
-                ),
-              ),
-              Positioned(
-                left: 0.0,
-                top: 90.0,
-                child: SvgPicture.asset(
-                  'assets/blob.svg',
-                  height: 150,
-                ),
-              ),
-              Positioned(
-                left: -80.0,
-                bottom: -40.0,
-                child: SvgPicture.asset(
-                  'assets/blob.svg',
-                  height: 150,
-                ),
-              ),
-              Positioned(
-                right: -40,
-                bottom: -100.0,
-                child: SvgPicture.asset(
-                  'assets/blob_two.svg',
-                  height: 300,
-                ),
-              ),
+              
               Positioned(
                 top: 60,
                 child: Row(
@@ -148,7 +117,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             textEditingController: _registrationNameController,
                             textCapitalization: TextCapitalization.words,
                             focusNode: _focusNodeName,
-                            color: Color.fromARGB(255, 208, 208, 212),
+                            color: Colors.white,
                           ),
                           const SizedBox(
                             height: 10,
@@ -160,28 +129,18 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             textEditingController:
                                 _registrationSurnameController,
                             focusNode: _focusNodeSurname,
-                            color: Color.fromARGB(255, 208, 208, 212),
+                            color: Colors.white
                           ),
                           const SizedBox(
-                            height: 10,
+                            height: 30,
                           ),
-                          EmailFormField(
-                            'username',
-                            iconCustom: CupertinoIcons.mail,
-                            textEditingController:
-                                _registrationUsernameController,
-                            focusNode: _focusNodeUsername,
-                            color: Color.fromARGB(255, 208, 208, 212),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
+                          
                           EmailFormField(
                             'email',
                             iconCustom: CupertinoIcons.mail,
                             textEditingController: _registrationEmailController,
                             focusNode: _focusNodeEmail,
-                            color: Color.fromARGB(255, 208, 208, 212),
+                            color: Colors.white
                           ),
                           const SizedBox(
                             height: 10,
@@ -191,17 +150,17 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             gestureTapCallback: () => _selectDate(context),
                             iconCustom: CupertinoIcons.calendar,
                             textEditingController: _registrationBirthController,
-                            color: Color.fromARGB(255, 208, 208, 212),
+                            color: Colors.white
                           ),
                           const SizedBox(
-                            height: 20,
+                            height: 30,
                           ),
                           PasswordFormField(
                             'password',
                             textEditingController:
                                 _registrationPasswordController,
                             focusNode: _focusNodePassword,
-                            color: Color.fromARGB(255, 208, 208, 212),
+                            color: Colors.white
                           ),
                           const SizedBox(
                             height: 10,
@@ -211,14 +170,14 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             textEditingController:
                                 _registrationPasswordConfirmController,
                             focusNode: _focusNodeConfirmPassword,
-                            color: Color.fromARGB(255, 208, 208, 212),
+                            color: Colors.white
                           ),
                           const SizedBox(
                             height: 20,
                           ),
                           FunctionButton(
                             colorText: Colors.white,
-                            colorsBackground: ThemeHelper.buttonSecondaryColor,
+                            colorsBackground: ThemeHelper.buttonColor,
                             text: 'Registration',
                             loading: state is TryLogginInState,
                             onPressed: () {

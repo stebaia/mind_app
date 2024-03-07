@@ -79,19 +79,22 @@ class EmailFormField extends StatelessWidget {
         decoration: BoxDecoration(
             color: color, borderRadius: BorderRadius.circular(10)),
         child: TextFormField(
-          style: TextStyle(fontSize: 14),
+        
+          style: TextStyle(fontSize: 14, color: Colors.black),
           cursorColor: Colors.grey,
           textCapitalization: textCapitalization != null ? textCapitalization! : TextCapitalization.none,
           controller: textEditingController,
           focusNode: focusNode,
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
+            contentPadding: EdgeInsets.symmetric(vertical: 20),
             hintText: label,
+            hintStyle: TextStyle(color: Colors.black),
             border: InputBorder.none,
             prefixIcon: Icon(
               iconCustom ?? CupertinoIcons.person,
               size: 18,
-              color: Colors.grey,
+              color: Colors.black,
             ),
           ),
           onFieldSubmitted: onFieldSubmitted,
@@ -130,17 +133,21 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
   @override
   Widget build(BuildContext context) {
     return Container(
+        
         decoration: BoxDecoration(
             color: widget.color, borderRadius: BorderRadius.circular(10)),
         child: TextFormField(
-          style: TextStyle(fontSize: 14),
-          cursorColor: Colors.grey,
+          
+          style: TextStyle(fontSize: 14, color: Colors.black),
+          cursorColor: Colors.white,
           enabled: widget.enalbed,
           controller: widget.textEditingController,
           focusNode: widget.focusNode,
           obscureText: _obscureText,
           keyboardType: TextInputType.text,
           decoration: InputDecoration(
+            contentPadding: EdgeInsets.symmetric(vertical: 20),
+            hintStyle: TextStyle(color: Colors.black),
             hintText: widget.label,
             border: InputBorder.none,
             suffixIcon: GestureDetector(
@@ -150,12 +157,12 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
               child: Icon(
                 _obscureText ? CupertinoIcons.eye : CupertinoIcons.eye_slash,
                 size: 18,
-                color: Colors.grey,
+                color: Colors.black,
               ),
             ),
             prefixIcon: const Icon(
               CupertinoIcons.lock,
-              color: Colors.grey,
+              color: Colors.black,
               size: 18,
             ),
           ),

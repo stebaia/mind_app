@@ -48,43 +48,12 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: ThemeHelper.backgroundColorWhite,
+        backgroundColor: ThemeHelper.colorSemiWhite,
         extendBodyBehindAppBar: true,
         body: Container(
           width: MediaQuery.of(context).size.width,
           child: Stack(children: [
-            Positioned(
-              left: -120.0,
-              top: -50.0,
-              child: SvgPicture.asset(
-                'assets/blob.svg',
-                height: 300,
-              ),
-            ),
-            Positioned(
-              right: 0.0,
-              top: 60.0,
-              child: SvgPicture.asset(
-                'assets/blob.svg',
-                height: 150,
-              ),
-            ),
-            Positioned(
-              right: -80.0,
-              bottom: -40.0,
-              child: SvgPicture.asset(
-                'assets/blob.svg',
-                height: 150,
-              ),
-            ),
-            Positioned(
-              left: 10,
-              bottom: 20.0,
-              child: SvgPicture.asset(
-                'assets/blob_two.svg',
-                height: 230,
-              ),
-            ),
+           
             Container(
               padding: EdgeInsets.all(40),
               alignment: Alignment.bottomCenter,
@@ -94,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
                   Text(
                     'Don\'t have an account?',
                     style: TextStyle(
-                        color: Color.fromARGB(255, 110, 110, 110),
+                        color: Colors.black,
                         fontWeight: FontWeight.w400,
                         fontSize: 12),
                   ),
@@ -150,29 +119,37 @@ class _LoginPageState extends State<LoginPage> {
                               child: Container(
                             width: MediaQuery.of(context).size.width / 1.2,
                             child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Lottie.asset(
-                                  width: 150,
-                                  'assets/hello_animation.json',
-                                  fit: BoxFit.contain,
-                                ),
+                                const Image(width: 110, height: 110, image: AssetImage('assets/happiness.png'),),
+                                const SizedBox(height: 20,),
                                 Container(
                                   alignment: Alignment.topLeft,
-                                  child: Text(
+                                  child: const Text(
                                     'Hello, welcome!',
                                     style: TextStyle(
                                         fontSize: 26,
+                                        color: Colors.black,
                                         fontFamily: 'PoppinsExtrabold'),
                                   ),
                                 ),
+                                Container(
+                                  alignment: Alignment.topLeft,
+                                  child: const Text(
+                                    'Please sing in to continue',
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        
+                                        ),
+                                  ),
+                                ),
                                 const SizedBox(
-                                  height: 10,
+                                  height: 30,
                                 ),
                                 EmailFormField(
                                   'Username',
-                                  color: Color.fromARGB(255, 208, 208, 212),
+                                  color: ThemeHelper.transparentGray,
                                   textEditingController: _singUpEmailController,
                                   focusNode: _focusNodeEmail,
                                   formFieldValidator: (value) {
@@ -189,7 +166,7 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                                 PasswordFormField(
                                   'Password',
-                                  color: Color.fromARGB(255, 208, 208, 212),
+                                  color: ThemeHelper.transparentGray,
                                   textInputAction: TextInputAction.go,
                                   textEditingController:
                                       _singUpPasswordController,
@@ -218,13 +195,13 @@ class _LoginPageState extends State<LoginPage> {
                                   child: Text(
                                     'Forgot Password?',
                                     style: TextStyle(
-                                        color: ThemeHelper.buttonColor,
+                                        color: Colors.black,
                                         fontWeight: FontWeight.w900,
                                         fontSize: 14),
                                   ),
                                 ),
                                 const SizedBox(
-                                  height: 24,
+                                  height: 50,
                                 ),
                                 FunctionButton(
                                   text: 'Login',
