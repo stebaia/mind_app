@@ -25,14 +25,14 @@ class DaysDTO extends DTO with EquatableMixin {
     }
     return data;
   }
-  
+
   @override
   // TODO: implement props
   List<Object?> get props => [count, days];
 }
 
 class DayDTO extends DTO with EquatableMixin {
-  int? mood;
+  String? mood;
   String? day;
   String? note;
   List<String>? tags;
@@ -54,15 +54,13 @@ class DayDTO extends DTO with EquatableMixin {
     data['tags'] = this.tags;
     return data;
   }
-  
+
   @override
   // TODO: implement props
   List<Object?> get props => [mood, day, note, tags];
 }
 
 class DayResultDTO extends DTO with EquatableMixin {
-
-
   DayDTO? dayDTO;
 
   DayResultDTO({this.dayDTO});
@@ -78,10 +76,8 @@ class DayResultDTO extends DTO with EquatableMixin {
     }
     return data;
   }
-  
 
   @override
   // TODO: implement props
   List<Object?> get props => [dayDTO];
-
 }

@@ -294,7 +294,7 @@ class CorePage extends StatelessWidget with AutoRouteWrapper {
                                       onTap: () => context
                                           .pushRoute(DayListRoute())
                                           .then(
-                                            (value) => context.read<DayBloc>().getDay(
+                                            (value) => context.read<DayBloc>().getDayTo(
                                                 userId: ((context.read<
                                                                     AuthCubit>()
                                                                 as AuthCubit)
@@ -429,7 +429,7 @@ class CorePage extends StatelessWidget with AutoRouteWrapper {
   Widget wrappedRoute(BuildContext context) => MultiBlocProvider(providers: [
         BlocProvider<DayBloc>(
             create: ((context) => DayBloc(daysRepository: context.read())
-              ..getDay(
+              ..getDayTo(
                   userId: ((context.read<AuthCubit>() as AuthCubit).state
                           as AuthenticatedState)
                       .user

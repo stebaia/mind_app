@@ -6,9 +6,8 @@ class Day extends Equatable {
   String? note;
   List<String>? tags;
 
-  Day({required this.mood, required this.day, this.note,  this.tags});
+  Day({required this.mood, required this.day, this.note, this.tags});
 
-  
   @override
   // TODO: implement props
   List<Object?> get props => [mood, day, note, tags];

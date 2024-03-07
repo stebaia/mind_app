@@ -79,10 +79,11 @@ class EmailFormField extends StatelessWidget {
         decoration: BoxDecoration(
             color: color, borderRadius: BorderRadius.circular(10)),
         child: TextFormField(
-        
           style: TextStyle(fontSize: 14, color: Colors.black),
           cursorColor: Colors.grey,
-          textCapitalization: textCapitalization != null ? textCapitalization! : TextCapitalization.none,
+          textCapitalization: textCapitalization != null
+              ? textCapitalization!
+              : TextCapitalization.none,
           controller: textEditingController,
           focusNode: focusNode,
           keyboardType: TextInputType.emailAddress,
@@ -133,13 +134,11 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        
         decoration: BoxDecoration(
             color: widget.color, borderRadius: BorderRadius.circular(10)),
         child: TextFormField(
-          
           style: TextStyle(fontSize: 14, color: Colors.black),
-          cursorColor: Colors.white,
+          cursorColor: Colors.black,
           enabled: widget.enalbed,
           controller: widget.textEditingController,
           focusNode: widget.focusNode,

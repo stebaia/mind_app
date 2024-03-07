@@ -20,13 +20,33 @@ class DaysRepository {
       required this.dtoMapper,
       required this.dtoResultMapper});
 
-  Future<DaysList> getDay(
+  Future<DaysList> getSingleDay(
       {required String userId,
       required String dayFrom,
       required String dayTo}) async {
     try {
       String date = DateConverter.getDateNowWithFormatSimples();
       final response = await daysService.getSingleDays(date);
+
+      /*final response = await daysService.getDay(GetDayRequest(
+          userId: userId,
+          dayFrom: DateConverter.convertDate(dayFrom),
+          dayTo: DateConverter.convertDate(dayTo)));
+          */
+      return dtoMapper.fromDTO(response);
+    } catch (error, stackTrace) {
+      logger.e('Error sing in with email $userId');
+      rethrow;
+    }
+  }
+
+  Future<DaysList> getDayTo(
+      {required String userId,
+      required String dayFrom,
+      required String dayTo}) async {
+    try {
+      String date = DateConverter.getDateNowWithFormatSimples();
+      final response = await daysService.getDaysTo(date);
 
       /*final response = await daysService.getDay(GetDayRequest(
           userId: userId,
@@ -49,11 +69,11 @@ class DaysRepository {
       required String timestamp}) async {
     try {
       final response = await daysService.setDay(
-          "",
+          day,
           SetDayRequest(
               userId: userId,
               day: DateConverter.convertDate(day),
-              mood: mood,
+              mood: mood.toString(),
               note: note,
               tags: tags,
               timestamp: DateConverter.getDateNowWithFormat()));

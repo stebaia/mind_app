@@ -31,7 +31,7 @@ class DayListPage extends StatefulWidget with AutoRouteWrapper {
   Widget wrappedRoute(BuildContext context) => MultiBlocProvider(providers: [
         BlocProvider<DayBloc>(
             create: ((context) => DayBloc(daysRepository: context.read())
-              ..getDay(
+              ..getDayTo(
                   userId: ((context.read<AuthCubit>() as AuthCubit).state
                           as AuthenticatedState)
                       .user
@@ -117,7 +117,9 @@ class _DayListPageState extends State<DayListPage> {
         return true;
       },
       child: Scaffold(
-        backgroundColor: darkMode.darkTheme ? ThemeHelper.backgroundColorDark : ThemeHelper.backgroundColorWhite,
+        backgroundColor: darkMode.darkTheme
+            ? ThemeHelper.backgroundColorDark
+            : ThemeHelper.backgroundColorWhite,
         body: SingleChildScrollView(
             child: Container(
           child: Column(
@@ -135,14 +137,19 @@ class _DayListPageState extends State<DayListPage> {
                           IconButton(
                               icon: Icon(
                                 CupertinoIcons.arrow_left,
-                                color: darkMode.darkTheme ? CupertinoColors.white : Colors.black,
+                                color: darkMode.darkTheme
+                                    ? CupertinoColors.white
+                                    : Colors.black,
                               ),
                               onPressed: () => context.popRoute()),
                           Text(
                             'Your emotional state',
                             style: TextStyle(
-                              color: darkMode.darkTheme ? CupertinoColors.white : Colors.black,
-                                fontSize: 20, fontFamily: 'PoppinsExtrabold'),
+                                color: darkMode.darkTheme
+                                    ? CupertinoColors.white
+                                    : Colors.black,
+                                fontSize: 20,
+                                fontFamily: 'PoppinsExtrabold'),
                           ),
                         ],
                       ),
@@ -158,7 +165,9 @@ class _DayListPageState extends State<DayListPage> {
                           'This is the history of how you have been lately, check if everything is OK!',
                           style: TextStyle(
                             fontWeight: FontWeight.w700,
-                            color: darkMode.darkTheme ? CupertinoColors.white : Colors.black,
+                            color: darkMode.darkTheme
+                                ? CupertinoColors.white
+                                : Colors.black,
                           ),
                         ),
                         SizedBox(
@@ -216,7 +225,8 @@ class _DayListPageState extends State<DayListPage> {
                       height: MediaQuery.of(context).size.height,
                       padding: EdgeInsets.all(20),
                       decoration: BoxDecoration(
-                          color: darkMode.darkTheme ? Colors.black : Colors.white,
+                          color:
+                              darkMode.darkTheme ? Colors.black : Colors.white,
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(40),
                               topRight: Radius.circular(40))),
@@ -336,7 +346,9 @@ class _DayListPageState extends State<DayListPage> {
                                                 .buttonSecondaryColor,
                                             text: 'Send!',
                                             onPressed: () {
-                                              context.read<VisibilityCubit>().changeVisibility(false);
+                                              context
+                                                  .read<VisibilityCubit>()
+                                                  .changeVisibility(false);
                                               context
                                                   .pushRoute(SetDayEmojiRoute(
                                                       isFirstTime: false,
@@ -347,7 +359,7 @@ class _DayListPageState extends State<DayListPage> {
                                                                       .toString()),
                                                           mood: 3)))
                                                   .then(
-                                                    (value) => context.read<DayBloc>().getDay(
+                                                    (value) => context.read<DayBloc>().getDayTo(
                                                         userId: ((context.read<AuthCubit>()
                                                                         as AuthCubit)
                                                                     .state
@@ -364,14 +376,15 @@ class _DayListPageState extends State<DayListPage> {
                                     } else if (state is DaySelectedInitial) {
                                       return GestureDetector(
                                         onTap: () {
-                                          context.read<VisibilityCubit>().changeVisibility(false);
                                           context
-                                            .pushRoute(SetDayEmojiRoute(
-                                                isFirstTime: false,
-                                                passedDay: state.day))
-                                            .then(
-                                          (value) {
-                                            context.read<DayBloc>().getDay(
+                                              .read<VisibilityCubit>()
+                                              .changeVisibility(false);
+                                          context
+                                              .pushRoute(SetDayEmojiRoute(
+                                                  isFirstTime: false,
+                                                  passedDay: state.day))
+                                              .then((value) {
+                                            context.read<DayBloc>().getDayTo(
                                                 userId: ((context.read<
                                                                     AuthCubit>()
                                                                 as AuthCubit)
@@ -383,16 +396,17 @@ class _DayListPageState extends State<DayListPage> {
                                                     DateConverter.getDateAll(),
                                                 dayTo: DateConverter
                                                     .getDateNowWithFormatSimples());
-                                        }
-                                        
-                                        );},
+                                          });
+                                        },
                                         child: Container(
                                           padding: EdgeInsets.all(8),
                                           width:
                                               MediaQuery.of(context).size.width,
-                                          
                                           decoration: BoxDecoration(
-                                              color:  darkMode.darkTheme? ThemeHelper.buttonSecondaryColor : ThemeHelper.colorSemiWhite,
+                                              color: darkMode.darkTheme
+                                                  ? ThemeHelper
+                                                      .buttonSecondaryColor
+                                                  : ThemeHelper.colorSemiWhite,
                                               borderRadius:
                                                   BorderRadius.circular(8)),
                                           child: Row(
@@ -413,9 +427,12 @@ class _DayListPageState extends State<DayListPage> {
                                                   ),
                                                 ),
                                                 Container(
-                                                  width: MediaQuery.of(context).size.width * 0.7,
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.7,
                                                   padding: const EdgeInsets
-                                                          .symmetric(
+                                                      .symmetric(
                                                       horizontal: 12),
                                                   child: Column(
                                                       mainAxisAlignment:
@@ -433,7 +450,12 @@ class _DayListPageState extends State<DayListPage> {
                                                                           .day)
                                                                   .capitalize(),
                                                               style: TextStyle(
-                                                                color: darkMode.darkTheme? Colors.white : Colors.black,
+                                                                  color: darkMode
+                                                                          .darkTheme
+                                                                      ? Colors
+                                                                          .white
+                                                                      : Colors
+                                                                          .black,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .bold),
@@ -442,7 +464,11 @@ class _DayListPageState extends State<DayListPage> {
                                                               width: 10,
                                                             ),
                                                             EmojyTextWidget(
-                                                              color: darkMode.darkTheme? Colors.white : Colors.black,
+                                                              color: darkMode
+                                                                      .darkTheme
+                                                                  ? Colors.white
+                                                                  : Colors
+                                                                      .black,
                                                               mood: state
                                                                   .day!.mood,
                                                               size: 20,
@@ -450,9 +476,16 @@ class _DayListPageState extends State<DayListPage> {
                                                           ],
                                                         ),
                                                         state.day!.mood != null
-                                                            ? 
-                                                                 Text(state
-                                                                    .day!.note!, style: TextStyle(color: darkMode.darkTheme ? Colors.white : Colors.black),)
+                                                            ? Text(
+                                                                state
+                                                                    .day!.note!,
+                                                                style: TextStyle(
+                                                                    color: darkMode.darkTheme
+                                                                        ? Colors
+                                                                            .white
+                                                                        : Colors
+                                                                            .black),
+                                                              )
                                                             : Container()
                                                       ]),
                                                 )
