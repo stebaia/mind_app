@@ -19,6 +19,7 @@ import 'package:mind_app/ui/components/text_feeling_widget.dart';
 import 'package:mind_app/ui/pages/secret_note_detail_page.dart';
 import 'package:mind_app/utils/app_utils.dart';
 import 'package:mind_app/utils/auth_service.dart';
+import 'package:mind_app/utils/emoji_widget.dart';
 import 'package:mind_app/utils/theme_helper.dart';
 import 'package:provider/provider.dart';
 
@@ -46,7 +47,6 @@ class CorePage extends StatelessWidget with AutoRouteWrapper {
             return SingleChildScrollView(
               child: Container(
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 1.2,
                 child: Stack(
                   children: [
                     Container(
@@ -64,8 +64,6 @@ class CorePage extends StatelessWidget with AutoRouteWrapper {
                                   height: 50,
                                 ),
                                 Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Column(
                                       mainAxisAlignment:
@@ -227,14 +225,15 @@ class CorePage extends StatelessWidget with AutoRouteWrapper {
                                               width: 36,
                                               height: 36,
                                               decoration: BoxDecoration(
-                                                  color: Colors.amber,
+                                                  color: ThemeHelper
+                                                      .backgroundColorDark,
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           40)),
                                               child: const Center(
                                                   child: Icon(
                                                 CupertinoIcons.lock_circle,
-                                                color: ThemeHelper.buttonColor,
+                                                color: Colors.white,
                                               ))),
                                           const SizedBox(height: 10),
                                           Text(
@@ -270,7 +269,7 @@ class CorePage extends StatelessWidget with AutoRouteWrapper {
                                           color: darkMode.darkTheme
                                               ? CupertinoColors.white
                                               : Colors.black,
-                                          fontSize: 18,
+                                          fontSize: 14,
                                           fontWeight: FontWeight.bold),
                                     ),
                                     GestureDetector(
@@ -347,7 +346,7 @@ class CorePage extends StatelessWidget with AutoRouteWrapper {
                                   },
                                 ),
                                 const SizedBox(
-                                  height: 50,
+                                  height: 30,
                                 ),
                                 Row(
                                   mainAxisAlignment:
@@ -359,7 +358,7 @@ class CorePage extends StatelessWidget with AutoRouteWrapper {
                                           color: darkMode.darkTheme
                                               ? CupertinoColors.white
                                               : Colors.black,
-                                          fontSize: 18,
+                                          fontSize: 14,
                                           fontWeight: FontWeight.bold),
                                     ),
                                     Row(
@@ -389,7 +388,10 @@ class CorePage extends StatelessWidget with AutoRouteWrapper {
                           ),
                           Container(
                               padding: EdgeInsets.only(top: 0),
-                              child: const CarouselItem())
+                              child: const CarouselItem()),
+                          const SizedBox(
+                            height: 30,
+                          )
                         ],
                       ),
                     ),

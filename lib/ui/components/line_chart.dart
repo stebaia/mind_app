@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mind_app/model/day.dart';
 import 'package:mind_app/providers/dark_theme_provider.dart';
 import 'package:mind_app/utils/app_utils.dart';
+import 'package:mind_app/utils/emoji_widget.dart';
 import 'package:mind_app/utils/theme_helper.dart';
 import 'package:provider/provider.dart';
 
@@ -18,10 +19,11 @@ class _LineChartSample2State extends State<LineChartSample2> {
   bool showAvg = false;
   final currentDays = DateConverter.getCurrentWeekDates();
   List<Day> lastWeekDays = [];
+  final List<DateTime> allWeekDays = [];
+  Map<DateTime, int>? moodMap = Map();
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     if (widget.days != null) {
       lastWeekDays.addAll(widget.days!
@@ -73,12 +75,23 @@ class _LineChartSample2State extends State<LineChartSample2> {
 
   Widget bottomTitleWidgets2(double value, TitleMeta meta, Color color) {
     int index = value.toInt();
-    if (index >= 0 && index < lastWeekDays.length) {
-      DateTime day = DateTime.parse(lastWeekDays[index].day);
-      int dayOfWeek = day.weekday; // 1 = Monday, 2 = Tuesday, ...
-      String dayName = _getDayName(dayOfWeek);
-      return Text(dayName, style: TextStyle(fontSize: 12, color: color));
+
+    if (index >= 0 && index < allWeekDays.length) {
+      // Ottieni la data corrispondente all'indice
+      DateTime day = allWeekDays[index];
+
+      // Ottieni il mood corrispondente dalla mappa dei mood
+      final mood = moodMap![day];
+
+      // Ottieni il nome del giorno
+      String dayName = _getDayName(day.weekday);
+
+      // Se il mood è disponibile, mostralo accanto al giorno
+      String text = mood != null ? '$dayName' : dayName;
+
+      return Text(text, style: TextStyle(fontSize: 12, color: color));
     }
+
     return Container();
   }
 
@@ -108,33 +121,33 @@ class _LineChartSample2State extends State<LineChartSample2> {
     );
   }
 
-  Widget leftTitleWidgets(double value, TitleMeta meta, Color color) {
-    final style = TextStyle(
-      color: color,
-      fontWeight: FontWeight.bold,
-      fontSize: 15,
-    );
-    String text;
-    switch (value.toInt()) {
-      case 1:
-        text = '😔';
-        break;
-
-      case 3:
-        text = '😕';
-        break;
-
-      case 5:
-        text = '😁';
-        break;
-      default:
-        return Container();
+  LineChartData mainData(String? date, Color color, List<Color> gradient) {
+    final Map<String, DateTime> weekDates = DateConverter.getCurrentWeekDates();
+    allWeekDays.clear();
+    for (DateTime day = weekDates['start']!;
+        day.isBefore(weekDates['end']!);
+        day = day.add(Duration(days: 1))) {
+      allWeekDays.add(day);
     }
 
-    return Text(text, style: style, textAlign: TextAlign.left);
-  }
+    // Ordina i giorni per data
+    lastWeekDays
+        .sort((a, b) => DateTime.parse(a.day).compareTo(DateTime.parse(b.day)));
 
-  LineChartData mainData(String? date, Color color, List<Color> gradient) {
+    // Mappa dei mood per data
+    moodMap = Map.fromIterable(
+      lastWeekDays,
+      key: (day) => DateTime.parse(day.day),
+      value: (day) => day.mood,
+    );
+    final List<FlSpot> spots = [];
+
+    for (int i = 0; i < allWeekDays.length; i++) {
+      final day = allWeekDays[i];
+      final mood = moodMap![day];
+      spots.add(FlSpot(i.toDouble(), mood?.toDouble() ?? 0));
+    }
+
     return LineChartData(
       gridData: FlGridData(
         show: true,
@@ -188,25 +201,20 @@ class _LineChartSample2State extends State<LineChartSample2> {
         border: Border.all(color: const Color(0xff37434d)),
       ),
       minX: 0,
-      maxX: lastWeekDays != null ? lastWeekDays.length.toDouble() - 1 : 0,
+      maxX: allWeekDays.length.toDouble() - 1,
       minY: 0,
       maxY: 6,
       lineBarsData: [
         LineChartBarData(
-          spots: lastWeekDays.asMap().entries.map((e) {
-            int index = e.key;
-            Day day = e.value;
-            int mood = day.mood;
-            return FlSpot(index.toDouble(), mood.toDouble());
-          }).toList(),
-          isCurved: true,
+          spots: spots,
+          isCurved: false,
           gradient: LinearGradient(
             colors: gradient,
           ),
           barWidth: 5,
           isStrokeCapRound: true,
           dotData: FlDotData(
-            show: false,
+            show: true,
           ),
           belowBarData: BarAreaData(
             show: true,

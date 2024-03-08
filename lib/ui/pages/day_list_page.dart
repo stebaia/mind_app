@@ -335,44 +335,55 @@ class _DayListPageState extends State<DayListPage> {
                                 ),
                                 BlocBuilder<DaySelectedCubit, DaySelectedState>(
                                   builder: (context, state) {
+                                    print(state);
+
                                     if (state is UnselectedDay) {
-                                      return Container(
-                                          padding: const EdgeInsets.only(
-                                              bottom: 20, right: 20, left: 20),
-                                          alignment: Alignment.bottomRight,
-                                          child: FunctionButton(
-                                            colorText: Colors.white,
-                                            colorsBackground: ThemeHelper
-                                                .buttonSecondaryColor,
-                                            text: 'Send!',
-                                            onPressed: () {
-                                              context
-                                                  .read<VisibilityCubit>()
-                                                  .changeVisibility(false);
-                                              context
-                                                  .pushRoute(SetDayEmojiRoute(
-                                                      isFirstTime: false,
-                                                      passedDay: Day(
-                                                          day: DateConverter
-                                                              .getDateNowWithFormatSimpleWithParameter(
-                                                                  _selectedDay
-                                                                      .toString()),
-                                                          mood: 3)))
-                                                  .then(
-                                                    (value) => context.read<DayBloc>().getDayTo(
-                                                        userId: ((context.read<AuthCubit>()
-                                                                        as AuthCubit)
-                                                                    .state
-                                                                as AuthenticatedState)
-                                                            .user
-                                                            .id,
-                                                        dayFrom: DateConverter
-                                                            .getDateAll(),
-                                                        dayTo: DateConverter
-                                                            .getDateNowWithFormatSimples()),
-                                                  );
-                                            },
-                                          ));
+                                      print(_selectedDay);
+                                      if (_selectedDay!
+                                          .isAfter(DateTime.now())) {
+                                        return Container();
+                                      } else {
+                                        return Container(
+                                            padding: const EdgeInsets.only(
+                                                bottom: 20,
+                                                right: 20,
+                                                left: 20),
+                                            alignment: Alignment.bottomRight,
+                                            child: FunctionButton(
+                                              colorText: Colors.white,
+                                              colorsBackground: ThemeHelper
+                                                  .buttonSecondaryColor,
+                                              text: 'Send!',
+                                              onPressed: () {
+                                                context
+                                                    .read<VisibilityCubit>()
+                                                    .changeVisibility(false);
+                                                context
+                                                    .pushRoute(SetDayEmojiRoute(
+                                                        isFirstTime: false,
+                                                        passedDay: Day(
+                                                            day: DateConverter
+                                                                .getDateNowWithFormatSimpleWithParameter(
+                                                                    _selectedDay
+                                                                        .toString()),
+                                                            mood: 3)))
+                                                    .then(
+                                                      (value) => context.read<DayBloc>().getDayTo(
+                                                          userId: ((context.read<
+                                                                              AuthCubit>()
+                                                                          as AuthCubit)
+                                                                      .state
+                                                                  as AuthenticatedState)
+                                                              .user
+                                                              .id,
+                                                          dayFrom: DateConverter
+                                                              .getDateAll(),
+                                                          dayTo: DateConverter
+                                                              .getDateNowWithFormatSimples()),
+                                                    );
+                                              },
+                                            ));
+                                      }
                                     } else if (state is DaySelectedInitial) {
                                       return GestureDetector(
                                         onTap: () {

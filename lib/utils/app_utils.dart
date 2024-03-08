@@ -238,7 +238,7 @@ class DateConverter {
     final now = DateTime.now();
     DateTime midnight = DateTime(now.year, now.month, now.day);
     final startOfWeek = midnight.subtract(Duration(days: midnight.weekday + 1));
-    final endOfWeek = startOfWeek.add(Duration(days: 9));
+    final endOfWeek = startOfWeek.add(Duration(days: 7));
     return {'start': startOfWeek, 'end': endOfWeek};
   }
 
