@@ -11,59 +11,62 @@
 // ignore_for_file: type=lint
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i15;
+import 'package:auto_route/auto_route.dart' as _i17;
 import 'package:auto_route/empty_router_widgets.dart' as _i1;
-import 'package:flutter/cupertino.dart' as _i17;
-import 'package:flutter/material.dart' as _i16;
+import 'package:flutter/cupertino.dart' as _i19;
+import 'package:flutter/material.dart' as _i18;
 
-import '../model/day.dart' as _i19;
-import '../model/secret_note_model.dart' as _i18;
+import '../model/day.dart' as _i21;
+import '../model/mood_improvment_tip.dart' as _i22;
+import '../model/secret_note_model.dart' as _i20;
 import '../ui/pages/container_page.dart' as _i5;
-import '../ui/pages/core_page.dart' as _i13;
+import '../ui/pages/core_page.dart' as _i15;
 import '../ui/pages/day_list_page.dart' as _i9;
 import '../ui/pages/detail_mood_page.dart' as _i10;
-import '../ui/pages/empty_page.dart' as _i14;
+import '../ui/pages/detail_mood_tip_page.dart' as _i13;
+import '../ui/pages/empty_page.dart' as _i16;
 import '../ui/pages/login_page.dart' as _i3;
 import '../ui/pages/main_page.dart' as _i2;
-import '../ui/pages/profile_page.dart' as _i12;
+import '../ui/pages/moodtips_list_page.dart' as _i12;
+import '../ui/pages/profile_page.dart' as _i14;
 import '../ui/pages/registration_page.dart' as _i4;
 import '../ui/pages/secret_note_detail_page.dart' as _i6;
 import '../ui/pages/secret_note_list.page.dart' as _i7;
 import '../ui/pages/set_day_emoji_page.dart' as _i11;
 import '../ui/pages/set_day_page.dart' as _i8;
 
-class AppRouter extends _i15.RootStackRouter {
-  AppRouter([_i16.GlobalKey<_i16.NavigatorState>? navigatorKey])
+class AppRouter extends _i17.RootStackRouter {
+  AppRouter([_i18.GlobalKey<_i18.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
-  final Map<String, _i15.PageFactory> pagesMap = {
+  final Map<String, _i17.PageFactory> pagesMap = {
     EmptyRouterRoute.name: (routeData) {
-      return _i15.MaterialPageX<dynamic>(
+      return _i17.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i1.EmptyRouterPage(),
       );
     },
     MainRoute.name: (routeData) {
-      return _i15.MaterialPageX<dynamic>(
+      return _i17.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i15.WrappedRoute(child: const _i2.MainPage()),
+        child: _i17.WrappedRoute(child: const _i2.MainPage()),
       );
     },
     LoginRoute.name: (routeData) {
-      return _i15.MaterialPageX<dynamic>(
+      return _i17.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i15.WrappedRoute(child: const _i3.LoginPage()),
+        child: _i17.WrappedRoute(child: const _i3.LoginPage()),
       );
     },
     RegistrationRoute.name: (routeData) {
-      return _i15.MaterialPageX<dynamic>(
+      return _i17.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i15.WrappedRoute(child: const _i4.RegistrationPage()),
+        child: _i17.WrappedRoute(child: const _i4.RegistrationPage()),
       );
     },
     ContainerRoute.name: (routeData) {
-      return _i15.MaterialPageX<dynamic>(
+      return _i17.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i5.ContainerPage(),
       );
@@ -71,9 +74,9 @@ class AppRouter extends _i15.RootStackRouter {
     SecretNoteDetailRoute.name: (routeData) {
       final args = routeData.argsAs<SecretNoteDetailRouteArgs>(
           orElse: () => const SecretNoteDetailRouteArgs());
-      return _i15.MaterialPageX<dynamic>(
+      return _i17.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i15.WrappedRoute(
+        child: _i17.WrappedRoute(
             child: _i6.SecretNoteDetailPage(
           key: args.key,
           secretModel: args.secretModel,
@@ -81,16 +84,16 @@ class AppRouter extends _i15.RootStackRouter {
       );
     },
     SecretNoteListRoute.name: (routeData) {
-      return _i15.MaterialPageX<dynamic>(
+      return _i17.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i15.WrappedRoute(child: const _i7.SecretNoteListPage()),
+        child: _i17.WrappedRoute(child: const _i7.SecretNoteListPage()),
       );
     },
     SetDayRoute.name: (routeData) {
       final args = routeData.argsAs<SetDayRouteArgs>();
-      return _i15.MaterialPageX<dynamic>(
+      return _i17.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i15.WrappedRoute(
+        child: _i17.WrappedRoute(
             child: _i8.SetDayPage(
           key: args.key,
           isFirstTime: args.isFirstTime,
@@ -101,14 +104,14 @@ class AppRouter extends _i15.RootStackRouter {
     DayListRoute.name: (routeData) {
       final args = routeData.argsAs<DayListRouteArgs>(
           orElse: () => const DayListRouteArgs());
-      return _i15.MaterialPageX<dynamic>(
+      return _i17.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i15.WrappedRoute(child: _i9.DayListPage(key: args.key)),
+        child: _i17.WrappedRoute(child: _i9.DayListPage(key: args.key)),
       );
     },
     DetailMoodRoute.name: (routeData) {
       final args = routeData.argsAs<DetailMoodRouteArgs>();
-      return _i15.MaterialPageX<dynamic>(
+      return _i17.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i10.DetailMoodPage(
           key: args.key,
@@ -118,9 +121,9 @@ class AppRouter extends _i15.RootStackRouter {
     },
     SetDayEmojiRoute.name: (routeData) {
       final args = routeData.argsAs<SetDayEmojiRouteArgs>();
-      return _i15.MaterialPageX<dynamic>(
+      return _i17.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i15.WrappedRoute(
+        child: _i17.WrappedRoute(
             child: _i11.SetDayEmojiPage(
           key: args.key,
           passedDay: args.passedDay,
@@ -128,110 +131,136 @@ class AppRouter extends _i15.RootStackRouter {
         )),
       );
     },
+    MoodTipsListRoute.name: (routeData) {
+      return _i17.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const _i12.MoodTipsListPage(),
+      );
+    },
+    MoodTipDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<MoodTipDetailRouteArgs>();
+      return _i17.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: _i13.MoodTipDetailPage(
+          key: args.key,
+          moodImprovementTip: args.moodImprovementTip,
+        ),
+      );
+    },
     TopBarContainerRouter.name: (routeData) {
-      return _i15.MaterialPageX<dynamic>(
+      return _i17.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i1.EmptyRouterScreen(),
       );
     },
     ProfileRoute.name: (routeData) {
-      return _i15.MaterialPageX<dynamic>(
+      return _i17.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i12.ProfilePage(),
+        child: const _i14.ProfilePage(),
       );
     },
     CoreRoute.name: (routeData) {
-      return _i15.MaterialPageX<dynamic>(
+      return _i17.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i15.WrappedRoute(child: const _i13.CorePage()),
+        child: _i17.WrappedRoute(child: const _i15.CorePage()),
       );
     },
     EmptyRoute.name: (routeData) {
-      return _i15.MaterialPageX<dynamic>(
+      return _i17.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i14.EmptyPage(),
+        child: const _i16.EmptyPage(),
       );
     },
   };
 
   @override
-  List<_i15.RouteConfig> get routes => [
-        _i15.RouteConfig(
+  List<_i17.RouteConfig> get routes => [
+        _i17.RouteConfig(
           EmptyRouterRoute.name,
           path: '/',
           children: [
-            _i15.RouteConfig(
+            _i17.RouteConfig(
               MainRoute.name,
               path: '',
               parent: EmptyRouterRoute.name,
             ),
-            _i15.RouteConfig(
+            _i17.RouteConfig(
               LoginRoute.name,
               path: 'login',
               parent: EmptyRouterRoute.name,
             ),
-            _i15.RouteConfig(
+            _i17.RouteConfig(
               RegistrationRoute.name,
               path: 'registration',
               parent: EmptyRouterRoute.name,
             ),
-            _i15.RouteConfig(
+            _i17.RouteConfig(
               ContainerRoute.name,
               path: 'container',
               parent: EmptyRouterRoute.name,
               children: [
-                _i15.RouteConfig(
+                _i17.RouteConfig(
                   TopBarContainerRouter.name,
                   path: 'empty',
                   parent: ContainerRoute.name,
                   children: [
-                    _i15.RouteConfig(
+                    _i17.RouteConfig(
                       EmptyRoute.name,
                       path: '',
                       parent: TopBarContainerRouter.name,
                     )
                   ],
                 ),
-                _i15.RouteConfig(
+                _i17.RouteConfig(
                   ProfileRoute.name,
                   path: 'profile',
                   parent: ContainerRoute.name,
                 ),
-                _i15.RouteConfig(
+                _i17.RouteConfig(
                   CoreRoute.name,
                   path: 'core_page',
                   parent: ContainerRoute.name,
                 ),
               ],
             ),
-            _i15.RouteConfig(
+            _i17.RouteConfig(
               SecretNoteDetailRoute.name,
               path: 'secret_note_detail',
               parent: EmptyRouterRoute.name,
             ),
-            _i15.RouteConfig(
+            _i17.RouteConfig(
               SecretNoteListRoute.name,
               path: 'secret_note_list',
               parent: EmptyRouterRoute.name,
             ),
-            _i15.RouteConfig(
+            _i17.RouteConfig(
               SetDayRoute.name,
               path: 'set_day_page',
               parent: EmptyRouterRoute.name,
             ),
-            _i15.RouteConfig(
+            _i17.RouteConfig(
               DayListRoute.name,
               path: 'day_list_page',
               parent: EmptyRouterRoute.name,
             ),
-            _i15.RouteConfig(
+            _i17.RouteConfig(
               DetailMoodRoute.name,
               path: 'detail_mood_page',
               parent: EmptyRouterRoute.name,
             ),
-            _i15.RouteConfig(
+            _i17.RouteConfig(
               SetDayEmojiRoute.name,
               path: 'set_day_emoji_page',
+              parent: EmptyRouterRoute.name,
+            ),
+            _i17.RouteConfig(
+              MoodTipsListRoute.name,
+              path: 'mood_tips_list_page',
+              parent: EmptyRouterRoute.name,
+            ),
+            _i17.RouteConfig(
+              MoodTipDetailRoute.name,
+              path: 'mood_tip_detail_page',
               parent: EmptyRouterRoute.name,
             ),
           ],
@@ -241,8 +270,8 @@ class AppRouter extends _i15.RootStackRouter {
 
 /// generated route for
 /// [_i1.EmptyRouterPage]
-class EmptyRouterRoute extends _i15.PageRouteInfo<void> {
-  const EmptyRouterRoute({List<_i15.PageRouteInfo>? children})
+class EmptyRouterRoute extends _i17.PageRouteInfo<void> {
+  const EmptyRouterRoute({List<_i17.PageRouteInfo>? children})
       : super(
           EmptyRouterRoute.name,
           path: '/',
@@ -254,7 +283,7 @@ class EmptyRouterRoute extends _i15.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.MainPage]
-class MainRoute extends _i15.PageRouteInfo<void> {
+class MainRoute extends _i17.PageRouteInfo<void> {
   const MainRoute()
       : super(
           MainRoute.name,
@@ -266,7 +295,7 @@ class MainRoute extends _i15.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.LoginPage]
-class LoginRoute extends _i15.PageRouteInfo<void> {
+class LoginRoute extends _i17.PageRouteInfo<void> {
   const LoginRoute()
       : super(
           LoginRoute.name,
@@ -278,7 +307,7 @@ class LoginRoute extends _i15.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i4.RegistrationPage]
-class RegistrationRoute extends _i15.PageRouteInfo<void> {
+class RegistrationRoute extends _i17.PageRouteInfo<void> {
   const RegistrationRoute()
       : super(
           RegistrationRoute.name,
@@ -290,8 +319,8 @@ class RegistrationRoute extends _i15.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i5.ContainerPage]
-class ContainerRoute extends _i15.PageRouteInfo<void> {
-  const ContainerRoute({List<_i15.PageRouteInfo>? children})
+class ContainerRoute extends _i17.PageRouteInfo<void> {
+  const ContainerRoute({List<_i17.PageRouteInfo>? children})
       : super(
           ContainerRoute.name,
           path: 'container',
@@ -304,10 +333,10 @@ class ContainerRoute extends _i15.PageRouteInfo<void> {
 /// generated route for
 /// [_i6.SecretNoteDetailPage]
 class SecretNoteDetailRoute
-    extends _i15.PageRouteInfo<SecretNoteDetailRouteArgs> {
+    extends _i17.PageRouteInfo<SecretNoteDetailRouteArgs> {
   SecretNoteDetailRoute({
-    _i17.Key? key,
-    _i18.SecretModel? secretModel,
+    _i19.Key? key,
+    _i20.SecretModel? secretModel,
   }) : super(
           SecretNoteDetailRoute.name,
           path: 'secret_note_detail',
@@ -326,9 +355,9 @@ class SecretNoteDetailRouteArgs {
     this.secretModel,
   });
 
-  final _i17.Key? key;
+  final _i19.Key? key;
 
-  final _i18.SecretModel? secretModel;
+  final _i20.SecretModel? secretModel;
 
   @override
   String toString() {
@@ -338,7 +367,7 @@ class SecretNoteDetailRouteArgs {
 
 /// generated route for
 /// [_i7.SecretNoteListPage]
-class SecretNoteListRoute extends _i15.PageRouteInfo<void> {
+class SecretNoteListRoute extends _i17.PageRouteInfo<void> {
   const SecretNoteListRoute()
       : super(
           SecretNoteListRoute.name,
@@ -350,11 +379,11 @@ class SecretNoteListRoute extends _i15.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i8.SetDayPage]
-class SetDayRoute extends _i15.PageRouteInfo<SetDayRouteArgs> {
+class SetDayRoute extends _i17.PageRouteInfo<SetDayRouteArgs> {
   SetDayRoute({
-    _i17.Key? key,
+    _i19.Key? key,
     required bool isFirstTime,
-    _i19.Day? passedDay,
+    _i21.Day? passedDay,
   }) : super(
           SetDayRoute.name,
           path: 'set_day_page',
@@ -375,11 +404,11 @@ class SetDayRouteArgs {
     this.passedDay,
   });
 
-  final _i17.Key? key;
+  final _i19.Key? key;
 
   final bool isFirstTime;
 
-  final _i19.Day? passedDay;
+  final _i21.Day? passedDay;
 
   @override
   String toString() {
@@ -389,8 +418,8 @@ class SetDayRouteArgs {
 
 /// generated route for
 /// [_i9.DayListPage]
-class DayListRoute extends _i15.PageRouteInfo<DayListRouteArgs> {
-  DayListRoute({_i17.Key? key})
+class DayListRoute extends _i17.PageRouteInfo<DayListRouteArgs> {
+  DayListRoute({_i19.Key? key})
       : super(
           DayListRoute.name,
           path: 'day_list_page',
@@ -403,7 +432,7 @@ class DayListRoute extends _i15.PageRouteInfo<DayListRouteArgs> {
 class DayListRouteArgs {
   const DayListRouteArgs({this.key});
 
-  final _i17.Key? key;
+  final _i19.Key? key;
 
   @override
   String toString() {
@@ -413,10 +442,10 @@ class DayListRouteArgs {
 
 /// generated route for
 /// [_i10.DetailMoodPage]
-class DetailMoodRoute extends _i15.PageRouteInfo<DetailMoodRouteArgs> {
+class DetailMoodRoute extends _i17.PageRouteInfo<DetailMoodRouteArgs> {
   DetailMoodRoute({
-    _i17.Key? key,
-    required _i19.Day day,
+    _i19.Key? key,
+    required _i21.Day day,
   }) : super(
           DetailMoodRoute.name,
           path: 'detail_mood_page',
@@ -435,9 +464,9 @@ class DetailMoodRouteArgs {
     required this.day,
   });
 
-  final _i17.Key? key;
+  final _i19.Key? key;
 
-  final _i19.Day day;
+  final _i21.Day day;
 
   @override
   String toString() {
@@ -447,10 +476,10 @@ class DetailMoodRouteArgs {
 
 /// generated route for
 /// [_i11.SetDayEmojiPage]
-class SetDayEmojiRoute extends _i15.PageRouteInfo<SetDayEmojiRouteArgs> {
+class SetDayEmojiRoute extends _i17.PageRouteInfo<SetDayEmojiRouteArgs> {
   SetDayEmojiRoute({
-    _i17.Key? key,
-    _i19.Day? passedDay,
+    _i19.Key? key,
+    _i21.Day? passedDay,
     required bool isFirstTime,
   }) : super(
           SetDayEmojiRoute.name,
@@ -472,9 +501,9 @@ class SetDayEmojiRouteArgs {
     required this.isFirstTime,
   });
 
-  final _i17.Key? key;
+  final _i19.Key? key;
 
-  final _i19.Day? passedDay;
+  final _i21.Day? passedDay;
 
   final bool isFirstTime;
 
@@ -485,9 +514,55 @@ class SetDayEmojiRouteArgs {
 }
 
 /// generated route for
+/// [_i12.MoodTipsListPage]
+class MoodTipsListRoute extends _i17.PageRouteInfo<void> {
+  const MoodTipsListRoute()
+      : super(
+          MoodTipsListRoute.name,
+          path: 'mood_tips_list_page',
+        );
+
+  static const String name = 'MoodTipsListRoute';
+}
+
+/// generated route for
+/// [_i13.MoodTipDetailPage]
+class MoodTipDetailRoute extends _i17.PageRouteInfo<MoodTipDetailRouteArgs> {
+  MoodTipDetailRoute({
+    _i19.Key? key,
+    required _i22.MoodImprovementTip moodImprovementTip,
+  }) : super(
+          MoodTipDetailRoute.name,
+          path: 'mood_tip_detail_page',
+          args: MoodTipDetailRouteArgs(
+            key: key,
+            moodImprovementTip: moodImprovementTip,
+          ),
+        );
+
+  static const String name = 'MoodTipDetailRoute';
+}
+
+class MoodTipDetailRouteArgs {
+  const MoodTipDetailRouteArgs({
+    this.key,
+    required this.moodImprovementTip,
+  });
+
+  final _i19.Key? key;
+
+  final _i22.MoodImprovementTip moodImprovementTip;
+
+  @override
+  String toString() {
+    return 'MoodTipDetailRouteArgs{key: $key, moodImprovementTip: $moodImprovementTip}';
+  }
+}
+
+/// generated route for
 /// [_i1.EmptyRouterScreen]
-class TopBarContainerRouter extends _i15.PageRouteInfo<void> {
-  const TopBarContainerRouter({List<_i15.PageRouteInfo>? children})
+class TopBarContainerRouter extends _i17.PageRouteInfo<void> {
+  const TopBarContainerRouter({List<_i17.PageRouteInfo>? children})
       : super(
           TopBarContainerRouter.name,
           path: 'empty',
@@ -498,8 +573,8 @@ class TopBarContainerRouter extends _i15.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i12.ProfilePage]
-class ProfileRoute extends _i15.PageRouteInfo<void> {
+/// [_i14.ProfilePage]
+class ProfileRoute extends _i17.PageRouteInfo<void> {
   const ProfileRoute()
       : super(
           ProfileRoute.name,
@@ -510,8 +585,8 @@ class ProfileRoute extends _i15.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i13.CorePage]
-class CoreRoute extends _i15.PageRouteInfo<void> {
+/// [_i15.CorePage]
+class CoreRoute extends _i17.PageRouteInfo<void> {
   const CoreRoute()
       : super(
           CoreRoute.name,
@@ -522,8 +597,8 @@ class CoreRoute extends _i15.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i14.EmptyPage]
-class EmptyRoute extends _i15.PageRouteInfo<void> {
+/// [_i16.EmptyPage]
+class EmptyRoute extends _i17.PageRouteInfo<void> {
   const EmptyRoute()
       : super(
           EmptyRoute.name,

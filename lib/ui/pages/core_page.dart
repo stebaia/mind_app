@@ -361,25 +361,28 @@ class CorePage extends StatelessWidget with AutoRouteWrapper {
                                           fontSize: 14,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          'See all..',
-                                          style: TextStyle(
-                                            color: darkMode.darkTheme
-                                                ? ThemeHelper.secondaryColor
-                                                : ThemeHelper
-                                                    .buttonSecondaryColor,
-                                            fontSize: 10,
-                                            fontWeight: FontWeight.w900,
+                                    GestureDetector(
+                                      onTap: () => context.pushRoute(const MoodTipsListRoute()),
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            'See all..',
+                                            style: TextStyle(
+                                              color: darkMode.darkTheme
+                                                  ? ThemeHelper.secondaryColor
+                                                  : ThemeHelper
+                                                      .buttonSecondaryColor,
+                                              fontSize: 10,
+                                              fontWeight: FontWeight.w900,
+                                            ),
                                           ),
-                                        ),
-                                        Icon(
-                                          CupertinoIcons.chevron_right,
-                                          size: 18,
-                                          color: ThemeHelper.buttonColor,
-                                        )
-                                      ],
+                                          Icon(
+                                            CupertinoIcons.chevron_right,
+                                            size: 18,
+                                            color: ThemeHelper.buttonColor,
+                                          )
+                                        ],
+                                      ),
                                     )
                                   ],
                                 ),
