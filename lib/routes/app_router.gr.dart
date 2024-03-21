@@ -20,15 +20,15 @@ import '../model/day.dart' as _i21;
 import '../model/mood_improvment_tip.dart' as _i22;
 import '../model/secret_note_model.dart' as _i20;
 import '../ui/pages/container_page.dart' as _i5;
-import '../ui/pages/core_page.dart' as _i15;
+import '../ui/pages/core_page.dart' as _i14;
 import '../ui/pages/day_list_page.dart' as _i9;
 import '../ui/pages/detail_mood_page.dart' as _i10;
-import '../ui/pages/detail_mood_tip_page.dart' as _i13;
+import '../ui/pages/detail_mood_tip_page.dart' as _i12;
 import '../ui/pages/empty_page.dart' as _i16;
 import '../ui/pages/login_page.dart' as _i3;
 import '../ui/pages/main_page.dart' as _i2;
-import '../ui/pages/moodtips_list_page.dart' as _i12;
-import '../ui/pages/profile_page.dart' as _i14;
+import '../ui/pages/moodtips_list_page.dart' as _i15;
+import '../ui/pages/profile_page.dart' as _i13;
 import '../ui/pages/registration_page.dart' as _i4;
 import '../ui/pages/secret_note_detail_page.dart' as _i6;
 import '../ui/pages/secret_note_list.page.dart' as _i7;
@@ -131,17 +131,11 @@ class AppRouter extends _i17.RootStackRouter {
         )),
       );
     },
-    MoodTipsListRoute.name: (routeData) {
-      return _i17.MaterialPageX<dynamic>(
-        routeData: routeData,
-        child: const _i12.MoodTipsListPage(),
-      );
-    },
     MoodTipDetailRoute.name: (routeData) {
       final args = routeData.argsAs<MoodTipDetailRouteArgs>();
       return _i17.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i13.MoodTipDetailPage(
+        child: _i12.MoodTipDetailPage(
           key: args.key,
           moodImprovementTip: args.moodImprovementTip,
         ),
@@ -156,13 +150,19 @@ class AppRouter extends _i17.RootStackRouter {
     ProfileRoute.name: (routeData) {
       return _i17.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i14.ProfilePage(),
+        child: const _i13.ProfilePage(),
       );
     },
     CoreRoute.name: (routeData) {
       return _i17.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i17.WrappedRoute(child: const _i15.CorePage()),
+        child: _i17.WrappedRoute(child: const _i14.CorePage()),
+      );
+    },
+    MoodTipsListRoute.name: (routeData) {
+      return _i17.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const _i15.MoodTipsListPage(),
       );
     },
     EmptyRoute.name: (routeData) {
@@ -221,6 +221,11 @@ class AppRouter extends _i17.RootStackRouter {
                   path: 'core_page',
                   parent: ContainerRoute.name,
                 ),
+                _i17.RouteConfig(
+                  MoodTipsListRoute.name,
+                  path: 'mood_tips_list_page',
+                  parent: ContainerRoute.name,
+                ),
               ],
             ),
             _i17.RouteConfig(
@@ -251,11 +256,6 @@ class AppRouter extends _i17.RootStackRouter {
             _i17.RouteConfig(
               SetDayEmojiRoute.name,
               path: 'set_day_emoji_page',
-              parent: EmptyRouterRoute.name,
-            ),
-            _i17.RouteConfig(
-              MoodTipsListRoute.name,
-              path: 'mood_tips_list_page',
               parent: EmptyRouterRoute.name,
             ),
             _i17.RouteConfig(
@@ -514,19 +514,7 @@ class SetDayEmojiRouteArgs {
 }
 
 /// generated route for
-/// [_i12.MoodTipsListPage]
-class MoodTipsListRoute extends _i17.PageRouteInfo<void> {
-  const MoodTipsListRoute()
-      : super(
-          MoodTipsListRoute.name,
-          path: 'mood_tips_list_page',
-        );
-
-  static const String name = 'MoodTipsListRoute';
-}
-
-/// generated route for
-/// [_i13.MoodTipDetailPage]
+/// [_i12.MoodTipDetailPage]
 class MoodTipDetailRoute extends _i17.PageRouteInfo<MoodTipDetailRouteArgs> {
   MoodTipDetailRoute({
     _i19.Key? key,
@@ -573,7 +561,7 @@ class TopBarContainerRouter extends _i17.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i14.ProfilePage]
+/// [_i13.ProfilePage]
 class ProfileRoute extends _i17.PageRouteInfo<void> {
   const ProfileRoute()
       : super(
@@ -585,7 +573,7 @@ class ProfileRoute extends _i17.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i15.CorePage]
+/// [_i14.CorePage]
 class CoreRoute extends _i17.PageRouteInfo<void> {
   const CoreRoute()
       : super(
@@ -594,6 +582,18 @@ class CoreRoute extends _i17.PageRouteInfo<void> {
         );
 
   static const String name = 'CoreRoute';
+}
+
+/// generated route for
+/// [_i15.MoodTipsListPage]
+class MoodTipsListRoute extends _i17.PageRouteInfo<void> {
+  const MoodTipsListRoute()
+      : super(
+          MoodTipsListRoute.name,
+          path: 'mood_tips_list_page',
+        );
+
+  static const String name = 'MoodTipsListRoute';
 }
 
 /// generated route for

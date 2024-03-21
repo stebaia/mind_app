@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mind_app/routes/app_router.gr.dart';
+import 'package:mind_app/ui/pages/moodtips_list_page.dart';
 
 class ContainerPage extends StatefulWidget {
   const ContainerPage({super.key});
@@ -17,7 +18,7 @@ class _ContainerPageState extends State<ContainerPage> {
       routes: const [
         CoreRoute(),
         ProfileRoute(),
-        ProfileRoute(),
+        MoodTipsListRoute(),
         ProfileRoute(),
       ],
       bottomNavigationBuilder: (context, tabsRouter) => BottomNavigationBar(

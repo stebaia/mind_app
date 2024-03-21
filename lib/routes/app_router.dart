@@ -37,6 +37,7 @@ import 'package:mind_app/ui/pages/set_day_page.dart';
           ]),
       AutoRoute(page: ProfilePage, path: 'profile'),
       AutoRoute(page: CorePage, path: 'core_page'),
+      AutoRoute(page: MoodTipsListPage, path: 'mood_tips_list_page'),
     ]),
     AutoRoute(page: SecretNoteDetailPage, path: 'secret_note_detail'),
     AutoRoute(page: SecretNoteListPage, path: 'secret_note_list'),
@@ -44,7 +45,6 @@ import 'package:mind_app/ui/pages/set_day_page.dart';
     AutoRoute(page: DayListPage, path: 'day_list_page'),
     AutoRoute(page: DetailMoodPage, path: 'detail_mood_page'),
     AutoRoute(page: SetDayEmojiPage, path: 'set_day_emoji_page'),
-    AutoRoute(page: MoodTipsListPage, path: 'mood_tips_list_page'),
     AutoRoute(page: MoodTipDetailPage, path: 'mood_tip_detail_page')
   ])
 
